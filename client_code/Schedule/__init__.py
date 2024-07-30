@@ -32,7 +32,7 @@ class Schedule(ScheduleTemplate):
     
   def file_loader_1_change(self, file, **event_args):
     # Parse file to get array
-    anvil.server.call("file_loader_1", file)
+    anvil.server.call("file_loader_1", file.get_bytes())
     # Clear current tables and replace with content
 
   def refresh_button_click(self, **event_args):
