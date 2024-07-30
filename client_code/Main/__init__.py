@@ -6,8 +6,8 @@ from anvil.tables import app_tables
 import anvil.server
 
 from ..Home import Home
-from ..ViewData import ViewData
-from ..Dependency import Dependency
+from ..Schedule import Schedule
+from ..Activity import Activity
 from ..Resource import Resource
 from ..UplinkTest import UplinkTest
 from ..Gantt_Test import Gantt_Test
@@ -27,20 +27,20 @@ class Main(MainTemplate):
     self.content_panel.clear()
     self.content_panel.add_component(Home())
 
-  def viewSch_button_click(self, **event_args):
+  def schedule_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(ViewData())
+    self.content_panel.add_component(Schedule())
 
   def resource_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
     self.content_panel.add_component(Resource())
 
-  def dependency_button_click(self, **event_args):
+  def activity_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(Dependency())
+    self.content_panel.add_component(Activity())
 
   def outlined_button_1_click(self, **event_args):
     """This method is called when the button is clicked"""

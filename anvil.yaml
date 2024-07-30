@@ -44,7 +44,7 @@ db_schema:
     columns: []
     title: Table 4
 startup: {type: form, module: Main}
-name: Clone of Demonstration Case RAVEN
+name: LOGOS UI
 startup_form: null
 native_deps: {head_html: '<script src="https://www.gstatic.com/charts/loader.js"></script>'}
 correct_dependency_ids: {}
@@ -63,3 +63,4 @@ services:
 - source: /runtime/services/anvil/email.yml
   client_config: {}
   server_config: {}
+metadata: {title: RAVEN LOGOS UI}

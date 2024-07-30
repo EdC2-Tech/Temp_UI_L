@@ -69,7 +69,7 @@ components:
         event_bindings: {click: button_1_click}
         name: button_1
       layout_properties: {pinned: true}
-    - properties: {item_template: Dependency.RowTemplate4}
+    - properties: {item_template: Activity.RowTemplate4}
       type: RepeatingPanel
       name: repeating_panel_1
     - properties: {}

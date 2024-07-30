@@ -17,18 +17,18 @@ components:
     type: Button
     layout_properties: {grid_position: 'TJTGSN,PEXSEI'}
     event_bindings: {click: home_button_click}
-  - name: viewSch_button
+  - name: schedule_button
     properties: {text: 'View Schedule   ', role: outlined-button, background: 'theme:On Primary', align: left}
     type: Button
     layout_properties: {grid_position: 'YDAPDE,RRMVSU'}
     event_bindings: {click: viewSch_button_click}
   - name: resource_button
-    properties: {text: 'Add Resources   ', role: outlined-button, background: 'theme:On Primary', align: left}
+    properties: {text: 'Resources          ', role: outlined-button, background: 'theme:On Primary', align: left}
     type: Button
     layout_properties: {grid_position: 'OHWBAL,PSHGDX'}
     event_bindings: {click: resource_button_click}
-  - name: dependency_button
-    properties: {text: Add Dependency, role: outlined-button, background: 'theme:On Primary', align: left}
+  - name: activity_button
+    properties: {text: 'Dependency       ', role: outlined-button, background: 'theme:On Primary', align: left}
     type: Button
     layout_properties: {grid_position: 'OUFMQB,EUTIHQ'}
     event_bindings: {click: dependency_button_click}
