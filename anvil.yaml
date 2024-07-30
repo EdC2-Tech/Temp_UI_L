@@ -38,11 +38,11 @@ db_schema:
       type: link_single
       target: resource
     title: dependency
-  table_4:
+  activity_table:
     client: none
     server: full
     columns: []
-    title: Table 4
+    title: Activity_table
 startup: {type: form, module: Main}
 name: LOGOS UI
 startup_form: null

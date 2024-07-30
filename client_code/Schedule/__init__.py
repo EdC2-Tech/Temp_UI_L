@@ -26,7 +26,24 @@ class Schedule(ScheduleTemplate):
     """This method is called when the selected date changes"""
     pass
 
+  def end_datePicker_change(self, **event_args):
+    """This method is called when the selected date changes"""
+    pass
+    
   def file_loader_1_change(self, file, **event_args):
+    # Parse file to get array
+    anvil.server.call("file_loader_1", file)
+    # Clear current tables and replace with content
+
+  def refresh_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    pass
+
+  def __refresh__(self):
+    pass
+
+  
+
 
     
 
