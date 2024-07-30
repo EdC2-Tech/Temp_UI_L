@@ -1,0 +1,79 @@
+is_package: true
+container:
+  type: HtmlTemplate
+  properties: {html: '@theme:standard-page.html'}
+components:
+- type: ColumnPanel
+  properties: {}
+  name: content_panel
+  layout_properties: {slot: default}
+  components:
+  - name: linear_panel_1
+    properties: {}
+    type: LinearPanel
+    layout_properties: {grid_position: 'ZTHFEH,OQLRUC'}
+    components:
+    - name: label_5
+      properties: {text: Schedule Viewer, align: center, font_size: 30}
+      type: Label
+      layout_properties: {}
+  - name: linear_panel_3
+    properties: {}
+    type: LinearPanel
+    layout_properties: {grid_position: 'KUUPAO,JMXRWP'}
+    components:
+    - name: outlined_card_1
+      properties: {role: outlined-card}
+      type: ColumnPanel
+      components:
+      - name: label_4
+        properties: {text: 'Viewing Options:', font_size: 20}
+        type: Label
+        layout_properties: {grid_position: 'CVOYYL,GTFELB'}
+      - name: grid_panel_2
+        properties: {}
+        type: GridPanel
+        layout_properties: {grid_position: 'HSIIQJ,JQKSYY'}
+        components:
+        - name: label_2
+          properties: {text: 'Start Date:', align: right}
+          type: Label
+          layout_properties: {row: XAOOOC, width_xs: 3, col_xs: 2}
+        - name: date_picker_1
+          properties: {}
+          type: DatePicker
+          layout_properties: {row: XAOOOC, width_xs: 3, col_xs: 5}
+        - name: label_3
+          properties: {text: 'End Date:', align: right}
+          type: Label
+          layout_properties: {row: RBFGCS, width_xs: 3, col_xs: 2}
+        - name: date_picker_2
+          properties: {}
+          type: DatePicker
+          layout_properties: {row: RBFGCS, width_xs: 3, col_xs: 5}
+        - name: label_6
+          properties: {align: right, text: 'Increment:'}
+          type: Label
+          layout_properties: {row: KMEVQN, width_xs: 3, col_xs: 2}
+        - name: increment_dropBox
+          properties: {}
+          type: DropDown
+          layout_properties: {row: KMEVQN, width_xs: 3, col_xs: 5}
+          event_bindings: {change: increment_dropBox_change}
+  - name: linear_panel_4
+    properties: {}
+    type: LinearPanel
+    layout_properties: {grid_position: 'FJFQCP,UVQCFJ'}
+    components:
+    - name: grid_panel_1
+      properties: {}
+      type: GridPanel
+      components: []
+- type: FlowPanel
+  properties: {}
+  name: navbar_links
+  layout_properties: {slot: nav-right}
+- name: label_1
+  properties: {text: Schedule Optimization Tool - Idaho National Laboratory}
+  type: Label
+  layout_properties: {slot: title}

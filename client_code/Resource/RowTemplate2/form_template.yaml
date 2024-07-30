@@ -1,0 +1,15 @@
+is_package: true
+container:
+  type: DataRowPanel
+  event_bindings: {refreshing_data_bindings: form_refreshing_data_bindings}
+components:
+- name: edit_link
+  properties: {icon: 'fa:edit', text: ''}
+  type: Link
+  layout_properties: {column: JPKHMZ}
+  event_bindings: {click: edit_link_click}
+- name: delete_link
+  properties: {icon: 'fa:minus-square', text: ''}
+  type: Link
+  layout_properties: {column: QYSIRR}
+  event_bindings: {click: delete_link_click}

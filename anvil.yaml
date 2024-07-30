@@ -1,0 +1,65 @@
+allow_embedding: false
+package_name: Demo
+db_schema:
+  increment:
+    client: search
+    server: full
+    columns:
+    - name: increment_value
+      admin_ui: {width: 200}
+      type: string
+    title: increment
+  resource:
+    client: full
+    server: full
+    columns:
+    - name: resource_value
+      admin_ui: {width: 200}
+      type: string
+    - name: resource_description
+      admin_ui: {width: 200}
+      type: string
+    title: resource
+  dependency:
+    client: full
+    server: full
+    columns:
+    - name: dependency_value
+      admin_ui: {width: 200}
+      type: string
+    - name: dependency_description
+      admin_ui: {width: 200}
+      type: string
+    - name: resource
+      admin_ui: {width: 200}
+      type: string
+    - name: res_list
+      admin_ui: {width: 200, order: 3}
+      type: link_single
+      target: resource
+    title: dependency
+  table_4:
+    client: none
+    server: full
+    columns: []
+    title: Table 4
+startup: {type: form, module: Main}
+name: Clone of Demonstration Case RAVEN
+startup_form: null
+native_deps: {head_html: '<script src="https://www.gstatic.com/charts/loader.js"></script>'}
+correct_dependency_ids: {}
+uplink_visible: true
+renamed: true
+runtime_options:
+  version: 2
+  client_version: '3'
+  server_version: python3-sandbox
+  server_spec: {base: python310-standard}
+dependencies: []
+services:
+- source: /runtime/services/tables.yml
+  client_config: {}
+  server_config: {}
+- source: /runtime/services/anvil/email.yml
+  client_config: {}
+  server_config: {}

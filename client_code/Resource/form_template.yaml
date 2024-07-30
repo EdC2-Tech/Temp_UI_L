@@ -1,0 +1,45 @@
+is_package: true
+container:
+  type: HtmlTemplate
+  properties: {html: '@theme:standard-page.html'}
+components:
+- type: ColumnPanel
+  properties: {}
+  layout_properties: {slot: default}
+  name: content_panel
+  components:
+  - properties: {text: Resources, align: center, font_size: 20}
+    type: Label
+    layout_properties: {grid_position: 'VDOGMD,MDBRTA'}
+    name: label_2
+  - properties:
+      columns:
+      - {id: JPKHMZ, data_key: column_1, title: '', expand: false, width: 40}
+      - {id: QYSIRR, data_key: column_1, title: '', width: 40, expand: false}
+      - {id: GECWBB, data_key: resource_value, title: Resources}
+      - {id: VJQQOR, title: Description, data_key: resource_description}
+    type: DataGrid
+    layout_properties: {grid_position: 'SKLABW,JHKUES'}
+    name: resource_dataGrid
+    components:
+    - properties: {item_template: Resource.RowTemplate2, visible: true}
+      type: RepeatingPanel
+      layout_properties: {}
+      name: repeating_panel_1
+  - properties: {text: Add Resource}
+    type: Button
+    layout_properties: {grid_position: 'EFCIFJ,HFZANY'}
+    event_bindings: {click: button_1_click}
+    name: button_1
+  - properties: {align: full}
+    type: DropDown
+    layout_properties: {grid_position: 'ZSENBL,DXNHDF'}
+    name: drop_down_1
+- type: FlowPanel
+  properties: {}
+  layout_properties: {slot: nav-right}
+  name: navbar_links
+- properties: {text: Schedule Optimization Tool - Idaho National Laboratory}
+  type: Label
+  layout_properties: {slot: title}
+  name: label_1

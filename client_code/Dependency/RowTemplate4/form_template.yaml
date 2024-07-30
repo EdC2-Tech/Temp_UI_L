@@ -1,0 +1,53 @@
+is_package: true
+container:
+  type: DataRowPanel
+  properties: {auto_display_data: false, visible: true}
+  data_bindings: []
+components:
+- properties: {}
+  type: DataRowPanel
+  layout_properties: {column: 'null'}
+  data_bindings:
+  - {property: item, code: self.item, writeback: false}
+  name: data_row_panel_1
+  components:
+  - properties: {text: '', icon: 'fa:edit', font_size: 18}
+    type: Button
+    layout_properties: {column: FYRUCI}
+    event_bindings: {click: button_3_click}
+    name: button_3
+- properties: {visible: false}
+  type: DataRowPanel
+  layout_properties: {column: 'null'}
+  name: data_row_panel_2
+  components:
+  - properties: {text: ''}
+    type: TextBox
+    layout_properties: {column: JKSDUP}
+    data_bindings:
+    - {code: 'self.item[''dependency_value'']', writeback: false, property: text}
+    name: text_box_4
+  - properties: {text: '', icon: 'fa:trash-o', font_size: 18}
+    type: Button
+    layout_properties: {column: OYQBVS}
+    event_bindings: {click: button_2_click}
+    name: button_2
+  - properties: {align: full}
+    type: DropDown
+    layout_properties: {column: JPGNPJ}
+    event_bindings: {change: null}
+    data_bindings:
+    - {code: 'self.item[''resource'']', writeback: false, property: selected_value}
+    name: drop_down_1
+  - properties: {}
+    type: TextBox
+    layout_properties: {column: VJQQOR}
+    data_bindings:
+    - {code: 'self.item[''dependency_description'']', writeback: false, property: text}
+    name: text_box_5
+  - properties: {text: '', icon: 'fa:save', font_size: 18}
+    type: Button
+    layout_properties: {column: FYRUCI}
+    event_bindings: {click: button_1_click}
+    name: button_1
+  data_bindings: []
