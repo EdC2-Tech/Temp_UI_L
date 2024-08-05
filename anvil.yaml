@@ -41,8 +41,19 @@ db_schema:
   activity_table:
     client: none
     server: full
-    columns: []
+    columns:
+    - name: activity_name
+      admin_ui: {width: 200, order: 0}
+      type: string
     title: Activity_table
+  resource_table:
+    client: none
+    server: full
+    columns:
+    - name: resource_name
+      admin_ui: {width: 200, order: 0}
+      type: string
+    title: Resource_table
 startup: {type: form, module: Main}
 name: LOGOS UI
 startup_form: null

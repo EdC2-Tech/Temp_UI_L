@@ -24,6 +24,7 @@ class Main(MainTemplate):
 
     # Add LOGOS logo to page
     self.logo_image.source = "_/theme/logo.PNG"
+    
   def home_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()

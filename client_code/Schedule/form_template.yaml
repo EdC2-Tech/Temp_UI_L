@@ -4,23 +4,18 @@ container:
   properties: {html: '@theme:standard-page.html'}
 components:
 - type: ColumnPanel
-  properties: {wrap_on: never, col_spacing: medium}
+  properties: {wrap_on: never, col_spacing: medium, col_widths: '{"ATKFBL":2,"JMXRWP":76,"QFVVPJ":2}'}
   name: content_panel
   layout_properties: {slot: default}
   components:
-  - name: linear_panel_1
-    properties: {}
-    type: LinearPanel
-    layout_properties: {grid_position: 'ZTHFEH,OQLRUC'}
-    components:
-    - name: label_5
-      properties: {text: Schedule Viewer, align: center, font_size: 30}
-      type: Label
-      layout_properties: {}
+  - name: spacer_1
+    properties: {height: 32}
+    type: Spacer
+    layout_properties: {grid_position: 'KUUPAO,ATKFBL'}
   - name: linear_panel_3
     properties: {}
     type: LinearPanel
-    layout_properties: {grid_position: 'KUUPAO,JMXRWP'}
+    layout_properties: {grid_position: 'KUUPAO,JMXRWP MNSCJQ,XYUMZN'}
     components:
     - name: outlined_card_1
       properties: {role: outlined-card, wrap_on: never, col_spacing: medium}
@@ -71,15 +66,14 @@ components:
         layout_properties: {grid_position: 'OAHJYT,GLSYBX', full_width_row: true}
         event_bindings: {click: refresh_button_click}
       layout_properties: {}
-  - name: linear_panel_4
-    properties: {}
-    type: LinearPanel
-    layout_properties: {grid_position: 'FJFQCP,UVQCFJ'}
-    components:
-    - name: flow_panel_1
-      properties: {}
-      type: FlowPanel
-      components: []
+  - name: image_1
+    properties: {height: 79, display_mode: original_size}
+    type: Image
+    layout_properties: {grid_position: 'KUUPAO,JMXRWP YSIMQJ,JFKGLU'}
+  - name: spacer_2
+    properties: {height: 32}
+    type: Spacer
+    layout_properties: {grid_position: 'KUUPAO,QFVVPJ'}
 - type: FlowPanel
   properties: {}
   name: navbar_links
