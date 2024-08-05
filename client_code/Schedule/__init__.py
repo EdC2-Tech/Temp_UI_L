@@ -13,10 +13,6 @@ class Schedule(ScheduleTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    
-  def import_button_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    pass
 
   def start_datePicker_change(self, **event_args):
     """This method is called when the selected date changes"""
