@@ -8,17 +8,17 @@ components:
   name: navbar_links
   layout_properties: {slot: nav-right}
 - name: menu_panel
-  properties: {}
+  properties: {background: '#dcddde'}
   type: ColumnPanel
   layout_properties: {slot: left-nav}
   components:
   - name: home_button
-    properties: {text: 'Home                   ', role: outlined-button, background: 'theme:On Primary', align: left}
+    properties: {text: 'Home                   ', role: outlined-button, background: 'theme:On Primary', align: left, font: Arial, bold: true}
     type: Button
     layout_properties: {grid_position: 'TJTGSN,PEXSEI'}
     event_bindings: {click: home_button_click}
   - name: schedule_button
-    properties: {text: 'View Schedule   ', role: outlined-button, background: 'theme:On Primary', align: left}
+    properties: {text: 'View Schedule   ', role: outlined-button, background: 'theme:On Primary', align: left, bold: true, font: Arial}
     type: Button
     layout_properties: {grid_position: 'YDAPDE,RRMVSU'}
     event_bindings: {click: schedule_button_click}
