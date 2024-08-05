@@ -13,10 +13,6 @@ class Schedule(ScheduleTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
-    # Initialize defaults to UI options
-    self.start_datePicker.date = datetime.now()
-    self.end_datePicker.date   = datetime.now()
     
   def import_button_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -30,7 +26,7 @@ class Schedule(ScheduleTemplate):
     """This method is called when the selected date changes"""
     pass
     
-  def file_loader_1_change(self, file, **event_args):
+  def import_button_change(self, file, **event_args):
     # Parse file to get array
     anvil.server.call("file_loader_1", file.get_bytes())
     # Clear current tables and replace with content

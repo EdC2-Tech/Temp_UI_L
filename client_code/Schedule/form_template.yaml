@@ -21,11 +21,11 @@ components:
       properties: {role: outlined-card, wrap_on: never, col_spacing: medium}
       type: ColumnPanel
       components:
-      - name: file_loader_1
+      - name: import_button
         properties: {text: Import Schedule}
         type: FileLoader
         layout_properties: {grid_position: 'XRJZSE,LKNTVG'}
-        event_bindings: {change: file_loader_1_change}
+        event_bindings: {change: import_button_change}
         data_bindings:
         - {property: file_types, code: '', writeback: false}
         - {property: file, code: '', writeback: false}
@@ -61,13 +61,13 @@ components:
           layout_properties: {row: RBFGCS, width_xs: 3, col_xs: 5}
           event_bindings: {change: end_datePicker_change}
       - name: refresh_button
-        properties: {text: Refresh Viewer}
+        properties: {text: Refresh Viewer, spacing_above: none, spacing_below: none, background: ''}
         type: Button
-        layout_properties: {grid_position: 'OAHJYT,GLSYBX', full_width_row: true}
+        layout_properties: {grid_position: 'BVXILC,AHCDQG'}
         event_bindings: {click: refresh_button_click}
       layout_properties: {}
-  - name: image_1
-    properties: {height: 79, display_mode: original_size}
+  - name: schedule_image
+    properties: {height: '200', display_mode: original_size}
     type: Image
     layout_properties: {grid_position: 'KUUPAO,JMXRWP YSIMQJ,JFKGLU'}
   - name: spacer_2
