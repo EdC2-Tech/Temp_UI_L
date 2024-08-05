@@ -4,51 +4,45 @@ container:
   properties: {html: '@theme:standard-page.html'}
 components:
 - name: menu_panel
-  properties: {background: '#dcddde'}
+  properties: {background: ''}
   type: ColumnPanel
   layout_properties: {slot: left-nav}
   components:
+  - name: logo_image
+    properties: {height: 179, display_mode: shrink_to_fit}
+    type: Image
+    layout_properties: {grid_position: 'IYJLQK,WYMTWC', full_width_row: true}
   - name: home_button
-    properties: {text: 'Home                   ', role: outlined-button, background: 'theme:On Primary', align: left, font: '', bold: false}
+    properties: {text: Home, role: outlined-button, background: 'theme:On Primary', align: center, font: '', bold: false}
     type: Button
-    layout_properties: {grid_position: 'TJTGSN,PEXSEI'}
+    layout_properties: {grid_position: 'TJTGSN,PEXSEI', full_width_row: true}
     event_bindings: {click: home_button_click}
   - name: schedule_button
-    properties: {text: 'View Schedule   ', role: outlined-button, background: 'theme:On Primary', align: left, bold: false, font: ''}
+    properties: {text: View Schedule, role: outlined-button, background: 'theme:On Primary', align: center, bold: false, font: ''}
     type: Button
-    layout_properties: {grid_position: 'YDAPDE,RRMVSU'}
+    layout_properties: {grid_position: 'YDAPDE,RRMVSU', full_width_row: true}
     event_bindings: {click: schedule_button_click}
   - name: resource_button
-    properties: {text: 'Resources          ', role: outlined-button, background: 'theme:On Primary', align: left}
+    properties: {text: Gantt Resources, role: outlined-button, background: 'theme:On Primary', align: center}
     type: Button
-    layout_properties: {grid_position: 'OHWBAL,PSHGDX'}
+    layout_properties: {grid_position: 'OHWBAL,PSHGDX', full_width_row: true}
     event_bindings: {click: resource_button_click}
   - name: activity_button
-    properties: {text: 'Activities              ', role: outlined-button, background: 'theme:On Primary', align: left}
+    properties: {text: Gantt Activities, role: outlined-button, background: 'theme:On Primary', align: center, foreground: ''}
     type: Button
-    layout_properties: {grid_position: 'OUFMQB,EUTIHQ'}
+    layout_properties: {grid_position: 'OUFMQB,EUTIHQ', full_width_row: true}
     event_bindings: {click: activity_button_click}
   - name: contact_button
-    properties: {text: 'Uplink Test          ', role: outlined-button, background: 'theme:On Primary', align: left}
+    properties: {text: Contact Us, role: outlined-button, background: 'theme:On Primary', align: center, icon_align: left}
     type: Button
-    layout_properties: {grid_position: 'LSXMNI,GFVABY'}
+    layout_properties: {grid_position: 'LSXMNI,GFVABY', full_width_row: true}
     event_bindings: {click: contact_button_click}
-  - name: outlined_button_2
-    properties: {text: 'Gantt Plotly         ', role: outlined-button, align: left, background: 'theme:On Primary'}
-    type: Button
-    layout_properties: {grid_position: 'QRJJUA,XRINME'}
-    event_bindings: {click: outlined_button_2_click}
-  - name: outlined_button_3
-    properties: {text: 'Gantt JSCharts  ', role: outlined-button, background: 'theme:On Primary', align: left}
-    type: Button
-    layout_properties: {grid_position: 'WSJSSE,GHSLJL'}
-    event_bindings: {click: outlined_button_3_click}
 - name: label_1
   properties: {text: Schedule Optimization Tool - Idaho National Laboratory}
   type: Label
   layout_properties: {slot: title}
 - name: content_panel
-  properties: {}
+  properties: {wrap_on: never}
   type: ColumnPanel
   layout_properties: {slot: default}
   components: []
