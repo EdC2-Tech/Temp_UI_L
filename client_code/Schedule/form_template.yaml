@@ -4,14 +4,10 @@ container:
   properties: {html: '@theme:standard-page.html'}
 components:
 - type: ColumnPanel
-  properties: {wrap_on: never, col_spacing: medium, col_widths: '{"ATKFBL":2,"JMXRWP":76,"QFVVPJ":2}'}
+  properties: {wrap_on: never, col_spacing: none, col_widths: '{"JMXRWP":76}'}
   name: content_panel
   layout_properties: {slot: default}
   components:
-  - name: spacer_1
-    properties: {height: 32}
-    type: Spacer
-    layout_properties: {grid_position: 'KUUPAO,ATKFBL', full_width_row: true}
   - name: linear_panel_3
     properties: {}
     type: LinearPanel
@@ -66,14 +62,10 @@ components:
         layout_properties: {grid_position: 'BVXILC,AHCDQG'}
         event_bindings: {click: refresh_button_click}
       layout_properties: {}
-  - name: spacer_2
-    properties: {height: 32}
-    type: Spacer
-    layout_properties: {grid_position: 'KUUPAO,QFVVPJ'}
   - name: plot_1
     properties: {}
     type: Plot
-    layout_properties: {grid_position: 'GPPNFK,IUPGNS'}
+    layout_properties: {grid_position: 'GPPNFK,IUPGNS', full_width_row: true}
 - name: label_1
   properties: {text: Schedule Optimization Tool - Idaho National Laboratory}
   type: Label
