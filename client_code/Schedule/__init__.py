@@ -24,18 +24,14 @@ class Schedule(ScheduleTemplate):
     pass
     
   def import_button_change(self, file, **event_args):
-    # Parse file to get array
-    print(file.content_type)
-
-    #my_media = anvil.URLMedia(file.name) 
-    
-    self.image_1.source = file
-    # Clear current tables and replace with content
+    # Load JSON file and create associated table from data
+    anvil.server.call("load_json", file)
+    anvil.server.call("draw_chart", self.plot_1)
 
   def refresh_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    chart = anvil.server.call('get_chart_obj')
-    self.plot_1.data = chart
+    fig = anvil.server.call("draw_chart")
+    self.plot_1.figure = fig
 
   def __refresh__(self):
     pass
