@@ -7,12 +7,15 @@ import anvil.media
 
 import json
 import pandas as pd
+import cloudpickle
+from urllib.request import urlopen
 
 # Backend for Schedule
-
 @anvil.server.callable
-def file_loader(file):
-    return anvil.media.from_file(file, 'text/html')
+def get_chart_obj():
+  chart = app_tables.chart_obj.get(name='chart')['chart']
+  chart = cloudpickle.load(urlopen(chart.url))  
+  return
   
 def load_json(file):
    with open(file, 'r') as f:

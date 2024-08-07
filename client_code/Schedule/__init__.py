@@ -9,6 +9,7 @@ import plotly.graph_objects as go
 from datetime import datetime 
 import json
 
+
 class Schedule(ScheduleTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -33,7 +34,7 @@ class Schedule(ScheduleTemplate):
 
   def refresh_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    chart = anvil.server.call('run_plotly2_uplink')
+    chart = anvil.server.call('get_chart_obj')
     self.plot_1.data = chart
 
   def __refresh__(self):

@@ -54,6 +54,17 @@ db_schema:
       admin_ui: {width: 200, order: 0}
       type: string
     title: Resource_table
+  chart_obj:
+    client: none
+    server: full
+    columns:
+    - name: chart
+      admin_ui: {width: 200, order: 0}
+      type: media
+    - name: name
+      admin_ui: {width: 200, order: 1}
+      type: string
+    title: chart_obj
 startup: {type: form, module: Main}
 name: LOGOS UI
 startup_form: null
