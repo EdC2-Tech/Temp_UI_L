@@ -66,14 +66,14 @@ components:
         layout_properties: {grid_position: 'BVXILC,AHCDQG'}
         event_bindings: {click: refresh_button_click}
       layout_properties: {}
-    - name: image_1
-      properties: {display_mode: original_size}
-      type: Image
-      layout_properties: {}
   - name: spacer_2
     properties: {height: 32}
     type: Spacer
     layout_properties: {grid_position: 'KUUPAO,QFVVPJ'}
+  - name: plot_1
+    properties: {}
+    type: Plot
+    layout_properties: {grid_position: 'GPPNFK,IUPGNS'}
 - name: label_1
   properties: {text: Schedule Optimization Tool - Idaho National Laboratory}
   type: Label

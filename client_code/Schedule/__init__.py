@@ -33,7 +33,8 @@ class Schedule(ScheduleTemplate):
 
   def refresh_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    pass
+    chart = anvil.server.call('run_plotly2_uplink')
+    self.plot_1.data = chart
 
   def __refresh__(self):
     pass
