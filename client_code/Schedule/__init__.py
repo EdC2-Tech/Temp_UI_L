@@ -24,7 +24,11 @@ class Schedule(ScheduleTemplate):
     
   def import_button_change(self, file, **event_args):
     # Parse file to get array
-    anvil.server.call("file_loader_1", file.get_bytes())
+    print(file.content_type)
+
+    #my_media = anvil.URLMedia(file.name) 
+    
+    self.image_1.source = file
     # Clear current tables and replace with content
 
   def refresh_button_click(self, **event_args):

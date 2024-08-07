@@ -11,11 +11,11 @@ components:
   - name: spacer_1
     properties: {height: 32}
     type: Spacer
-    layout_properties: {grid_position: 'KUUPAO,ATKFBL'}
+    layout_properties: {grid_position: 'KUUPAO,ATKFBL', full_width_row: true}
   - name: linear_panel_3
     properties: {}
     type: LinearPanel
-    layout_properties: {grid_position: 'KUUPAO,JMXRWP MNSCJQ,XYUMZN'}
+    layout_properties: {grid_position: 'KUUPAO,JMXRWP', full_width_row: true}
     components:
     - name: outlined_card_1
       properties: {role: outlined-card, wrap_on: never, col_spacing: medium}
@@ -66,18 +66,14 @@ components:
         layout_properties: {grid_position: 'BVXILC,AHCDQG'}
         event_bindings: {click: refresh_button_click}
       layout_properties: {}
-  - name: schedule_image
-    properties: {height: '200', display_mode: original_size}
-    type: Image
-    layout_properties: {grid_position: 'KUUPAO,JMXRWP YSIMQJ,JFKGLU'}
+    - name: image_1
+      properties: {display_mode: original_size}
+      type: Image
+      layout_properties: {}
   - name: spacer_2
     properties: {height: 32}
     type: Spacer
     layout_properties: {grid_position: 'KUUPAO,QFVVPJ'}
-- type: FlowPanel
-  properties: {}
-  name: navbar_links
-  layout_properties: {slot: nav-right}
 - name: label_1
   properties: {text: Schedule Optimization Tool - Idaho National Laboratory}
   type: Label
