@@ -14,8 +14,9 @@ from urllib.request import urlopen
 @anvil.server.callable
 def get_chart_obj():
   chart = app_tables.chart_obj.get(name='chart')['chart']
-  chart = cloudpickle.load(urlopen(chart.url))  
-  return
+  chart = cloudpickle.load(urlopen(chart.url)) 
+  
+  return chart
   
 def load_json(file):
    with open(file, 'r') as f:
