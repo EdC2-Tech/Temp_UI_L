@@ -31,7 +31,7 @@ def draw_simplified_chart(start_date=0, end_date=0, interval="Days"):
     -------
     '''
   # Parameter verification
-  
+    return 0
   
 @anvil.server.callable
 def draw_full_chart(start_date=0, end_date=0, interval="Days"):
@@ -42,15 +42,19 @@ def draw_full_chart(start_date=0, end_date=0, interval="Days"):
   dicts       = [{'Task':r['Task'],
                   'Start':r['Start'],
                   'Finish':r['Finish'],
-                  'Adj':r['Adj']
+                  'Adj':r['Adj'],
+                  'CP_flag':r['CP_flag']
                  } for r in all_records] 
   data        = pd.DataFrame.from_dict(dicts)
+  
+  data["Color"] = data.apply(is_critical, axis=1)
   
   # Draw Gantt Chart
   fig = px.timeline(data,
                     y=data["Task"],
                     x_start=data["Start"],
-                    x_end=data["Finish"]
+                    x_end=data["Finish"],
+                    color="Color"
   )
   
   # Update x-axis and y-axis with correct information
@@ -88,7 +92,8 @@ def draw_full_chart(start_date=0, end_date=0, interval="Days"):
                  tickvals = tickvals,
                  ticktext = data['Task'],
                  range  = [tickvals[0]-1/2, tickvals[-1]+1/2],
-                 autorange = "reversed"
+                 autorange = "reversed",
+                 categoryarray = data["Task"]
     )
   )
   # Change width of activities
@@ -110,7 +115,8 @@ def draw_full_chart(start_date=0, end_date=0, interval="Days"):
                   tickvals = tickvals,
                   ticktext = data['Task'],
                   range  = [tickvals[0]-1/2, tickvals[-1]+1/2],
-                  autorange = "reversed"
+                  autorange = "reversed",
+                  categoryarray = data["Task"]
       )
     )      
   elif interval == "Months":
@@ -125,11 +131,10 @@ def draw_full_chart(start_date=0, end_date=0, interval="Days"):
                   tickvals = tickvals,
                   ticktext = data['Task'],
                   range  = [tickvals[0]-1/2, tickvals[-1]+1/2],
-                  autorange = "reversed"
+                  autorange = "reversed",
+                  categoryarray = data["Task"]
       )
     )     
-
-  
   return fig
 
 @anvil.server.callable
@@ -188,8 +193,18 @@ def draw_task_links(fig, json_dict):
         for endPoint in link[1]["Adj"]:
             ind     = json_dict.index[json_dict["Task"]==endPoint].tolist()
             end_act = json_dict.loc[ind[0]] 
+            CP_flag = end_act["CP_flag"] and start_act["CP_flag"]
+            if not CP_flag:
+                new_fig = draw_arrow_between_jobs_v2(new_fig, start_act, end_act)
+        
+        # Draw critical path on top of existing links
+        for endPoint in link[1]["Adj"]:
+            ind     = json_dict.index[json_dict["Task"]==endPoint].tolist()
+            end_act = json_dict.loc[ind[0]] 
+            CP_flag = end_act["CP_flag"] and start_act["CP_flag"]
             
-            new_fig = draw_arrow_between_jobs_v2(new_fig, start_act, end_act)
+            if CP_flag:
+                new_fig = draw_arrow_between_jobs_v2(new_fig, start_act, end_act, color="black", width=3)
     return new_fig
 
 def draw_arrow_between_jobs_v1(fig, first_job_dict, second_job_dict, color="blue", width=2):
@@ -401,3 +416,9 @@ def draw_line(fig, x0, x1, y0, y1, color="blue", width=2):
     )
     
     return fig     
+
+def is_critical(json_dict):
+    if json_dict["CP_flag"]:
+        return "green"
+    else:
+        return "blue"
