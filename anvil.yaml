@@ -84,6 +84,9 @@ db_schema:
     - name: Adj
       admin_ui: {width: 200, order: 5}
       type: simpleObject
+    - name: CP_Flag
+      admin_ui: {width: 200, order: 6}
+      type: bool
     title: JSON_table
 startup: {type: form, module: Main}
 name: LOGOS UI

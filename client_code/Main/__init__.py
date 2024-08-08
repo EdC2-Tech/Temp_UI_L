@@ -20,7 +20,7 @@ class Main(MainTemplate):
 
     # Initiate default homepage panel 
     self.content_panel.clear()
-    self.content_panel.add_component(Home())
+    self.content_panel.add_component(Home(), full_width_row=True)
 
     # Add LOGOS logo to page
     self.logo_image.source = "_/theme/logo.PNG"
@@ -28,37 +28,37 @@ class Main(MainTemplate):
   def home_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(Home())
+    self.content_panel.add_component(Home(), full_width_row=True)
 
   def schedule_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(Schedule())
+    self.content_panel.add_component(Schedule(), full_width_row=True)
 
   def resource_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(Resource())
+    self.content_panel.add_component(Resource(), full_width_row=True)
 
   def activity_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(Activity())
+    self.content_panel.add_component(Activity(), full_width_row=True)
 
   def contact_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(UplinkTest())
+    self.content_panel.add_component(UplinkTest(), full_width_row=True)
 
   def outlined_button_2_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(Gantt_Test())
+    self.content_panel.add_component(Gantt_Test(), full_width_row=True)
 
   def outlined_button_3_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(Gantt_JS())
+    self.content_panel.add_component(Gantt_JS(), full_width_row=True)
 
   
 
