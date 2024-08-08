@@ -14,7 +14,7 @@ import math
 
 # Backend for Schedule
 @anvil.server.callable
-def draw_simplified_chart(start_date=0, end_date=0, interval="Days"):
+def draw_simplified_chart(start_date=0, end_date=0, interval="Days", showCrit=False):
     '''
     Draws a Gantt chart using the simplified list of activities.
 
@@ -34,7 +34,7 @@ def draw_simplified_chart(start_date=0, end_date=0, interval="Days"):
     return 0
   
 @anvil.server.callable
-def draw_full_chart(start_date=0, end_date=0, interval="Days"):
+def draw_full_chart(start_date=0, end_date=0, interval="Days", showCrit=False):
   # Parameter verification
   
   # Extract data to draw chart from app tables
@@ -47,19 +47,33 @@ def draw_full_chart(start_date=0, end_date=0, interval="Days"):
                  } for r in all_records] 
   data        = pd.DataFrame.from_dict(dicts)
   
-  data["Color"] = data.apply(is_critical, axis=1)
+  data["Critical"] = data.apply(is_critical, axis=1)
   
   # Draw Gantt Chart
-  fig = px.timeline(data,
-                    y=data["Task"],
-                    x_start=data["Start"],
-                    x_end=data["Finish"],
-                    color="Color"
-  )
-  
+  if showCrit:
+    fig = px.timeline(data,
+                      y=data["Task"],
+                      x_start=data["Start"],
+                      x_end=data["Finish"],
+                      color="Critical"
+    )
+    fig.update_layout(legend_title_text='Critical Task Status')
+  else:
+    fig = px.timeline(data,
+                      y=data["Task"],
+                      x_start=data["Start"],
+                      x_end=data["Finish"]
+    )
+    
   # Update x-axis and y-axis with correct information
   fig.update_xaxes(showgrid=True)
   fig.update_yaxes(showgrid=True)
+  
+  # x_start = base, x_end = x in figure dictionary
+  fig.update_traces(hovertemplate="Start: %{base|%Y-%m-%d}<br>"
+                                  "End: %{x|%Y-%m-%d}<br>"
+                                  "Task: %{y}"
+                                  )
 
   # Change start date for Gantt drawing
   if not isinstance(start_date, datetime.date):
@@ -419,6 +433,6 @@ def draw_line(fig, x0, x1, y0, y1, color="blue", width=2):
 
 def is_critical(json_dict):
     if json_dict["CP_flag"]:
-        return "green"
+        return "Is Critical"
     else:
-        return "blue"
+        return "Not Critical"

@@ -38,13 +38,15 @@ class Schedule(ScheduleTemplate):
       fig = anvil.server.call("draw_simplified_chart", 
                               self.start_datePicker.date, 
                               self.end_datePicker.date, 
-                              self.interval_drop_down.selected_value
+                              self.interval_drop_down.selected_value,
+                              self.CP_flag.checked
                              )
     else:
       fig = anvil.server.call("draw_full_chart", 
                               self.start_datePicker.date, 
                               self.end_datePicker.date, 
-                              self.interval_drop_down.selected_value
+                              self.interval_drop_down.selected_value,
+                              self.CP_flag.checked
                              )
     self.plot_1.figure = fig
 
