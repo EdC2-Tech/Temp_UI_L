@@ -18,17 +18,12 @@ components:
       type: ColumnPanel
       components:
       - name: import_button
-        properties: {text: Import Schedule}
+        properties: {text: Import Schedule, file_types: '".json"'}
         type: FileLoader
         layout_properties: {grid_position: 'XRJZSE,LKNTVG', full_width_row: true}
         event_bindings: {change: import_button_change}
         data_bindings:
         - {property: file, code: '', writeback: false}
-        - {property: file_types, code: '', writeback: false}
-      - name: button_2
-        properties: {text: button_2}
-        type: Button
-        layout_properties: {grid_position: 'XRJZSE,NTUVTG', full_width_row: true}
       - name: label_4
         properties: {text: 'Viewing Options:', font_size: 20}
         type: Label
@@ -43,19 +38,40 @@ components:
           type: Label
           layout_properties: {row: XAOOOC, width_xs: 3, col_xs: 2}
         - name: start_datePicker
-          properties: {pick_time: true}
+          properties: {pick_time: false}
           type: DatePicker
           layout_properties: {row: XAOOOC, width_xs: 3, col_xs: 5}
-          event_bindings: {change: start_datePicker_change}
+          event_bindings: {}
         - name: label_3
           properties: {text: 'End Date:', align: right}
           type: Label
           layout_properties: {row: RBFGCS, width_xs: 3, col_xs: 2}
         - name: end_datePicker
-          properties: {pick_time: true}
+          properties: {pick_time: false}
           type: DatePicker
           layout_properties: {row: RBFGCS, width_xs: 3, col_xs: 5}
-          event_bindings: {change: end_datePicker_change}
+          event_bindings: {}
+        - name: label_5
+          properties: {align: right, text: 'Interval:'}
+          type: Label
+          layout_properties: {row: NPQIFM, width_xs: 3, col_xs: 2}
+        - name: interval_drop_down
+          properties: {}
+          type: DropDown
+          layout_properties: {row: NPQIFM, width_xs: 3, col_xs: 5}
+      - name: column_panel_1
+        properties: {}
+        type: ColumnPanel
+        layout_properties: {grid_position: 'HSIIQJ,JGOYOG'}
+        components:
+        - name: CP_flag
+          properties: {text: Show critical path}
+          type: CheckBox
+          layout_properties: {grid_position: 'JRQMFB,AGCDSA'}
+        - name: simplified_flag
+          properties: {text: Show simplified Gantt chart}
+          type: CheckBox
+          layout_properties: {grid_position: 'UMPLIP,FKHUSB'}
       - name: refresh_button
         properties: {text: Refresh Viewer, spacing_above: none, spacing_below: none, background: ''}
         type: Button

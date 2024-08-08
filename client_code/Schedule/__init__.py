@@ -15,27 +15,38 @@ class Schedule(ScheduleTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-  def start_datePicker_change(self, **event_args):
-    """This method is called when the selected date changes"""
-    pass
-
-  def end_datePicker_change(self, **event_args):
-    """This method is called when the selected date changes"""
-    pass
+    panel = app_tables.increment.search()
+    self.interval_drop_down.items = {(row["increment_value"]) for row in panel}
+    self.interval_drop_down.selected_value = self.interval_drop_down.items[0]
     
   def import_button_change(self, file, **event_args):
     # Load JSON file and create associated table from data
-    anvil.server.call("load_json", file)
-    fig = anvil.server.call("draw_chart")
-    self.plot_1.figure = fig
+    success = anvil.server.call("load_json", file)
+    if success:
+      self.__refreshPlot__()
+    else:
+      anvil.alert("Import unsuccessful, file type unsupported. Gantt chart data must be JSON formatted file.")
 
   def refresh_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    fig = anvil.server.call("draw_chart")
-    self.plot_1.figure = fig
+    self.__refreshPlot__()
 
-  def __refresh__(self):
-    pass
+  def __refreshPlot__(self):
+    if self.CP_flag:
+      pass
+    if self.simplified_flag.checked:
+      fig = anvil.server.call("draw_simplified_chart", 
+                              self.start_datePicker.date, 
+                              self.end_datePicker.date, 
+                              self.interval_drop_down.selected_value
+                             )
+    else:
+      fig = anvil.server.call("draw_full_chart", 
+                              self.start_datePicker.date, 
+                              self.end_datePicker.date, 
+                              self.interval_drop_down.selected_value
+                             )
+    self.plot_1.figure = fig
 
   
 

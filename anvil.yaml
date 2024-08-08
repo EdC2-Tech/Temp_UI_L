@@ -20,24 +20,6 @@ db_schema:
       admin_ui: {width: 200}
       type: string
     title: resource
-  dependency:
-    client: full
-    server: full
-    columns:
-    - name: dependency_value
-      admin_ui: {width: 200}
-      type: string
-    - name: dependency_description
-      admin_ui: {width: 200}
-      type: string
-    - name: resource
-      admin_ui: {width: 200}
-      type: string
-    - name: res_list
-      admin_ui: {width: 200, order: 3}
-      type: link_single
-      target: resource
-    title: dependency
   activity_table:
     client: none
     server: full
@@ -54,17 +36,6 @@ db_schema:
       admin_ui: {width: 200, order: 0}
       type: string
     title: Resource_table
-  chart_obj:
-    client: none
-    server: full
-    columns:
-    - name: chart
-      admin_ui: {width: 200, order: 0}
-      type: media
-    - name: name
-      admin_ui: {width: 200, order: 1}
-      type: string
-    title: chart_obj
   json_table:
     client: none
     server: full
@@ -87,6 +58,9 @@ db_schema:
     - name: CP_Flag
       admin_ui: {width: 200, order: 6}
       type: bool
+    - name: Simple_Adj
+      admin_ui: {width: 200, order: 7}
+      type: simpleObject
     title: JSON_table
 startup: {type: form, module: Main}
 name: LOGOS UI

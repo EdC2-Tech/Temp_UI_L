@@ -10,10 +10,33 @@ import pandas as pd
 import plotly.express as px 
 import datetime
 import numpy as np
+import math
 
 # Backend for Schedule
 @anvil.server.callable
-def draw_chart():
+def draw_simplified_chart(start_date=0, end_date=0, interval="Days"):
+    '''
+    Draws a Gantt chart using the simplified list of activities.
+
+    Parameters
+    ----------
+    start_date : date
+        Custom start date specified by user.
+    end_date : date
+        Custom end date specified by user.
+    interval : string
+        Custom interval specified by user.
+
+    Returns
+    -------
+    '''
+  # Parameter verification
+  
+  
+@anvil.server.callable
+def draw_full_chart(start_date=0, end_date=0, interval="Days"):
+  # Parameter verification
+  
   # Extract data to draw chart from app tables
   all_records = app_tables.json_table.search() 
   dicts       = [{'Task':r['Task'],
@@ -22,7 +45,7 @@ def draw_chart():
                   'Adj':r['Adj']
                  } for r in all_records] 
   data        = pd.DataFrame.from_dict(dicts)
-
+  
   # Draw Gantt Chart
   fig = px.timeline(data,
                     y=data["Task"],
@@ -34,10 +57,23 @@ def draw_chart():
   fig.update_xaxes(showgrid=True)
   fig.update_yaxes(showgrid=True)
 
-  # Get range for x (start and end date)
-  start_date = data["Start"][0]
-  end_date   = data["Finish"].iloc[-1]
+  # Change start date for Gantt drawing
+  if not isinstance(start_date, datetime.date):
+    # Get range for x (start and end date)
+    start_date = data["Start"][0]
+  else:
+    start_date = start_date
+    print("Start date", start_date)
+    
+  #Change start date for Gantt drawing
+  if not isinstance(end_date, datetime.date):
+    end_date   = data["Finish"].iloc[-1]
+  else:
+    end_date = end_date
+    print("End date", end_date)
+    
   numdays    = (end_date - start_date).days
+  print(numdays)
 
   # Get range for y (# of activities)
   tickvals   = np.arange(0, len(data))
@@ -45,7 +81,8 @@ def draw_chart():
   fig.update_layout(
     xaxis = dict(tickmode = 'array',
                  tickvals = [start_date + datetime.timedelta(days=x) for x in range(numdays)],
-                 ticktext = [start_date + datetime.timedelta(days=x) for x in range(numdays)]
+                 ticktext = [start_date + datetime.timedelta(days=x) for x in range(numdays)],
+                 range    = [start_date, end_date]
     ),
     yaxis = dict(tickmode = 'array',
                  tickvals = tickvals,
@@ -60,18 +97,55 @@ def draw_chart():
   # Draw arrows between tasks
   fig = draw_task_links(fig, data)
   
+  # Convert to correct time scale
+  if interval == "Weeks":
+    numweeks = math.ceil(numdays/7)
+    fig.update_layout(
+      xaxis = dict(tickmode = 'array',
+                  tickvals = [start_date + datetime.timedelta(weeks=x) for x in range(numweeks)],
+                  ticktext = [start_date + datetime.timedelta(weeks=x) for x in range(numweeks)],
+                  range    = [start_date, end_date]
+      ),
+      yaxis = dict(tickmode = 'array',
+                  tickvals = tickvals,
+                  ticktext = data['Task'],
+                  range  = [tickvals[0]-1/2, tickvals[-1]+1/2],
+                  autorange = "reversed"
+      )
+    )      
+  elif interval == "Months":
+    nummonths = math.ceil(numdays/28)
+    fig.update_layout(
+      xaxis = dict(tickmode = 'array',
+                  tickvals = [start_date + datetime.timedelta(weeks=x*4) for x in range(nummonths)],
+                  ticktext = [start_date + datetime.timedelta(weeks=x*4) for x in range(nummonths)],
+                  range    = [start_date, end_date]
+      ),
+      yaxis = dict(tickmode = 'array',
+                  tickvals = tickvals,
+                  ticktext = data['Task'],
+                  range  = [tickvals[0]-1/2, tickvals[-1]+1/2],
+                  autorange = "reversed"
+      )
+    )     
+
+  
   return fig
 
 @anvil.server.callable
 def load_json(file):
+  # Try to load the file
+  f = file.get_bytes().decode('utf-8').replace("'", '"')
+  try:
+    data = json.loads(f)
+    data = pd.DataFrame.from_dict(data)
+  except Exception as e:
+    return 0
+  
   # Remove existing table from anvil
   app_tables.json_table.delete_all_rows()
   
-  # Load file from json
-  f = file.get_bytes().decode('utf-8').replace("'", '"')
-  data = json.loads(f)
-  data = pd.DataFrame.from_dict(data)
-
+  # Format data correctly
   data["Start"] = pd.to_datetime(data["Start"]).dt.date
   data["Finish"] = pd.to_datetime(data["Finish"]).dt.date
   data["Duration"] = pd.to_numeric(data["Duration"])
@@ -82,11 +156,10 @@ def load_json(file):
                                   Start=tmp["Start"],
                                   Finish=tmp["Finish"],
                                   Duration=tmp["Duration"],
-                                  Adj=tmp["Adj"]
+                                  Adj=tmp["Adj"],
+                                  CP_Flag=False
                                  )
-
-  print("Table creation successful")
-  return 
+  return 1
 
 def draw_task_links(fig, json_dict):
     '''
