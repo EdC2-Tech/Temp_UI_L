@@ -1,0 +1,11 @@
+container: {type: ColumnPanel}
+components:
+- name: flow_panel_1
+  properties: {border: 2px gray dashed, background: 'theme:Gray 100', spacing_above: small}
+  type: FlowPanel
+  layout_properties: {grid_position: 'HSHTGF,RXRGPZ'}
+is_package: true
+custom_component: true
+properties:
+- {name: add_callback, type: object, important: true, default_binding_prop: true}
+- {name: remove_callback, type: object, important: true}

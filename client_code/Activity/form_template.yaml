@@ -20,14 +20,15 @@ components:
   - properties:
       columns:
       - {id: JKSDUP, title: Activity Name, data_key: Task, width: 201, expand: false}
-      - {id: VJQQOR, title: Description, data_key: Description, width: 197, expand: false}
-      - {id: JPGNPJ, data_key: Resource, title: Column 1, width: 169, expand: false}
-      - {id: FYRUCI, data_key: c1, title: Column 2, expand: false, width: 81}
-      - {id: OYQBVS, data_key: c2, title: Column 3, width: 82, expand: false}
+      - {id: VJQQOR, title: Description, data_key: Description, width: 297, expand: false}
+      - {id: JPGNPJ, data_key: Resource, title: Resource, width: '400', expand: false}
+      - {id: UMUOAE, data_key: Adj, title: Adj_Activities, width: '400', expand: false}
+      - {id: FYRUCI, data_key: c1, title: Column 2, expand: false, width: 108}
+      - {id: OYQBVS, data_key: c2, title: Column 3, width: 119, expand: false}
       auto_header: false
       rows_per_page: 10
     type: DataGrid
-    layout_properties: {grid_position: 'OLNOWC,LOOHLL', full_width_row: false}
+    layout_properties: {grid_position: 'OLNOWC,LOOHLL', full_width_row: true}
     name: data_grid_1
     components:
     - properties: {background: '#0091ff'}
@@ -59,15 +60,19 @@ components:
         type: TextBox
         layout_properties: {column: VJQQOR}
         name: edit_dep_des
-      - properties: {}
-        type: DropDown
-        layout_properties: {column: JPGNPJ}
-        name: edit_res_dropdown
       - properties: {text: '', icon: 'fa:plus-square', font_size: 17, align: left}
         type: Button
         layout_properties: {column: FYRUCI}
         event_bindings: {click: add_button_click}
         name: add_button
+      - name: multi_select_drop_down_1
+        properties: {}
+        type: form:MultiSelectDropDown
+        layout_properties: {column: JPGNPJ}
+      - name: multi_select_drop_down_2
+        properties: {}
+        type: form:MultiSelectDropDown
+        layout_properties: {column: UMUOAE}
       layout_properties: {pinned: true}
     - properties: {item_template: Activity.RowTemplate4}
       type: RepeatingPanel
