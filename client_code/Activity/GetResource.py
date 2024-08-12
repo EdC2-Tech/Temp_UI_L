@@ -10,6 +10,6 @@ from anvil.tables import app_tables
 #    Module1.say_hello()
 #
 
-resources = {dep['resource'] for dep in anvil.server.call('get_dependency')}
+resources = {dep['resource'] for dep in anvil.server.call('get_resources')}
 
 resources = sorted(list(resources))

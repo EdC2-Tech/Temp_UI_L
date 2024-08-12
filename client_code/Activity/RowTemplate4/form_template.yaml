@@ -25,7 +25,7 @@ components:
     type: TextBox
     layout_properties: {column: JKSDUP}
     data_bindings:
-    - {code: 'self.item[''dependency_value'']', writeback: false, property: text}
+    - {property: text, code: 'self.item[''Task'']', writeback: false}
     name: text_box_4
   - properties: {text: '', icon: 'fa:trash-o', font_size: 18}
     type: Button
@@ -37,13 +37,13 @@ components:
     layout_properties: {column: JPGNPJ}
     event_bindings: {change: null}
     data_bindings:
-    - {code: 'self.item[''resource'']', writeback: false, property: selected_value}
+    - {property: selected_value, code: 'self.item[''Resource'']', writeback: false}
     name: drop_down_1
   - properties: {}
     type: TextBox
     layout_properties: {column: VJQQOR}
     data_bindings:
-    - {code: 'self.item[''dependency_description'']', writeback: false, property: text}
+    - {property: text, code: 'self.item[''Description'']', writeback: false}
     name: text_box_5
   - properties: {text: '', icon: 'fa:save', font_size: 18}
     type: Button

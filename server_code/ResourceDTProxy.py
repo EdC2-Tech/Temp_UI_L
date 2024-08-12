@@ -7,7 +7,7 @@ from datetime import datetime
 
 @anvil.server.callable
 def get_resource():
-  return app_tables.resource.search()
+  return app_tables.resource_table.search()
 '''[(row["resource_value"]) for row in app_tables.resource.search()]'''
 
 @anvil.server.callable

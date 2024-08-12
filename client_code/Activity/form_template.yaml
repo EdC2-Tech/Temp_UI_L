@@ -13,15 +13,15 @@ components:
     layout_properties: {grid_position: 'WDGXOQ,IWEBPM'}
     name: column_panel_1
     components:
-    - properties: {text: Dependencies, align: center, font_size: 25}
+    - properties: {text: Activity Dependencies, align: center, font_size: 25}
       type: Label
       layout_properties: {grid_position: 'CANXDD,EDYANT'}
       name: label_2
   - properties:
       columns:
-      - {id: JKSDUP, title: Dependency Name, data_key: dependency_value, width: 201, expand: false}
-      - {id: VJQQOR, title: Description, data_key: dependency_description, width: 197, expand: false}
-      - {id: JPGNPJ, data_key: resource, title: Column 1, width: 169, expand: false}
+      - {id: JKSDUP, title: Activity Name, data_key: Task, width: 201, expand: false}
+      - {id: VJQQOR, title: Description, data_key: Description, width: 197, expand: false}
+      - {id: JPGNPJ, data_key: Resource, title: Column 1, width: 169, expand: false}
       - {id: FYRUCI, data_key: c1, title: Column 2, expand: false, width: 81}
       - {id: OYQBVS, data_key: c2, title: Column 3, width: 82, expand: false}
       auto_header: false
@@ -35,7 +35,7 @@ components:
       layout_properties: {pinned: true}
       name: data_row_panel_1
       components:
-      - properties: {text: Dependency Name, font_size: 20, foreground: 'theme:On Primary'}
+      - properties: {text: Activity Name, font_size: 20, foreground: 'theme:On Primary'}
         type: Label
         layout_properties: {column: JKSDUP}
         name: label_3
@@ -43,7 +43,7 @@ components:
         type: Label
         layout_properties: {column: VJQQOR}
         name: label_4
-      - properties: {text: Resource, foreground: 'theme:On Primary', font_size: 20}
+      - properties: {text: Utilized Resource, foreground: 'theme:On Primary', font_size: 20}
         type: Label
         layout_properties: {column: JPGNPJ}
         name: label_6
@@ -66,8 +66,8 @@ components:
       - properties: {text: '', icon: 'fa:plus-square', font_size: 17, align: left}
         type: Button
         layout_properties: {column: FYRUCI}
-        event_bindings: {click: button_1_click}
-        name: button_1
+        event_bindings: {click: add_button_click}
+        name: add_button
       layout_properties: {pinned: true}
     - properties: {item_template: Activity.RowTemplate4}
       type: RepeatingPanel

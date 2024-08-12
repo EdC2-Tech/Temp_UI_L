@@ -43,6 +43,7 @@ def draw_full_chart(start_date=0, end_date=0, interval="Days", showCrit=False):
                   'Start':r['Start'],
                   'Finish':r['Finish'],
                   'Adj':r['Adj'],
+                  'Resource':r["Resource"],
                   'CP_flag':r['CP_flag']
                  } for r in all_records] 
   data        = pd.DataFrame.from_dict(dicts)
@@ -159,6 +160,7 @@ def load_json(file):
     data = json.loads(f)
     data = pd.DataFrame.from_dict(data)
   except Exception as e:
+    print("Could not load JSON file")
     return 0
   
   # Remove existing table from anvil
@@ -176,8 +178,13 @@ def load_json(file):
                                   Finish=tmp["Finish"],
                                   Duration=tmp["Duration"],
                                   Adj=tmp["Adj"],
-                                  CP_Flag=False
+                                  Description=tmp["Description"],
+                                  Resource=tmp["Resource"],
+                                  CP_flag=False
                                  )
+
+  # Add resources to separate unique table
+  update_resource_table()
   return 1
 
 def draw_task_links(fig, json_dict):
@@ -436,3 +443,21 @@ def is_critical(json_dict):
         return "Is Critical"
     else:
         return "Not Critical"
+
+def update_resource_table():
+  all_records = app_tables.json_table.search() 
+  dicts       = [{'Task':r['Task'],
+                  'Start':r['Start'],
+                  'Finish':r['Finish'],
+                  'Adj':r['Adj'],
+                  'Resource':r["Resource"],
+                  'CP_flag':r['CP_flag']
+                 } for r in all_records] 
+  data        = pd.DataFrame.from_dict(dicts)
+
+  df = data["Resource"].apply(pd.Series).stack().unique()
+  for name in df:
+    app_tables.resource_table.add_row(resource_name=name,
+                                      resource_description=""
+                                     )
+  
