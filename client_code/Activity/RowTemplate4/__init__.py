@@ -5,27 +5,27 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ..ResourceState import resources_available
-
 class RowTemplate4(RowTemplate4Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
-    self.drop_down_1.items = resources_available 
-
+    panel = anvil.server.call('get_resource')
+    self.Task_resource_edit.items =  {(row["resource_name"]) for row in panel}
+    #self.Task_dependency_edit.itmes = None
+    
   def edit_dependency(self):
     #resource = self.drop_down_1.selected_value
-    dependency_value       = self.text_box_4.text
-    dependency_description = self.text_box_5.text
-    res                    = self.drop_down_1.selected_value
+    task_name       = self.Task_name_edit.text
+    task_desciption = self.Task_decription_edit.text
+    #task_resource   = self.Task_resource_edit.items
     
     anvil.server.call('edit_dependency',
                       self.item,
-                      dependency_value = dependency_value,
-                      dependency_description = dependency_description,
-                      resource = res)
+                      dependency_value = task_name,
+                      dependency_description = task_desciption,
+                      resource = None)
 
   def button_3_click(self, **event_args):
     """This method is called when the edit button is clicked"""

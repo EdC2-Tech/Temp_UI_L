@@ -22,7 +22,7 @@ components:
       - {id: JKSDUP, title: Activity Name, data_key: Task, width: 201, expand: false}
       - {id: VJQQOR, title: Description, data_key: Description, width: 297, expand: false}
       - {id: JPGNPJ, data_key: Resource, title: Resource, width: '400', expand: false}
-      - {id: UMUOAE, data_key: Adj, title: Adj_Activities, width: '400', expand: false}
+      - {id: UMUOAE, data_key: Adj, title: Dependency, width: '400', expand: false}
       - {id: FYRUCI, data_key: c1, title: Column 2, expand: false, width: 108}
       - {id: OYQBVS, data_key: c2, title: Column 3, width: 119, expand: false}
       auto_header: false
@@ -31,7 +31,7 @@ components:
     layout_properties: {grid_position: 'OLNOWC,LOOHLL', full_width_row: true}
     name: data_grid_1
     components:
-    - properties: {background: '#0091ff'}
+    - properties: {background: '#0091ff', font_size: 20}
       type: DataRowPanel
       layout_properties: {pinned: true}
       name: data_row_panel_1
@@ -48,6 +48,10 @@ components:
         type: Label
         layout_properties: {column: JPGNPJ}
         name: label_6
+      - name: label_7
+        properties: {text: Activity Dependency, foreground: 'theme:On Primary'}
+        type: Label
+        layout_properties: {column: UMUOAE}
     - properties: {}
       type: DataRowPanel
       name: data_row_panel_2
@@ -65,11 +69,11 @@ components:
         layout_properties: {column: FYRUCI}
         event_bindings: {click: add_button_click}
         name: add_button
-      - name: multi_select_drop_down_1
+      - name: edit_resource_multi
         properties: {}
         type: form:MultiSelectDropDown
         layout_properties: {column: JPGNPJ}
-      - name: multi_select_drop_down_2
+      - name: edit_dependency_multi
         properties: {}
         type: form:MultiSelectDropDown
         layout_properties: {column: UMUOAE}

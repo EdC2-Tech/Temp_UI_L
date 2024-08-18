@@ -180,7 +180,7 @@ def load_json(file):
                                   Adj=tmp["Adj"],
                                   Description=tmp["Description"],
                                   Resource=tmp["Resource"],
-                                  CP_flag=False
+                                  CP_flag=bool(tmp["CP_flag"])
                                  )
 
   # Add resources to separate unique table
@@ -456,6 +456,7 @@ def update_resource_table():
   data        = pd.DataFrame.from_dict(dicts)
 
   df = data["Resource"].apply(pd.Series).stack().unique()
+  app_tables.resource_table.delete_all_rows()
   for name in df:
     app_tables.resource_table.add_row(resource_name=name,
                                       resource_description=""

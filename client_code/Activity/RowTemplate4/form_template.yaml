@@ -26,28 +26,29 @@ components:
     layout_properties: {column: JKSDUP}
     data_bindings:
     - {property: text, code: 'self.item[''Task'']', writeback: false}
-    name: text_box_4
+    name: Task_name_edit
   - properties: {text: '', icon: 'fa:trash-o', font_size: 18}
     type: Button
     layout_properties: {column: OYQBVS}
     event_bindings: {click: button_2_click}
     name: button_2
-  - properties: {align: full}
-    type: DropDown
-    layout_properties: {column: JPGNPJ}
-    event_bindings: {change: null}
-    data_bindings:
-    - {property: selected_value, code: 'self.item[''Resource'']', writeback: false}
-    name: drop_down_1
   - properties: {}
     type: TextBox
     layout_properties: {column: VJQQOR}
     data_bindings:
     - {property: text, code: 'self.item[''Description'']', writeback: false}
-    name: text_box_5
+    name: Task_decription_edit
   - properties: {text: '', icon: 'fa:save', font_size: 18}
     type: Button
     layout_properties: {column: FYRUCI}
     event_bindings: {click: button_1_click}
     name: button_1
+  - name: Task_resource_edit
+    properties: {}
+    type: form:MultiSelectDropDown
+    layout_properties: {column: JPGNPJ}
+  - name: Task_dependency_edit
+    properties: {}
+    type: form:MultiSelectDropDown
+    layout_properties: {column: UMUOAE}
   data_bindings: []

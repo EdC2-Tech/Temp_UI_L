@@ -16,13 +16,14 @@ class Activity(ActivityTemplate):
 
     # Populate drop down panel
     panel = anvil.server.call('get_activity')
-    self.edit_res_dropdown.items = {(row["Resource"]) for row in panel}
+    #self.edit_res_dropdown.items = {(row["Resource"]) for row in panel}
 
     self.repeating_panel_1.set_event_handler('x-refresh-dependencies', self.refresh_dependencies)
     # Any code you write here will run before the form opens.
   
   def refresh_dependencies(self, **event_args):
-    self.repeating_panel_1.items = anvil.server.call('get_activity')
+    #self.repeating_panel_1.items = anvil.server.call('get_activity')
+    pass
   
   def pg_size_lost_focus(self, **event_args):
     """This method is called when the TextBox loses focus"""
