@@ -10,15 +10,18 @@ db_schema:
       type: string
     title: increment
   activity_table:
-    client: none
+    client: full
     server: full
     columns:
     - name: activity_name
       admin_ui: {width: 200, order: 0}
       type: string
+    - name: activity_description
+      admin_ui: {width: 200, order: 1}
+      type: string
     title: Activity_table
   resource_table:
-    client: search
+    client: full
     server: full
     columns:
     - name: resource_name
@@ -29,7 +32,7 @@ db_schema:
       type: string
     title: Resource_table
   json_table:
-    client: search
+    client: full
     server: full
     columns:
     - name: Task
@@ -58,14 +61,14 @@ db_schema:
       type: simpleObject
     title: JSON_table
   group_table:
-    client: none
+    client: full
     server: full
     columns:
-    - name: Group_name
+    - name: group_name
       admin_ui: {order: 0, width: 200}
       type: string
-    - name: Group_description
-      admin_ui: {width: 200, order: 1}
+    - name: group_description
+      admin_ui: {order: 1, width: 200}
       type: string
     title: Group_table
 startup: {type: form, module: Main}

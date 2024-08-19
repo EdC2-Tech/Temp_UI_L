@@ -38,12 +38,12 @@ class RowTemplate4(RowTemplate4Template):
     self.data_row_panel_2.visible=False
 
     self.edit_activity()
-    self.parent.raise_event('x-refresh-dependencies')
+    self.raise_event('x-refresh-tables')
 
   def delete_button_click(self, **event_args):
     """This method is called when the delete button is clicked"""
     anvil.server.call('delete_dependency', self.item)
-    self.parent.raise_event('x-refresh-dependencies')
+    self.parent.raise_event('x-refresh-tables')
     
 
 

@@ -13,7 +13,7 @@ components:
     properties: {align: right, text: 'Group Name:'}
     type: Label
     layout_properties: {grid_position: 'USWRVM,RXCRDG'}
-  - name: resource_name
+  - name: group_name
     properties: {}
     type: TextBox
     layout_properties: {grid_position: 'USWRVM,FQBHPI'}
@@ -21,7 +21,7 @@ components:
     properties: {align: right, text: 'Group Description:'}
     type: Label
     layout_properties: {grid_position: 'LCHWVW,TLNUOP'}
-  - name: resource_description
+  - name: group_description
     properties: {}
     type: TextBox
     layout_properties: {grid_position: 'LCHWVW,YLVQOP'}

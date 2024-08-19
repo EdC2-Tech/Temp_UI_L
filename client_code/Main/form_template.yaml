@@ -4,7 +4,7 @@ container:
   properties: {html: '@theme:standard-page.html'}
 components:
 - name: menu_panel
-  properties: {background: '', col_widths: '{"PEXSEI":50,"SBLXZI":10,"RRMVSU":50,"SKHKCP":10,"PSHGDX":50,"UDWRTF":10,"EUTIHQ":75,"GFVABY":50,"BVFXUW":10,"HVNUEG":15,"GUXMSJ":50,"JDITYM":10}'}
+  properties: {background: '', col_widths: '{"PEXSEI":50,"SBLXZI":10,"RRMVSU":50,"SKHKCP":10,"PSHGDX":50,"UDWRTF":10,"EUTIHQ":75,"GFVABY":50,"BVFXUW":10,"HVNUEG":15,"GUXMSJ":50,"JDITYM":10}', wrap_on: never}
   type: ColumnPanel
   layout_properties: {slot: left-nav}
   components:
@@ -45,16 +45,16 @@ components:
     layout_properties: {grid_position: 'OUFMQB,EUTIHQ', full_width_row: true}
     event_bindings: {click: activity_button_click}
   - name: spacer_3_copy
-    properties: {height: 32}
+    properties: {height: 35.77777099609375}
     type: Spacer
     layout_properties: {grid_position: 'OUFMQB,HVNUEG'}
   - name: group_button
-    properties: {text: Activity Groups, role: outlined-button, background: 'theme:On Primary'}
+    properties: {text: Activity Groups, role: outlined-button, background: 'theme:On Primary', align: right}
     type: Button
     layout_properties: {grid_position: 'MMOYWC,GUXMSJ', full_width_row: true}
     event_bindings: {click: group_button_click}
   - name: spacer_4
-    properties: {height: 59.111083984375}
+    properties: {height: 34.33331298828125}
     type: Spacer
     layout_properties: {grid_position: 'MMOYWC,JDITYM', full_width_row: true}
   - name: contact_button

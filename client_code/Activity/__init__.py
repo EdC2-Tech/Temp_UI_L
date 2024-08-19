@@ -20,14 +20,15 @@ class Activity(ActivityTemplate):
     self.edit_dependency_multi.items = [(row["Task"]) for row in get_open_form().json_table]
 
     # Populate edit_group
-    self.edit_group.items = [(row["Task"]) for row in get_open_form().group_table]
+    self.edit_group.items = [(row["group_name"]) for row in get_open_form().group_table]
 
     # Set event handlers
-    self.repeating_panel_1.set_event_handler('x-refresh-dependencies', self.refresh_dependencies)
+    #self.repeating_panel_1.set_event_handler('x-refresh-dependencies', self.refresh_dependencies)
     # Any code you write here will run before the form opens.
   
   def refresh_dependencies(self, **event_args):
-    self.repeating_panel_1.items = anvil.server.call('get_activity')
+    self.raise_event('x-refresh-tables')
+    self.repeating_panel_1.items = get_open_form().json_table 
     pass
   
   def pg_size_lost_focus(self, **event_args):
@@ -55,7 +56,7 @@ class Activity(ActivityTemplate):
                       
                      )
     # refresh grid panel
-    self.raise_event('x-refresh-dependencies')
+    self.refresh_dependencies()
     
     # clear after adding new row
     self.edit_dep_val.text = ''

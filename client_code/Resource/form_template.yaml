@@ -31,10 +31,6 @@ components:
     layout_properties: {grid_position: 'EFCIFJ,HFZANY'}
     event_bindings: {click: button_1_click}
     name: button_1
-  - properties: {align: full}
-    type: DropDown
-    layout_properties: {grid_position: 'ZSENBL,DXNHDF'}
-    name: drop_down_1
 - type: FlowPanel
   properties: {}
   layout_properties: {slot: nav-right}

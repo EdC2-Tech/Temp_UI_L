@@ -40,7 +40,7 @@ components:
         - name: start_datePicker
           properties: {pick_time: false}
           type: DatePicker
-          layout_properties: {row: XAOOOC, width_xs: 3, col_xs: 5}
+          layout_properties: {row: XAOOOC, width_xs: 5, col_xs: 5}
           event_bindings: {}
         - name: label_3
           properties: {text: 'End Date:', align: right}
@@ -49,7 +49,7 @@ components:
         - name: end_datePicker
           properties: {pick_time: false}
           type: DatePicker
-          layout_properties: {row: RBFGCS, width_xs: 3, col_xs: 5}
+          layout_properties: {row: RBFGCS, width_xs: 5, col_xs: 5}
           event_bindings: {}
         - name: label_5
           properties: {align: right, text: 'Interval:'}
@@ -58,20 +58,32 @@ components:
         - name: interval_drop_down
           properties: {}
           type: DropDown
-          layout_properties: {row: NPQIFM, width_xs: 3, col_xs: 5}
+          layout_properties: {row: NPQIFM, width_xs: 5, col_xs: 5}
       - name: column_panel_1
-        properties: {}
+        properties: {col_widths: '{"SZSQAZ":15,"IVPDDD":25,"VVMGRQ":40}'}
         type: ColumnPanel
         layout_properties: {grid_position: 'HSIIQJ,JGOYOG'}
         components:
+        - name: label_6
+          properties: {text: 'Show Activity Group:', align: right}
+          type: Label
+          layout_properties: {grid_position: 'HOGPJL,SZSQAZ'}
+        - name: group_dropdown
+          properties: {}
+          type: DropDown
+          layout_properties: {grid_position: 'HOGPJL,IVPDDD'}
+        - name: spacer_1
+          properties: {height: 32}
+          type: Spacer
+          layout_properties: {grid_position: 'HOGPJL,VVMGRQ'}
         - name: CP_flag
           properties: {text: Show critical path}
           type: CheckBox
-          layout_properties: {grid_position: 'JRQMFB,AGCDSA'}
+          layout_properties: {grid_position: 'LVRTKV,SUHVKH'}
         - name: simplified_flag
           properties: {text: Show simplified Gantt chart}
           type: CheckBox
-          layout_properties: {grid_position: 'UMPLIP,FKHUSB'}
+          layout_properties: {grid_position: 'YOCVMO,UIHEIG'}
       - name: refresh_button
         properties: {text: Refresh Viewer, spacing_above: none, spacing_below: none, background: ''}
         type: Button
