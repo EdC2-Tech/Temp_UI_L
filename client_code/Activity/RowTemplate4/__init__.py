@@ -15,13 +15,13 @@ class RowTemplate4(RowTemplate4Template):
     self.Task_resource_edit.items =  {(row["resource_name"]) for row in panel}
     #self.Task_dependency_edit.itmes = None
     
-  def edit_dependency(self):
+  def edit_activity(self):
     #resource = self.drop_down_1.selected_value
     task_name       = self.Task_name_edit.text
     task_desciption = self.Task_decription_edit.text
     #task_resource   = self.Task_resource_edit.items
     
-    anvil.server.call('edit_dependency',
+    anvil.server.call('edit_activity',
                       self.item,
                       dependency_value = task_name,
                       dependency_description = task_desciption,
