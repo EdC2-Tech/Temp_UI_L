@@ -9,13 +9,8 @@ class RowTemplate4(RowTemplate4Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
-    # Any code you write here will run before the form opens.
-    panel = anvil.server.call('get_resource')
-    self.Task_resource_edit.items =  {(row["resource_name"]) for row in panel}
-    #self.Task_dependency_edit.itmes = None
     
-  def edit_activity(self):
+  def edit_activity(self):    
     #resource = self.drop_down_1.selected_value
     task_name       = self.Task_name_edit.text
     task_desciption = self.Task_decription_edit.text
@@ -27,20 +22,25 @@ class RowTemplate4(RowTemplate4Template):
                       dependency_description = task_desciption,
                       resource = None)
 
-  def button_3_click(self, **event_args):
+  def edit_button_click(self, **event_args):
+    json_table     = get_open_form().json_table
+    resource_table = get_open_form().resource_table
+    self.Task_resource_edit.items =  [(row["resource_name"]) for row in resource_table]
+    self.Task_dependency_edit.items = [(row["Task"]) for row in json_table]
+
     """This method is called when the edit button is clicked"""
     self.data_row_panel_1.visible=False
     self.data_row_panel_2.visible=True
 
-  def button_1_click(self, **event_args):
+  def save_button_click(self, **event_args):
     """This method is called when the save button is clicked"""
     self.data_row_panel_1.visible=True
     self.data_row_panel_2.visible=False
 
-    self.edit_dependency()
-    self.refresh_data_bindings()
+    self.edit_activity()
+    self.parent.raise_event('x-refresh-dependencies')
 
-  def button_2_click(self, **event_args):
+  def delete_button_click(self, **event_args):
     """This method is called when the delete button is clicked"""
     anvil.server.call('delete_dependency', self.item)
     self.parent.raise_event('x-refresh-dependencies')

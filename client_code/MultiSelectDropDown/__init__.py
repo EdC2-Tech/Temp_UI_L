@@ -1,5 +1,6 @@
 from ._anvil_designer import MultiSelectDropDownTemplate
 from anvil import *
+import anvil.server
 
 class MultiSelectDropDown(MultiSelectDropDownTemplate):
   def __init__(self, **properties):

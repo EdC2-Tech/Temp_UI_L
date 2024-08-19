@@ -1,0 +1,29 @@
+container: {type: ColumnPanel}
+components:
+- name: outlined_card_1
+  properties: {role: outlined-card}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'NUFBZB,CFYOQE'}
+  components:
+  - name: label_1
+    properties: {text: Group, font_size: 25}
+    type: Label
+    layout_properties: {grid_position: 'SNWFOK,ONIHBH'}
+  - name: label_2
+    properties: {align: right, text: 'Group Name:'}
+    type: Label
+    layout_properties: {grid_position: 'USWRVM,RXCRDG'}
+  - name: resource_name
+    properties: {}
+    type: TextBox
+    layout_properties: {grid_position: 'USWRVM,FQBHPI'}
+  - name: label_3
+    properties: {align: right, text: 'Group Description:'}
+    type: Label
+    layout_properties: {grid_position: 'LCHWVW,TLNUOP'}
+  - name: resource_description
+    properties: {}
+    type: TextBox
+    layout_properties: {grid_position: 'LCHWVW,YLVQOP'}
+    event_bindings: {pressed_enter: resource_description_pressed_enter}
+is_package: true

@@ -14,8 +14,14 @@ components:
   - properties: {text: '', icon: 'fa:edit', font_size: 18}
     type: Button
     layout_properties: {column: FYRUCI}
-    event_bindings: {click: button_3_click}
-    name: button_3
+    event_bindings: {click: edit_button_click}
+    name: edit_button
+  - name: check_box_1
+    properties: {text: Critical, enabled: false}
+    type: CheckBox
+    layout_properties: {column: QDDSUN}
+    data_bindings:
+    - {property: checked, code: 'self.item[''CP_flag'']', writeback: false}
 - properties: {visible: false}
   type: DataRowPanel
   layout_properties: {column: 'null'}
@@ -26,29 +32,44 @@ components:
     layout_properties: {column: JKSDUP}
     data_bindings:
     - {property: text, code: 'self.item[''Task'']', writeback: false}
+    - {property: placeholder, code: 'self.item[''Task'']', writeback: false}
     name: Task_name_edit
   - properties: {text: '', icon: 'fa:trash-o', font_size: 18}
     type: Button
     layout_properties: {column: OYQBVS}
-    event_bindings: {click: button_2_click}
-    name: button_2
+    event_bindings: {click: delete_button_click}
+    name: delete_button
   - properties: {}
     type: TextBox
     layout_properties: {column: VJQQOR}
     data_bindings:
     - {property: text, code: 'self.item[''Description'']', writeback: false}
+    - {property: placeholder, code: 'self.item[''Description'']', writeback: false}
     name: Task_decription_edit
   - properties: {text: '', icon: 'fa:save', font_size: 18}
     type: Button
     layout_properties: {column: FYRUCI}
-    event_bindings: {click: button_1_click}
-    name: button_1
+    event_bindings: {click: save_button_click}
+    name: save_button
   - name: Task_resource_edit
-    properties: {}
+    properties:
+      items: []
     type: form:MultiSelectDropDown
     layout_properties: {column: JPGNPJ}
+    data_bindings: []
   - name: Task_dependency_edit
     properties: {}
     type: form:MultiSelectDropDown
     layout_properties: {column: UMUOAE}
+    data_bindings: []
+  - name: check_box_2
+    properties: {text: Critical, enabled: false}
+    type: CheckBox
+    layout_properties: {column: QDDSUN}
+    data_bindings:
+    - {property: checked, code: 'self.item[''CP_flag'']', writeback: true}
+  - name: Group_edit
+    properties: {}
+    type: DropDown
+    layout_properties: {column: ENXKXA}
   data_bindings: []

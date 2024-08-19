@@ -15,7 +15,7 @@ class Schedule(ScheduleTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    panel = app_tables.increment.search()
+    panel = get_open_form().increment
     self.interval_drop_down.items = {(row["increment_value"]) for row in panel}
     self.interval_drop_down.selected_value = self.interval_drop_down.items[0]
     

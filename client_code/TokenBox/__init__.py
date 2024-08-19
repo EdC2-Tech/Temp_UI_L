@@ -1,5 +1,6 @@
 from ._anvil_designer import TokenBoxTemplate
 from anvil import *
+import anvil.server
 
 class TokenBox(TokenBoxTemplate):
   def __init__(self, **properties):

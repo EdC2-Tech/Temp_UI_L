@@ -10,6 +10,7 @@ from ..Schedule import Schedule
 from ..Activity import Activity
 from ..Resource import Resource
 from ..Contact import Contact
+from ..Group import Group
 
 class Main(MainTemplate):
   def __init__(self, **properties):
@@ -20,6 +21,10 @@ class Main(MainTemplate):
     self.content_panel.clear()
     self.content_panel.add_component(Home(), full_width_row=True)
 
+    # Pre-load existing data tables
+    self.update_tables()
+    self.set_event_handler('x-refresh-tables', self.update_tables)
+    
     # Add LOGOS logo to page
     self.logo_image.source = "_/theme/logo.PNG"
     
@@ -47,6 +52,21 @@ class Main(MainTemplate):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
     self.content_panel.add_component(Contact(), full_width_row=True)
+
+  def group_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.content_panel.clear()
+    self.content_panel.add_component(Group(), full_width_row=True)
+    
+  def update_tables(self):
+    resource_table, activity_table, json_table, increment, group_table = anvil.server.call('get_all_tables')
+    self.resource_table = resource_table
+    self.activity_table = activity_table
+    self.json_table     = json_table
+    self.increment      = increment
+    self.group_table    = group_table
+
+
 
 
 

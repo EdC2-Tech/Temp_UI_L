@@ -20,9 +20,11 @@ components:
   - properties:
       columns:
       - {id: JKSDUP, title: Activity Name, data_key: Task, width: 201, expand: false}
-      - {id: VJQQOR, title: Description, data_key: Description, width: 297, expand: false}
+      - {id: VJQQOR, title: Description, data_key: Description, width: 207.5555419921875, expand: false}
       - {id: JPGNPJ, data_key: Resource, title: Resource, width: '400', expand: false}
       - {id: UMUOAE, data_key: Adj, title: Dependency, width: '400', expand: false}
+      - {id: QDDSUN, data_key: CP_flag, title: Critical Path, width: 143, expand: false}
+      - {id: ENXKXA, data_key: group_name, title: Group, width: 136.8887939453125, expand: false}
       - {id: FYRUCI, data_key: c1, title: Column 2, expand: false, width: 108}
       - {id: OYQBVS, data_key: c2, title: Column 3, width: 119, expand: false}
       auto_header: false
@@ -36,22 +38,30 @@ components:
       layout_properties: {pinned: true}
       name: data_row_panel_1
       components:
-      - properties: {text: Activity Name, font_size: 20, foreground: 'theme:On Primary'}
+      - properties: {text: Activity Name, font_size: 20, foreground: 'theme:On Primary', align: center}
         type: Label
         layout_properties: {column: JKSDUP}
         name: label_3
-      - properties: {text: Description, foreground: 'theme:On Primary', font_size: 20}
+      - properties: {text: Description, foreground: 'theme:On Primary', font_size: 20, align: center}
         type: Label
         layout_properties: {column: VJQQOR}
         name: label_4
-      - properties: {text: Utilized Resource, foreground: 'theme:On Primary', font_size: 20}
+      - properties: {text: Utilized Resource, foreground: 'theme:On Primary', font_size: 20, align: center}
         type: Label
         layout_properties: {column: JPGNPJ}
         name: label_6
       - name: label_7
-        properties: {text: Activity Dependency, foreground: 'theme:On Primary'}
+        properties: {text: Activity Dependency, foreground: 'theme:On Primary', align: center}
         type: Label
         layout_properties: {column: UMUOAE}
+      - name: label_8
+        properties: {text: Critical Path, foreground: 'theme:On Primary', align: center}
+        type: Label
+        layout_properties: {column: QDDSUN}
+      - name: label_9
+        properties: {text: Group, align: center, foreground: 'theme:On Primary'}
+        type: Label
+        layout_properties: {column: ENXKXA}
     - properties: {}
       type: DataRowPanel
       name: data_row_panel_2
@@ -77,6 +87,14 @@ components:
         properties: {}
         type: form:MultiSelectDropDown
         layout_properties: {column: UMUOAE}
+      - name: critical_checkbox
+        properties: {text: Critical}
+        type: CheckBox
+        layout_properties: {column: QDDSUN}
+      - name: edit_group
+        properties: {}
+        type: DropDown
+        layout_properties: {column: ENXKXA}
       layout_properties: {pinned: true}
     - properties: {item_template: Activity.RowTemplate4}
       type: RepeatingPanel

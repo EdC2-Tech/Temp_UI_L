@@ -57,6 +57,17 @@ db_schema:
       admin_ui: {width: 200, order: 8}
       type: simpleObject
     title: JSON_table
+  group_table:
+    client: none
+    server: full
+    columns:
+    - name: Group_name
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: Group_description
+      admin_ui: {width: 200, order: 1}
+      type: string
+    title: Group_table
 startup: {type: form, module: Main}
 name: LOGOS UI
 startup_form: null

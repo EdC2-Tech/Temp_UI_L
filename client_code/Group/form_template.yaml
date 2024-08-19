@@ -16,8 +16,8 @@ components:
       columns:
       - {id: JPKHMZ, data_key: column_1, title: '', expand: false, width: 40}
       - {id: QYSIRR, data_key: column_1, title: '', width: 40, expand: false}
-      - {id: GECWBB, data_key: resource_name, title: Resources}
-      - {id: VJQQOR, title: Description, data_key: resource_description}
+      - {id: GECWBB, data_key: group_name, title: Group}
+      - {id: VJQQOR, title: Description, data_key: group_description}
     type: DataGrid
     layout_properties: {grid_position: 'SKLABW,JHKUES'}
     name: resource_dataGrid
@@ -31,10 +31,6 @@ components:
     layout_properties: {grid_position: 'EFCIFJ,HFZANY'}
     event_bindings: {click: button_1_click}
     name: button_1
-  - properties: {align: full}
-    type: DropDown
-    layout_properties: {grid_position: 'ZSENBL,DXNHDF'}
-    name: drop_down_1
 - type: FlowPanel
   properties: {}
   layout_properties: {slot: nav-right}
