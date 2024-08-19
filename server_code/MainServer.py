@@ -3,7 +3,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.email
 import anvil.server
-from datetime import datetime
+import datetime as dt
 
 import json
 import pandas as pd
@@ -115,6 +115,8 @@ def draw_full_chart(start_date=0, end_date=0, interval="Days", showCrit=False):
                   'CP_flag':r['CP_flag']
                  } for r in all_records]
   data        = pd.DataFrame.from_dict(data)
+  data["Start"]    = pd.to_datetime(data["Start"]).dt.date
+  data["Finish"]   = pd.to_datetime(data["Finish"]).dt.date
   fig = draw_chart(data, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit)
   return fig
 
@@ -184,30 +186,27 @@ def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False):
                                   )
 
   # Change start date for Gantt drawing
-  if not isinstance(start_date, datetime.date):
+  if not isinstance(start_date, dt.date):
     # Get range for x (start and end date)
     start_date = data["Start"][0]
   else:
     start_date = start_date
-    print("Start date", start_date)
     
   #Change start date for Gantt drawing
-  if not isinstance(end_date, datetime.date):
+  if not isinstance(end_date, dt.date):
     end_date   = data["Finish"].iloc[-1]
   else:
     end_date = end_date
-    print("End date", end_date)
     
   numdays    = (end_date - start_date).days
-  print(numdays)
 
   # Get range for y (# of activities)
   tickvals   = np.arange(0, len(data))
     
   fig.update_layout(
     xaxis = dict(tickmode = 'array',
-                 tickvals = [start_date + datetime.timedelta(days=x) for x in range(numdays)],
-                 ticktext = [start_date + datetime.timedelta(days=x) for x in range(numdays)],
+                 tickvals = [start_date + dt.timedelta(days=x) for x in range(numdays)],
+                 ticktext = [start_date + dt.timedelta(days=x) for x in range(numdays)],
                  range    = [start_date, end_date]
     ),
     yaxis = dict(tickmode = 'array',
@@ -229,8 +228,8 @@ def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False):
     numweeks = math.ceil(numdays/7)
     fig.update_layout(
       xaxis = dict(tickmode = 'array',
-                  tickvals = [start_date + datetime.timedelta(weeks=x) for x in range(numweeks)],
-                  ticktext = [start_date + datetime.timedelta(weeks=x) for x in range(numweeks)],
+                  tickvals = [start_date + dt.timedelta(weeks=x) for x in range(numweeks)],
+                  ticktext = [start_date + dt.timedelta(weeks=x) for x in range(numweeks)],
                   range    = [start_date, end_date]
       ),
       yaxis = dict(tickmode = 'array',
@@ -245,8 +244,8 @@ def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False):
     nummonths = math.ceil(numdays/28)
     fig.update_layout(
       xaxis = dict(tickmode = 'array',
-                  tickvals = [start_date + datetime.timedelta(weeks=x*4) for x in range(nummonths)],
-                  ticktext = [start_date + datetime.timedelta(weeks=x*4) for x in range(nummonths)],
+                  tickvals = [start_date + dt.timedelta(weeks=x*4) for x in range(nummonths)],
+                  ticktext = [start_date + dt.timedelta(weeks=x*4) for x in range(nummonths)],
                   range    = [start_date, end_date]
       ),
       yaxis = dict(tickmode = 'array',

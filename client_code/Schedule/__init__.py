@@ -15,9 +15,9 @@ class Schedule(ScheduleTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    panel = get_open_form().increment
-    self.interval_drop_down.items = {(row["increment_value"]) for row in panel}
+    self.interval_drop_down.items = [(row["increment_value"]) for row in get_open_form().increment]
     self.interval_drop_down.selected_value = self.interval_drop_down.items[0]
+    self.group_dropdown.items = [(row["group_name"]) for row in get_open_form().group_table]
     
   def import_button_change(self, file, **event_args):
     # Load JSON file and create associated table from data
