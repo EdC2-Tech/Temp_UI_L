@@ -17,11 +17,17 @@ class Schedule(ScheduleTemplate):
 
     self.interval_drop_down.items = [(row["increment_value"]) for row in get_open_form().increment]
     self.interval_drop_down.selected_value = self.interval_drop_down.items[0]
-    self.group_dropdown.items = [(row["group_name"]) for row in get_open_form().group_table]
+
+    self.__refresh_self__()
     
+    if not (get_open_form().fig == None):
+      self.plot_1.figure = get_open_form().fig
+      
   def import_button_change(self, file, **event_args):
     # Load JSON file and create associated table from data
     success = anvil.server.call("load_json", file)
+    self.raise_event('x-refresh-tables')
+    self.__refresh_self__()
     if success:
       self.__refreshPlot__()
     else:
@@ -34,21 +40,34 @@ class Schedule(ScheduleTemplate):
   def __refreshPlot__(self):
     if self.CP_flag:
       pass
+
+    if self.group_dropdown.selected_value == None:
+      grouping = "All"
+    else:
+      grouping = self.group_dropdown.selected_value
+      
     if self.simplified_flag.checked:
       fig = anvil.server.call("draw_simplified_chart", 
-                              self.start_datePicker.date, 
-                              self.end_datePicker.date, 
-                              self.interval_drop_down.selected_value,
-                              self.CP_flag.checked
+                              start_date=self.start_datePicker.date, 
+                              end_date=self.end_datePicker.date, 
+                              interval=self.interval_drop_down.selected_value,
+                              showCrit=self.CP_flag.checked,
+                              Group = grouping
                              )
     else:
       fig = anvil.server.call("draw_full_chart", 
-                              self.start_datePicker.date, 
-                              self.end_datePicker.date, 
+                              start_date=self.start_datePicker.date, 
+                              end_date=self.end_datePicker.date, 
                               interval=self.interval_drop_down.selected_value,
-                              showCrit=self.CP_flag.checked
+                              showCrit=self.CP_flag.checked,
+                              Group = grouping
                              )
+
+    get_open_form().fig = fig
     self.plot_1.figure = fig
+
+  def __refresh_self__(self):
+    self.group_dropdown.items = [(row["group_name"]) for row in get_open_form().group_table]
 
   
 
