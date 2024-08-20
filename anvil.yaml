@@ -1,5 +1,5 @@
 allow_embedding: false
-package_name: Demo
+package_name: LOGOS_UI
 db_schema:
   increment:
     client: search
