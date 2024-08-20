@@ -148,7 +148,8 @@ def load_json(file):
                                   Adj=tmp["Adj"],
                                   Description=tmp["Description"],
                                   Resource=tmp["Resource"],
-                                  CP_flag=bool(tmp["CP_flag"])
+                                  CP_flag=False,
+                                  Group=tmp["Group"]
                                  )
 
   # Add resources to separate unique table
