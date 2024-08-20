@@ -59,6 +59,9 @@ db_schema:
     - name: Resource
       admin_ui: {width: 200, order: 8}
       type: simpleObject
+    - name: Group
+      admin_ui: {width: 200, order: 9}
+      type: simpleObject
     title: JSON_table
   group_table:
     client: full

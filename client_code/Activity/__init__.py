@@ -24,7 +24,6 @@ class Activity(ActivityTemplate):
 
     # Set event handlers
     #self.repeating_panel_1.set_event_handler('x-refresh-dependencies', self.refresh_dependencies)
-    # Any code you write here will run before the form opens.
   
   def refresh_dependencies(self, **event_args):
     self.raise_event('x-refresh-tables')
