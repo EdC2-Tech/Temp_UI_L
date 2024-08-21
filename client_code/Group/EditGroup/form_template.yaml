@@ -10,23 +10,23 @@ components:
     type: Label
     layout_properties: {grid_position: 'PKEBSI,AFICLO'}
   - name: label_2
-    properties: {text: 'Resource Name:', align: right}
+    properties: {text: 'Group Name:', align: right}
     type: Label
     layout_properties: {grid_position: 'CNJARX,PWNAFT'}
-  - name: text_box_1
+  - name: edit_group_name
     properties: {}
     type: TextBox
     layout_properties: {grid_position: 'CNJARX,USHPCA'}
     data_bindings:
-    - {property: text, code: 'self.item[''resource_value'']', writeback: true}
+    - {property: text, code: 'self.item[''group_name'']', writeback: true}
   - name: label_3
-    properties: {text: 'Resource Description:', align: right}
+    properties: {text: 'Group Description:', align: right}
     type: Label
     layout_properties: {grid_position: 'HKQVZO,ZAGRUS'}
-  - name: text_box_2
+  - name: edit_group_description
     properties: {}
     type: TextBox
     layout_properties: {grid_position: 'HKQVZO,UFBJCJ'}
     data_bindings:
-    - {property: text, code: 'self.item[''resource_description'']', writeback: true}
+    - {property: text, code: 'self.item[''group_description'']', writeback: true}
 is_package: true

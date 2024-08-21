@@ -13,17 +13,17 @@ components:
     properties: {text: 'Resource Name:', align: right}
     type: Label
     layout_properties: {grid_position: 'CNJARX,PWNAFT'}
-  - name: text_box_1
+  - name: edit_resource_name
     properties: {}
     type: TextBox
     layout_properties: {grid_position: 'CNJARX,USHPCA'}
     data_bindings:
-    - {property: text, code: 'self.item[''resource_value'']', writeback: true}
+    - {property: text, code: 'self.item[''resource_name'']', writeback: true}
   - name: label_3
     properties: {text: 'Resource Description:', align: right}
     type: Label
     layout_properties: {grid_position: 'HKQVZO,ZAGRUS'}
-  - name: text_box_2
+  - name: edit_resource_description
     properties: {}
     type: TextBox
     layout_properties: {grid_position: 'HKQVZO,UFBJCJ'}

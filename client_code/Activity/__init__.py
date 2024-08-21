@@ -21,12 +21,9 @@ class Activity(ActivityTemplate):
 
     # Populate edit_group
     self.edit_group.items = [(row["group_name"]) for row in get_open_form().group_table]
-
-    # Set event handlers
-    #self.repeating_panel_1.set_event_handler('x-refresh-dependencies', self.refresh_dependencies)
   
   def refresh_dependencies(self, **event_args):
-    self.raise_event('x-refresh-tables')
+    get_open_form().raise_event('x-refresh-tables')
     self.repeating_panel_1.items = get_open_form().json_table 
     pass
   

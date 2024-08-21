@@ -25,25 +25,22 @@ def get_all_tables():
 
 ################################################ RESOURCE ###################################################
 @anvil.server.callable
-def get_resource():
-  return app_tables.resource_table.search()
+def add_resource(name, description):
+  app_tables.resource_table.add_row(resource_name=name,
+                                    resource_description=description)
 
 @anvil.server.callable
-def add_resource():
-  pass
-
-@anvil.server.callable
-def edit_resource():
-  pass
+def edit_resource(table_entry, name, description):
+  table_entry.update(resource_name=name,
+                     resource_description=description)
 
 @anvil.server.callable
 def delete_resource(table_entry):
   table_entry.delete()
+  
+############################################ END RESOURCE ###################################################
 
-@anvil.server.callable
-def get_activity():
-  return app_tables.json_table.search()
-
+################################################ ACTIVITY ###################################################
 @anvil.server.callable
 def add_activity(activity_name, activity_description, resource):
   app_tables.json_table.add_row(Task=activity_name,
@@ -62,7 +59,26 @@ def edit_activity(table_entry, activity_name, activity_description, resource):
 def delete_activity(table_entry):
   table_entry.delete()
 
-############################################ END RESOURCE ###################################################
+############################################ END ACTIVITY ###################################################
+
+################################################ GROUP ######################################################
+@anvil.server.callable
+def add_group(group_name, group_description):
+  app_tables.group_table.add_row(group_name=group_name,
+                                 group_description=group_description
+                               )
+  
+@anvil.server.callable
+def edit_group(table_entry, group_name, group_description):
+  table_entry.update(group_name=group_name,
+                     group_description = group_description
+                    )
+
+@anvil.server.callable
+def delete_group(table_entry):
+  table_entry.delete()
+
+############################################### END GROUP ###################################################
 
 ################################################ SCHEDULE ###################################################
 
@@ -80,47 +96,52 @@ def draw_simplified_chart(start_date=0, end_date=0, interval="Days", showCrit=Fa
         Custom end date specified by user.
     interval : string
         Custom interval specified by user.
-
+    showCrit : Bool
+        Specifies whether to display critical path
+    Group : string
+        Specifies whether to display a specific grouping in the Gantt chart
     Returns
     -------
+    fig : plotly.figure
+        Figure generated through plotly for Gantt display.
     '''
-  # Parameter verification
-    all_records = app_tables.json_table.search()
-    input       = [{'Task':r['Task'],
-                  'Start':r['Start'],
-                  'Finish':r['Finish'],
-                  'Adj':r['Adj'],
-                  'Resource':r["Resource"],
-                  'CP_flag':r['CP_flag'],
-                  'Group':r['Group']
-                 } for r in all_records] 
-    output = anvil.server.call("calculateSimplifiedGantt", input)
-    output             = pd.DataFrame.from_dict(output)
-    output["Start"]    = pd.to_datetime(output["Start"]).dt.date
-    output["Finish"]   = pd.to_datetime(output["Finish"]).dt.date
-    output["Duration"] = pd.to_numeric(output["Duration"])
-    fig = draw_chart(output, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit)
+    data = get_data()
+  
+    data = anvil.server.call("calculateSimplifiedGantt", input)
+  
+    data = pd.DataFrame.from_dict(data)
+    data = format_data(data)
+  
+    fig = draw_chart(data, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit, Group=Group)
     return fig
   
 @anvil.server.callable
 def draw_full_chart(start_date=0, end_date=0, interval="Days", showCrit=False, Group="All"):
-  # Parameter verification
-  
-  # Extract data to draw chart from app tables
-  all_records = app_tables.json_table.search() 
-  data        = [{'Task':r['Task'],
-                  'Start':r['Start'],
-                  'Finish':r['Finish'],
-                  'Adj':r['Adj'],
-                  'Resource':r["Resource"],
-                  'CP_flag':r['CP_flag'],
-                  'Group':r['Group']
-                 } for r in all_records]
-  data        = pd.DataFrame.from_dict(data)
-  data["Start"]    = pd.to_datetime(data["Start"]).dt.date
-  data["Finish"]   = pd.to_datetime(data["Finish"]).dt.date
-  fig = draw_chart(data, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit, Group=Group)
-  return fig
+    '''
+    Draws a Gantt chart using the full list of activities.
+
+    Parameters
+    ----------
+    start_date : date
+        Custom start date specified by user.
+    end_date : date
+        Custom end date specified by user.
+    interval : string
+        Custom interval specified by user.
+    showCrit : Bool
+        Specifies whether to display critical path
+    Group : string
+        Specifies whether to display a specific grouping in the Gantt chart
+    Returns
+    -------
+    fig : plotly.figure
+        Figure generated through plotly for Gantt display.
+    '''
+    data = get_data(ret_pd=True)
+    data = format_data(data)  
+    
+    fig = draw_chart(data, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit, Group=Group)
+    return fig
 
 @anvil.server.callable
 def load_json(file):
@@ -168,10 +189,11 @@ def load_json(file):
   return 1
 
 def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, Group="All"):
-  
+
+  # Using CP_flag, determine critical activities for Gantt coloring
   data["Critical"] = data.apply(is_critical, axis=1)
 
-  # User option    
+  # Same activity names will overlap in the Gantt chart and not be visible. Activities are renamed by group. 
   if Group == "All":
     data["Task"] = data["Task"] + "_" + data["Group"]
     data["Adj"]  = data.apply(relabel, axis=1)
@@ -204,14 +226,13 @@ def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, 
                     text=data["Group"]
                    )
 
-  # Change start date for Gantt drawing
+  # Option to change start date for Gantt drawing
   if not isinstance(start_date, dt.date):
-    # Get range for x (start and end date)
     start_date = data["Start"].iloc[0]
   else:
     start_date = start_date
     
-  #Change start date for Gantt drawing
+  # Option to change end date for Gantt drawing
   if not isinstance(end_date, dt.date):
     end_date   = data["Finish"].iloc[-1]
   else:
@@ -236,11 +257,12 @@ def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, 
                  categoryarray = data["Task"]
     )
   )
+  
   # Change width of activities
   fig.update_traces(width=1)
 
-  # Draw arrows between tasks
-  fig = draw_task_links(fig, data)
+  # Draw arrows between tasks. Must be after x- and y-axis intervals are specified to know where start and end arrow coordinates are.
+  fig = draw_task_links(fig, data, showCrit=showCrit)
   
   # Convert to correct time scale
   if interval == "Weeks":
@@ -250,13 +272,6 @@ def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, 
                   tickvals = [start_date + dt.timedelta(weeks=x) for x in range(numweeks)],
                   ticktext = [start_date + dt.timedelta(weeks=x) for x in range(numweeks)],
                   range    = [start_date, end_date]
-      ),
-      yaxis = dict(tickmode = 'array',
-                  tickvals = tickvals,
-                  ticktext = data['Task'],
-                  range  = [tickvals[0]-1/2, tickvals[-1]+1/2],
-                  autorange = "reversed",
-                  categoryarray = data["Task"]
       )
     )      
   elif interval == "Months":
@@ -266,18 +281,11 @@ def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, 
                   tickvals = [start_date + dt.timedelta(weeks=x*4) for x in range(nummonths)],
                   ticktext = [start_date + dt.timedelta(weeks=x*4) for x in range(nummonths)],
                   range    = [start_date, end_date]
-      ),
-      yaxis = dict(tickmode = 'array',
-                  tickvals = tickvals,
-                  ticktext = data['Task'],
-                  range  = [tickvals[0]-1/2, tickvals[-1]+1/2],
-                  autorange = "reversed",
-                  categoryarray = data["Task"]
       )
     )     
   return fig
 
-def draw_task_links(fig, json_dict):
+def draw_task_links(fig, json_dict, showCrit=False):
     '''
     Draw all arrows in the figure.
 
@@ -304,18 +312,11 @@ def draw_task_links(fig, json_dict):
         for endPoint in link[1]["Adj"]:
             ind     = json_dict.index[json_dict["Task"]==endPoint].tolist()
             end_act = json_dict.loc[ind[0]] 
-            CP_flag = end_act["CP_flag"] and start_act["CP_flag"]
-            if not CP_flag:
+            if not showCrit:
                 new_fig = draw_arrow_between_jobs_v2(new_fig, start_act, end_act)
-        
-        # Draw critical path on top of existing links
-        for endPoint in link[1]["Adj"]:
-            ind     = json_dict.index[json_dict["Task"]==endPoint].tolist()
-            end_act = json_dict.loc[ind[0]] 
-            CP_flag = end_act["CP_flag"] and start_act["CP_flag"]
-            
-            if CP_flag:
+            elif showCrit and (end_act["CP_flag"] and start_act["CP_flag"]):
                 new_fig = draw_arrow_between_jobs_v2(new_fig, start_act, end_act, color="black", width=3)
+                
     return new_fig
 
 def draw_arrow_between_jobs_v1(fig, first_job_dict, second_job_dict, color="blue", width=2):
@@ -528,8 +529,31 @@ def draw_line(fig, x0, x1, y0, y1, color="blue", width=2):
     
     return fig     
 
-def is_critical(json_dict):
-    if json_dict["CP_flag"]:
+def get_data(ret_pd=False):
+    all_records = app_tables.json_table.search()
+    input       = [{'Task':r['Task'],
+                  'Start':r['Start'],
+                  'Finish':r['Finish'],
+                  'Duration':r['Duration'],
+                  'Adj':r['Adj'],
+                  'Resource':r["Resource"],
+                  'CP_flag':r['CP_flag'],
+                  'Group':r['Group']
+                 } for r in all_records] 
+    if ret_pd:
+      return pd.DataFrame.from_dict(input)
+    else:
+      return input
+
+def format_data(pd_data):
+  pd_data["Start"]      = pd.to_datetime(pd_data["Start"]).dt.date
+  pd_data["Finish"]     = pd.to_datetime(pd_data["Finish"]).dt.date
+  pd_data["Duration"]   = pd.to_numeric(pd_data["Duration"])
+
+  return pd_data
+  
+def is_critical(pd_data):
+    if pd_data["CP_flag"]:
         return "Is Critical"
     else:
         return "Not Critical"

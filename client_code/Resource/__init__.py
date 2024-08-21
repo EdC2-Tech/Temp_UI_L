@@ -11,29 +11,40 @@ class Resource(ResourceTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    
+
+    # Populate displayed resource table
     self.__update_table__()
-    # Any code you write here will run before the form opens.
-    
-  def __update_table__(self):
+
+    # Set event handlers
+    self.set_event_handler('x-update-resources', self.__update_table__)
+  
+  def __update_table__(self, **event_args):
+    '''
+    Update the displayed resource table
+    '''
+    print("Resource update")
     self.repeating_panel_1.items = get_open_form().resource_table
 
-  def button_1_click(self, **event_args):
-    """This method is called when the button is clicked"""
+  def add_button_click(self, **event_args):
+    '''
+    Add a new resource when the "Add Resource" button is pressed.
+    '''
     adding_form = AddResource(item=self.item)
     result = alert(content=adding_form, large=True, 
                    buttons=[("Accept", True),
                             ("Cancel", False)
                            ])
-    if result:
-      resDesc = adding_form.resource_description
-      resName = adding_form.resource_name              
-      app_tables.resource_table.add_row(resource_name==resName.text,
-                                        resource_description=resDesc.text)
-      self.raise_event('x-refresh-tables')
+    if result:      
+      anvil.server.call('add_resource', adding_form.resource_name.text, adding_form.resource_description.text)
+      get_open_form().raise_event('x-refresh-tables')
       self.__update_table__()
-    else:
       return
+    else:
+      alert("Error, could not add resource to table", title="Error")
+      return
+
+  def refresh_button_click(self, **event_args):
+     self.__update_table__()
     
     
     

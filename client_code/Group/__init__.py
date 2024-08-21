@@ -16,7 +16,7 @@ class Group(GroupTemplate):
     self.__update_table__()
     # Any code you write here will run before the form opens.
 
-  def __update_table__(self):
+  def __update_table__(self, **event_args):
     self.repeating_panel_1.items = get_open_form().group_table
     
   def add_resource_button_click(self, **event_args):
@@ -25,12 +25,9 @@ class Group(GroupTemplate):
     result = alert(content=adding_form, large=True, buttons=[("Accept", True), ("Cancel", False)])
     
     if result:
-      group_name        = adding_form.group_name.text
-      group_description = adding_form.group_description.text
-  
-      app_tables.group_table.add_row(group_name = group_name, group_description=group_description)
-      self.raise_event('x-refresh-tables')
+      anvil.server.call('add_group', adding_form.group_name.text, adding_form.group_description.text)
+      get_open_form().raise_event('x-refresh-tables')
       self.__update_table__()
-      
+      return
     else:
       return

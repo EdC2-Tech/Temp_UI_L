@@ -5,28 +5,29 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-import plotly.graph_objects as go
 from datetime import datetime 
 import json
-
 
 class Schedule(ScheduleTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
+    # Populate interval option dropdown (never changes)
     self.interval_drop_down.items = [(row["increment_value"]) for row in get_open_form().increment]
-    self.interval_drop_down.selected_value = self.interval_drop_down.items[0]
+    self.interval_drop_down.selected_value = self.interval_drop_down.items[0] # Default to 'days'
 
+    # Populate other option dropdown menus 
     self.__refresh_self__()
-    
+
+    # Show figure if one has alrady been generated
     if not (get_open_form().fig == None):
       self.plot_1.figure = get_open_form().fig
       
   def import_button_change(self, file, **event_args):
     # Load JSON file and create associated table from data
     success = anvil.server.call("load_json", file)
-    self.raise_event('x-refresh-tables')
+    get_open_form().raise_event('x-refresh-tables')
     self.__refresh_self__()
     if success:
       self.__refreshPlot__()
@@ -37,7 +38,7 @@ class Schedule(ScheduleTemplate):
     """This method is called when the button is clicked"""
     self.__refreshPlot__()
 
-  def __refreshPlot__(self):
+  def __refreshPlot__(self, **event_args):
     if self.CP_flag:
       pass
 
@@ -66,7 +67,7 @@ class Schedule(ScheduleTemplate):
     get_open_form().fig = fig
     self.plot_1.figure = fig
 
-  def __refresh_self__(self):
+  def __refresh_self__(self, **event_args):
     self.group_dropdown.items = [(row["group_name"]) for row in get_open_form().group_table]
 
   

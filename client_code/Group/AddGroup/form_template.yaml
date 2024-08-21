@@ -6,7 +6,7 @@ components:
   layout_properties: {grid_position: 'NUFBZB,CFYOQE'}
   components:
   - name: label_1
-    properties: {text: Group, font_size: 25}
+    properties: {text: Add New Group, font_size: 25}
     type: Label
     layout_properties: {grid_position: 'SNWFOK,ONIHBH'}
   - name: label_2
