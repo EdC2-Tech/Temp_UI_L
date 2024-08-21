@@ -68,7 +68,7 @@ def delete_activity(table_entry):
 
 # Backend for Schedule
 @anvil.server.callable
-def draw_simplified_chart(start_date=0, end_date=0, interval="Days", showCrit=False):
+def draw_simplified_chart(start_date=0, end_date=0, interval="Days", showCrit=False, Group="All"):
     '''
     Draws a Gantt chart using the simplified list of activities.
 
@@ -91,7 +91,8 @@ def draw_simplified_chart(start_date=0, end_date=0, interval="Days", showCrit=Fa
                   'Finish':r['Finish'],
                   'Adj':r['Adj'],
                   'Resource':r["Resource"],
-                  'CP_flag':r['CP_flag']
+                  'CP_flag':r['CP_flag'],
+                  'Group':r['Group']
                  } for r in all_records] 
     output = anvil.server.call("calculateSimplifiedGantt", input)
     output             = pd.DataFrame.from_dict(output)
@@ -102,7 +103,7 @@ def draw_simplified_chart(start_date=0, end_date=0, interval="Days", showCrit=Fa
     return fig
   
 @anvil.server.callable
-def draw_full_chart(start_date=0, end_date=0, interval="Days", showCrit=False):
+def draw_full_chart(start_date=0, end_date=0, interval="Days", showCrit=False, Group="All"):
   # Parameter verification
   
   # Extract data to draw chart from app tables
@@ -112,23 +113,32 @@ def draw_full_chart(start_date=0, end_date=0, interval="Days", showCrit=False):
                   'Finish':r['Finish'],
                   'Adj':r['Adj'],
                   'Resource':r["Resource"],
-                  'CP_flag':r['CP_flag']
+                  'CP_flag':r['CP_flag'],
+                  'Group':r['Group']
                  } for r in all_records]
   data        = pd.DataFrame.from_dict(data)
   data["Start"]    = pd.to_datetime(data["Start"]).dt.date
   data["Finish"]   = pd.to_datetime(data["Finish"]).dt.date
-  fig = draw_chart(data, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit)
+  fig = draw_chart(data, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit, Group=Group)
   return fig
 
 @anvil.server.callable
 def load_json(file):
   # Try to load the file
   f = file.get_bytes().decode('utf-8').replace("'", '"')
+  
   try:
     data = json.loads(f)
-    data = pd.DataFrame.from_dict(data)
+    data = data["Group"] 
+    data_list = list()
+    for key in data.keys():
+        for row in data[key]:
+            row["Group"] = key
+            row["CP_flag"] = False
+            data_list.append(row)
+    data = pd.DataFrame.from_dict(data_list)
   except Exception as e:
-    print("Could not load JSON file")
+    print("Could not load JSON file: " + str(e))
     return 0
   
   # Remove existing table from anvil
@@ -148,18 +158,26 @@ def load_json(file):
                                   Adj=tmp["Adj"],
                                   Description=tmp["Description"],
                                   Resource=tmp["Resource"],
-                                  CP_flag=False,
+                                  CP_flag=tmp["CP_flag"],
                                   Group=tmp["Group"]
                                  )
 
   # Add resources to separate unique table
   update_resource_table()
+  update_group_table()
   return 1
 
-def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False):
+def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, Group="All"):
   
   data["Critical"] = data.apply(is_critical, axis=1)
-  
+
+  # User option    
+  if Group == "All":
+    data["Task"] = data["Task"] + "_" + data["Group"]
+    data["Adj"]  = data.apply(relabel, axis=1)
+  else:
+    data = data[data["Group"]==Group]
+      
   # Draw Gantt Chart
   if showCrit:
     fig = px.timeline(data,
@@ -180,16 +198,16 @@ def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False):
   fig.update_xaxes(showgrid=True)
   fig.update_yaxes(showgrid=True)
   
-  # x_start = base, x_end = x in figure dictionary
-  fig.update_traces(hovertemplate="Start: %{base|%Y-%m-%d}<br>"
-                                  "End: %{x|%Y-%m-%d}<br>"
-                                  "Task: %{y}"
-                                  )
+  hover_template = "Task Name: %{y}" + "<br>Start Date: %{base|%Y-%m-%d}" + "<br>End Date: %{x|%Y-%m-%d}" + "<br>Task: %{y}"
+
+  fig.update_traces(hovertemplate=hover_template,
+                    text=data["Group"]
+                   )
 
   # Change start date for Gantt drawing
   if not isinstance(start_date, dt.date):
     # Get range for x (start and end date)
-    start_date = data["Start"][0]
+    start_date = data["Start"].iloc[0]
   else:
     start_date = start_date
     
@@ -516,23 +534,42 @@ def is_critical(json_dict):
     else:
         return "Not Critical"
 
+def relabel(json_list):
+    group_tag = json_list["Group"]
+    dest_Adj = json_list["Adj"]
+    newlist = list()
+    for line in dest_Adj:
+        newlist.append(line + "_" + group_tag)
+    
+    return newlist
+  
 def update_resource_table():
   all_records = app_tables.json_table.search() 
-  dicts       = [{'Task':r['Task'],
-                  'Start':r['Start'],
-                  'Finish':r['Finish'],
-                  'Adj':r['Adj'],
-                  'Resource':r["Resource"],
-                  'CP_flag':r['CP_flag']
+  temp        = [{'Resource':r["Resource"]
                  } for r in all_records] 
-  data        = pd.DataFrame.from_dict(dicts)
+  data        = pd.DataFrame.from_dict(temp)
 
+  # Find unique instances 
   df = data["Resource"].apply(pd.Series).stack().unique()
+
+  # Remove existing resource table and recreate
   app_tables.resource_table.delete_all_rows()
   for name in df:
     app_tables.resource_table.add_row(resource_name=name,
-                                      resource_description=""
+                                      resource_description="placeholder"
                                      )
 
+def update_group_table():
+  all_records = app_tables.json_table.search() 
+  temp        = [{'Group':r['Group']
+                 } for r in all_records] 
+  data        = pd.DataFrame.from_dict(temp)
+
+  df = data["Group"].apply(pd.Series).stack().unique()
+  app_tables.group_table.delete_all_rows()
+  for name in df:
+    app_tables.group_table.add_row(group_name=name,
+                                   group_description="placeholder"
+                                     )
 ################################################ END SCHEDULE ###################################################
 

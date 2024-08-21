@@ -69,9 +69,11 @@ components:
           type: Label
           layout_properties: {grid_position: 'HOGPJL,SZSQAZ'}
         - name: group_dropdown
-          properties: {}
+          properties: {placeholder: All, include_placeholder: true}
           type: DropDown
           layout_properties: {grid_position: 'HOGPJL,IVPDDD'}
+          event_bindings: {}
+          data_bindings: []
         - name: spacer_1
           properties: {height: 32}
           type: Spacer
