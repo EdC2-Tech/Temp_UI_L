@@ -25,7 +25,7 @@ class Activity(ActivityTemplate):
   def refresh_dependencies(self, **event_args):
     get_open_form().raise_event('x-refresh-tables')
     self.repeating_panel_1.items = get_open_form().json_table 
-    pass
+    return
   
   def pg_size_lost_focus(self, **event_args):
     """This method is called when the TextBox loses focus"""
@@ -42,6 +42,7 @@ class Activity(ActivityTemplate):
     activity_resource    = self.edit_resource_multi.items
     activity_dependency  = self.edit_dependency_multi.items 
     activity_CP_flag     = self.critical_checkbox.checked
+    activity_group       = self.edit_group.selected_value
     
     anvil.server.call('add_activity',
                       Task = activity_name,
@@ -49,7 +50,7 @@ class Activity(ActivityTemplate):
                       Resource = activity_resource,
                       Adj = activity_dependency,
                       CP_flag = activity_CP_flag,
-                      
+                      Group = activity_group
                      )
     # refresh grid panel
     self.refresh_dependencies()
