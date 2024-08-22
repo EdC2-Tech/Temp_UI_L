@@ -42,23 +42,31 @@ def delete_resource(table_entry):
 
 ################################################ ACTIVITY ###################################################
 @anvil.server.callable
-def add_activity(Task="placeholder", Description="placeholder", Start=0, Finish=0, Resource=[], Adj=[], CP_flag=False, Group="placeholder", duration=0):
-  app_tables.json_table.add_row(Task = Task,
-                                Description = Description,
-                                Start = Start,
-                                Finish = Finish,
-                                Duration = duration,
-                                Resource = Resource,
-                                Adj = Adj,
-                                CP_flag = CP_flag,
-                                Group = Group
-                                )
+def add_activity(**kwargs):
+  Duration = (kwargs["Start"] - kwargs["Finish"]).days
+  app_tables.json_table.add_row(Task=kwargs["Task"],
+                                Description=kwargs["Description"],
+                                Start=kwargs["Start"],
+                                Finish=kwargs["Finish"],
+                                Duration=Duration,
+                                Resource=kwargs["Resource"],
+                                Adj=kwargs["Adj"],
+                                Group=kwargs["Group"],
+                                CP_flag=kwargs["CP_flag"]
+                               )
   
 @anvil.server.callable
-def edit_activity(table_entry, activity_name, activity_description, resource):
-  table_entry.update(Task=activity_name,
-                     Description=activity_description,
-                     Resource=resource
+def edit_activity(table_entry, **kwargs):
+  Duration = (kwargs["Start"] - kwargs["Finish"]).days
+  table_entry.update(Task=kwargs["Task"],
+                     Description=kwargs["Description"],
+                     Start=kwargs["Start"],
+                     Finish=kwargs["Finish"],
+                     Duration=Duration,
+                     Resource=kwargs["Resource"],
+                     Adj=kwargs["Adj"],
+                     Group=kwargs["Group"],
+                     CP_flag=kwargs["CP_flag"]
                     )
 
 @anvil.server.callable

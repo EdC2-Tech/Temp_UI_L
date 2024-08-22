@@ -16,7 +16,7 @@ components:
     layout_properties: {column: FYRUCI}
     event_bindings: {click: edit_button_click}
     name: edit_button
-  - name: check_box_1
+  - name: CP_flag
     properties: {text: Critical, enabled: false}
     type: CheckBox
     layout_properties: {column: QDDSUN}
@@ -63,16 +63,20 @@ components:
     type: form:MultiSelectDropDown
     layout_properties: {column: UMUOAE}
     data_bindings: []
-  - name: check_box_2
+  - name: CP_flag_edit
     properties: {text: Critical, enabled: true}
     type: CheckBox
     layout_properties: {column: QDDSUN}
     data_bindings:
     - {property: checked, code: 'self.item[''CP_flag'']', writeback: true}
   - name: Group_edit
-    properties: {}
+    properties:
+      items: []
+      placeholder: ''
     type: DropDown
     layout_properties: {column: ENXKXA}
+    data_bindings:
+    - {property: selected_value, code: 'self.item[''Group'']', writeback: true}
   - name: Start_edit
     properties: {pick_time: false}
     type: DatePicker

@@ -24,9 +24,10 @@ class Activity(ActivityTemplate):
 
     # Set page size
     self.pg_size_lost_focus()
+
+    self.set_event_handler('x-refresh-activity', self.__update_table__)
     
-  def refresh_dependencies(self, **event_args):
-    get_open_form().raise_event('x-refresh-tables')
+  def __update_table__(self, **event_args):
     self.repeating_panel_1.items = get_open_form().json_table 
     return
   
@@ -57,11 +58,12 @@ class Activity(ActivityTemplate):
                       Resource = activity_resource,
                       Adj = activity_dependency,
                       CP_flag = activity_CP_flag,
-                      Group = activity_group
+                      Group = activity_group,
                      )
 
     # refresh grid panel
-    self.refresh_dependencies()
+    get_open_form().raise_event('x-refresh-tables')
+    self.__update_table__()
     
     # clear after adding new row
     self.edit_dep_val.text = ''

@@ -26,7 +26,7 @@ components:
       - {id: JPGNPJ, data_key: Resource, title: Resource, width: 193, expand: false}
       - {id: UMUOAE, data_key: Adj, title: Dependency, width: 183, expand: false}
       - {id: QDDSUN, data_key: CP_flag, title: Critical Path, width: 93, expand: false}
-      - {id: ENXKXA, data_key: group_name, title: Group, width: 136.8887939453125, expand: false}
+      - {id: ENXKXA, data_key: Group, title: Group, width: 136.8887939453125, expand: false}
       - {id: FYRUCI, data_key: c1, title: Column 2, expand: false, width: 84}
       - {id: OYQBVS, data_key: c2, title: Column 3, width: 98, expand: false}
       auto_header: false

@@ -19,10 +19,6 @@ class Resource(ResourceTemplate):
     self.set_event_handler('x-update-resources', self.__update_table__)
   
   def __update_table__(self, **event_args):
-    '''
-    Update the displayed resource table
-    '''
-    print("Resource update")
     self.repeating_panel_1.items = get_open_form().resource_table
 
   def add_button_click(self, **event_args):
