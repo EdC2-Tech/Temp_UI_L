@@ -15,13 +15,16 @@ class Activity(ActivityTemplate):
 
     # Populate edit_resource_multi dropdown menu
     self.edit_resource_multi.items = [(row["resource_name"]) for row in get_open_form().resource_table]
-
+    
     # Populate edit_activity_multi dropdown menu
     self.edit_dependency_multi.items = [(row["Task"]) for row in get_open_form().json_table]
-
+    
     # Populate edit_group
     self.edit_group.items = [(row["group_name"]) for row in get_open_form().group_table]
-  
+
+    # Set page size
+    self.pg_size_lost_focus()
+    
   def refresh_dependencies(self, **event_args):
     get_open_form().raise_event('x-refresh-tables')
     self.repeating_panel_1.items = get_open_form().json_table 
@@ -39,22 +42,34 @@ class Activity(ActivityTemplate):
     """This method is called when the button is clicked"""
     activity_name        = self.edit_dep_val.text
     activity_description = self.edit_dep_des.text
-    activity_resource    = self.edit_resource_multi.items
-    activity_dependency  = self.edit_dependency_multi.items 
+    activity_start       = self.edit_start_date.date
+    activity_end         = self.edit_end_date.date
+    activity_resource    = self.edit_resource_multi.token_box.selected
+    activity_dependency  = self.edit_dependency_multi.token_box.selected
     activity_CP_flag     = self.critical_checkbox.checked
     activity_group       = self.edit_group.selected_value
     
     anvil.server.call('add_activity',
                       Task = activity_name,
                       Description = activity_description,
+                      Start = activity_start,
+                      Finish = activity_end,
                       Resource = activity_resource,
                       Adj = activity_dependency,
                       CP_flag = activity_CP_flag,
                       Group = activity_group
                      )
+
     # refresh grid panel
     self.refresh_dependencies()
     
     # clear after adding new row
     self.edit_dep_val.text = ''
     self.edit_dep_des.text = ''
+    self.edit_start_date.date = None
+    self.edit_end_date.date = None
+    self.edit_dependency_multi.reset()
+    self.edit_resource_multi.reset()
+    self.edit_group = self.edit_group.items[0]
+    self.critical_checkbox.checked = False
+

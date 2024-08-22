@@ -42,13 +42,16 @@ def delete_resource(table_entry):
 
 ################################################ ACTIVITY ###################################################
 @anvil.server.callable
-def add_activity(activity_name, activity_description, activity_resource, activity_dependency, activity_CP_flag, activity_group):
-  app_tables.json_table.add_row(Task = activity_name,
-                                Description = activity_description,
-                                Resource = activity_resource,
-                                Adj = activity_dependency,
-                                CP_flag = activity_CP_flag,
-                                Group = activity_group
+def add_activity(Task="placeholder", Description="placeholder", Start=0, Finish=0, Resource=[], Adj=[], CP_flag=False, Group="placeholder", duration=0):
+  app_tables.json_table.add_row(Task = Task,
+                                Description = Description,
+                                Start = Start,
+                                Finish = Finish,
+                                Duration = duration,
+                                Resource = Resource,
+                                Adj = Adj,
+                                CP_flag = CP_flag,
+                                Group = Group
                                 )
   
 @anvil.server.callable

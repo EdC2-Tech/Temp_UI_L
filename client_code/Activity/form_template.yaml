@@ -21,8 +21,8 @@ components:
       columns:
       - {id: JKSDUP, title: Activity Name, data_key: Task, width: 147, expand: false}
       - {id: VJQQOR, title: Description, data_key: Description, width: 181, expand: false}
-      - {id: RVRDDL, data_key: start_date, title: Column 1, width: 157, expand: false}
-      - {id: UMGSGP, data_key: end_date, title: Column 4, width: 139, expand: false}
+      - {id: RVRDDL, data_key: Start, title: Column 1, width: 139, expand: false}
+      - {id: UMGSGP, data_key: Finish, title: Column 4, width: 142, expand: false}
       - {id: JPGNPJ, data_key: Resource, title: Resource, width: 193, expand: false}
       - {id: UMUOAE, data_key: Adj, title: Dependency, width: 183, expand: false}
       - {id: QDDSUN, data_key: CP_flag, title: Critical Path, width: 93, expand: false}
@@ -89,12 +89,8 @@ components:
         layout_properties: {column: FYRUCI}
         event_bindings: {click: add_button_click}
         name: add_button
-      - name: edit_resource_multi
-        properties: {}
-        type: form:MultiSelectDropDown
-        layout_properties: {column: JPGNPJ}
       - name: edit_dependency_multi
-        properties: {}
+        properties: {placeholder: Select a value}
         type: form:MultiSelectDropDown
         layout_properties: {column: UMUOAE}
       - name: critical_checkbox
@@ -113,6 +109,10 @@ components:
         properties: {}
         type: DatePicker
         layout_properties: {column: UMGSGP}
+      - name: edit_resource_multi
+        properties: {}
+        type: form:MultiSelectDropDown
+        layout_properties: {column: JPGNPJ}
       layout_properties: {pinned: true}
     - properties: {item_template: Activity.RowTemplate4}
       type: RepeatingPanel
@@ -126,7 +126,7 @@ components:
         type: Label
         layout_properties: {}
         name: label_5
-      - properties: {spacing_above: none, text: '10'}
+      - properties: {spacing_above: none, text: '20'}
         type: TextBox
         layout_properties: {width: 56}
         event_bindings: {lost_focus: pg_size_lost_focus}

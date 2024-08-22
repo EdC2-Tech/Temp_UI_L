@@ -14,8 +14,12 @@ class RowTemplate4(RowTemplate4Template):
     #resource = self.drop_down_1.selected_value
     task_name       = self.Task_name_edit.text
     task_desciption = self.Task_decription_edit.text
-    #task_resource   = self.Task_resource_edit.items
-    
+    task_start      = self.Start_edit.date
+    task_end        = self.End_edit.date
+    task_resource   = self.Task_resource_edit.selected
+    task_adj        = self.Task_dependency_edit.selected
+
+    #fix
     anvil.server.call('edit_activity',
                       self.item,
                       dependency_value = task_name,
@@ -27,6 +31,9 @@ class RowTemplate4(RowTemplate4Template):
     resource_table = get_open_form().resource_table
     self.Task_resource_edit.items =  [(row["resource_name"]) for row in resource_table]
     self.Task_dependency_edit.items = [(row["Task"]) for row in json_table]
+
+    self.Task_resource_edit.add_to_token(self.item['Resource'])
+    self.Task_dependency_edit.add_to_token(self.item['Adj'])
 
     """This method is called when the edit button is clicked"""
     self.data_row_panel_1.visible=False

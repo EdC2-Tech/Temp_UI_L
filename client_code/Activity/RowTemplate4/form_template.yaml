@@ -54,16 +54,17 @@ components:
   - name: Task_resource_edit
     properties:
       items: []
+      placeholder: ''
     type: form:MultiSelectDropDown
     layout_properties: {column: JPGNPJ}
     data_bindings: []
   - name: Task_dependency_edit
-    properties: {}
+    properties: {placeholder: ''}
     type: form:MultiSelectDropDown
     layout_properties: {column: UMUOAE}
     data_bindings: []
   - name: check_box_2
-    properties: {text: Critical, enabled: false}
+    properties: {text: Critical, enabled: true}
     type: CheckBox
     layout_properties: {column: QDDSUN}
     data_bindings:
@@ -72,4 +73,16 @@ components:
     properties: {}
     type: DropDown
     layout_properties: {column: ENXKXA}
+  - name: Start_edit
+    properties: {pick_time: false}
+    type: DatePicker
+    layout_properties: {column: RVRDDL}
+    data_bindings:
+    - {property: date, code: 'self.item[''Start'']', writeback: true}
+  - name: End_edit
+    properties: {placeholder: '', pick_time: false, date: null}
+    type: DatePicker
+    layout_properties: {column: UMGSGP}
+    data_bindings:
+    - {property: date, code: 'self.item[''Finish'']', writeback: true}
   data_bindings: []
