@@ -1,81 +1,81 @@
-is_package: true
-container:
-  type: HtmlTemplate
-  properties: {html: '@theme:standard-page.html'}
 components:
-- name: menu_panel
-  properties: {background: '', col_widths: '{"PEXSEI":50,"SBLXZI":10,"RRMVSU":50,"SKHKCP":10,"PSHGDX":50,"UDWRTF":10,"EUTIHQ":75,"GFVABY":50,"BVFXUW":10,"HVNUEG":15,"GUXMSJ":50,"JDITYM":10}', wrap_on: never}
-  type: ColumnPanel
-  layout_properties: {slot: left-nav}
-  components:
-  - name: logo_image
-    properties: {height: 179, display_mode: shrink_to_fit}
+- components:
+  - layout_properties: {full_width_row: true, grid_position: 'IYJLQK,WYMTWC'}
+    name: logo_image
+    properties: {display_mode: shrink_to_fit, height: 179}
     type: Image
-    layout_properties: {grid_position: 'IYJLQK,WYMTWC', full_width_row: true}
-  - name: home_button
-    properties: {text: Home, role: outlined-button, background: 'theme:On Primary', align: right, font: '', bold: false}
+  - event_bindings: {click: home_button_click}
+    layout_properties: {full_width_row: true, grid_position: 'TJTGSN,PEXSEI'}
+    name: home_button
+    properties: {align: right, background: 'theme:On Primary', bold: false, font: '', role: outlined-button, text: Home}
     type: Button
-    layout_properties: {grid_position: 'TJTGSN,PEXSEI', full_width_row: true}
-    event_bindings: {click: home_button_click}
-  - name: spacer_1
+  - layout_properties: {grid_position: 'TJTGSN,SBLXZI'}
+    name: spacer_1
     properties: {height: 37}
     type: Spacer
-    layout_properties: {grid_position: 'TJTGSN,SBLXZI'}
-  - name: schedule_button
-    properties: {text: View Schedule, role: outlined-button, background: 'theme:On Primary', align: right, bold: false, font: ''}
+  - event_bindings: {click: schedule_button_click}
+    layout_properties: {full_width_row: true, grid_position: 'YDAPDE,RRMVSU'}
+    name: schedule_button
+    properties: {align: right, background: 'theme:On Primary', bold: false, font: '', role: outlined-button, text: View Schedule}
     type: Button
-    layout_properties: {grid_position: 'YDAPDE,RRMVSU', full_width_row: true}
-    event_bindings: {click: schedule_button_click}
-  - name: spacer_2
+  - layout_properties: {grid_position: 'YDAPDE,SKHKCP'}
+    name: spacer_2
     properties: {height: 32}
     type: Spacer
-    layout_properties: {grid_position: 'YDAPDE,SKHKCP'}
-  - name: resource_button
-    properties: {text: Gantt Resources, role: outlined-button, background: 'theme:On Primary', align: right}
+  - event_bindings: {click: resource_button_click}
+    layout_properties: {full_width_row: true, grid_position: 'OHWBAL,PSHGDX'}
+    name: resource_button
+    properties: {align: right, background: 'theme:On Primary', role: outlined-button, text: Gantt Resources}
     type: Button
-    layout_properties: {grid_position: 'OHWBAL,PSHGDX', full_width_row: true}
-    event_bindings: {click: resource_button_click}
-  - name: spacer_3
+  - layout_properties: {grid_position: 'OHWBAL,UDWRTF'}
+    name: spacer_3
     properties: {height: 32}
     type: Spacer
-    layout_properties: {grid_position: 'OHWBAL,UDWRTF'}
-  - name: activity_button
-    properties: {text: Gantt Activities, role: outlined-button, background: 'theme:On Primary', align: right, foreground: ''}
+  - event_bindings: {click: activity_button_click}
+    layout_properties: {full_width_row: true, grid_position: 'OUFMQB,EUTIHQ'}
+    name: activity_button
+    properties: {align: right, background: 'theme:On Primary', foreground: '', role: outlined-button, text: Gantt Activities}
     type: Button
-    layout_properties: {grid_position: 'OUFMQB,EUTIHQ', full_width_row: true}
-    event_bindings: {click: activity_button_click}
-  - name: spacer_3_copy
+  - layout_properties: {grid_position: 'OUFMQB,HVNUEG'}
+    name: spacer_3_copy
     properties: {height: 35.77777099609375}
     type: Spacer
-    layout_properties: {grid_position: 'OUFMQB,HVNUEG'}
-  - name: group_button
-    properties: {text: Activity Groups, role: outlined-button, background: 'theme:On Primary', align: right}
+  - event_bindings: {click: group_button_click}
+    layout_properties: {full_width_row: true, grid_position: 'MMOYWC,GUXMSJ'}
+    name: group_button
+    properties: {align: right, background: 'theme:On Primary', role: outlined-button, text: Activity Groups}
     type: Button
-    layout_properties: {grid_position: 'MMOYWC,GUXMSJ', full_width_row: true}
-    event_bindings: {click: group_button_click}
-  - name: spacer_4
+  - layout_properties: {full_width_row: true, grid_position: 'MMOYWC,JDITYM'}
+    name: spacer_4
     properties: {height: 34.33331298828125}
     type: Spacer
-    layout_properties: {grid_position: 'MMOYWC,JDITYM', full_width_row: true}
-  - name: contact_button
-    properties: {text: Contact Us, role: outlined-button, background: 'theme:On Primary', align: right, icon_align: left}
+  - event_bindings: {click: contact_button_click}
+    layout_properties: {full_width_row: true, grid_position: 'LSXMNI,GFVABY'}
+    name: contact_button
+    properties: {align: right, background: 'theme:On Primary', icon_align: left, role: outlined-button, text: Contact Us}
     type: Button
-    layout_properties: {grid_position: 'LSXMNI,GFVABY', full_width_row: true}
-    event_bindings: {click: contact_button_click}
-  - name: spacer_5
+  - layout_properties: {grid_position: 'LSXMNI,BVFXUW'}
+    name: spacer_5
     properties: {height: 32}
     type: Spacer
-    layout_properties: {grid_position: 'LSXMNI,BVFXUW'}
-- name: label_1
+  layout_properties: {slot: left-nav}
+  name: menu_panel
+  properties: {background: '', col_widths: '{"PEXSEI":50,"SBLXZI":10,"RRMVSU":50,"SKHKCP":10,"PSHGDX":50,"UDWRTF":10,"EUTIHQ":75,"GFVABY":50,"BVFXUW":10,"HVNUEG":15,"GUXMSJ":50,"JDITYM":10}', wrap_on: never}
+  type: ColumnPanel
+- layout_properties: {slot: title}
+  name: label_1
   properties: {text: Schedule Optimization Tool - Idaho National Laboratory}
   type: Label
-  layout_properties: {slot: title}
-- name: content_panel
-  properties: {wrap_on: never}
-  type: ColumnPanel
-  layout_properties: {slot: default}
-  components:
-  - name: outlined_card_1
+- components:
+  - layout_properties: {full_width_row: true, grid_position: 'VKHGPV,BSPJPV'}
+    name: outlined_card_1
     properties: {role: outlined-card}
     type: ColumnPanel
-    layout_properties: {grid_position: 'VKHGPV,BSPJPV', full_width_row: true}
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {wrap_on: never}
+  type: ColumnPanel
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true

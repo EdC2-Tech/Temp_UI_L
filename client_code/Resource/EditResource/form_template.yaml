@@ -1,32 +1,32 @@
-container: {type: ColumnPanel}
 components:
-- name: outlined_card_1
+- components:
+  - layout_properties: {grid_position: 'PKEBSI,AFICLO'}
+    name: label_1
+    properties: {font_size: 25, text: Edit Resource}
+    type: Label
+  - layout_properties: {grid_position: 'CNJARX,PWNAFT'}
+    name: label_2
+    properties: {align: right, text: 'Resource Name:'}
+    type: Label
+  - data_bindings:
+    - {code: 'self.item[''resource_name'']', property: text, writeback: true}
+    layout_properties: {grid_position: 'CNJARX,USHPCA'}
+    name: edit_resource_name
+    properties: {}
+    type: TextBox
+  - layout_properties: {grid_position: 'HKQVZO,ZAGRUS'}
+    name: label_3
+    properties: {align: right, text: 'Resource Description:'}
+    type: Label
+  - data_bindings:
+    - {code: 'self.item[''resource_description'']', property: text, writeback: true}
+    layout_properties: {grid_position: 'HKQVZO,UFBJCJ'}
+    name: edit_resource_description
+    properties: {}
+    type: TextBox
+  layout_properties: {grid_position: 'EEODOH,SSSHAQ'}
+  name: outlined_card_1
   properties: {role: outlined-card}
   type: ColumnPanel
-  layout_properties: {grid_position: 'EEODOH,SSSHAQ'}
-  components:
-  - name: label_1
-    properties: {text: Edit Resource, font_size: 25}
-    type: Label
-    layout_properties: {grid_position: 'PKEBSI,AFICLO'}
-  - name: label_2
-    properties: {text: 'Resource Name:', align: right}
-    type: Label
-    layout_properties: {grid_position: 'CNJARX,PWNAFT'}
-  - name: edit_resource_name
-    properties: {}
-    type: TextBox
-    layout_properties: {grid_position: 'CNJARX,USHPCA'}
-    data_bindings:
-    - {property: text, code: 'self.item[''resource_name'']', writeback: true}
-  - name: label_3
-    properties: {text: 'Resource Description:', align: right}
-    type: Label
-    layout_properties: {grid_position: 'HKQVZO,ZAGRUS'}
-  - name: edit_resource_description
-    properties: {}
-    type: TextBox
-    layout_properties: {grid_position: 'HKQVZO,UFBJCJ'}
-    data_bindings:
-    - {property: text, code: 'self.item[''resource_description'']', writeback: true}
+container: {type: ColumnPanel}
 is_package: true

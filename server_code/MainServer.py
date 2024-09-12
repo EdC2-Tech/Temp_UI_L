@@ -202,6 +202,50 @@ def load_json(file):
   update_group_table()
   return 1
 
+def load_file():
+  # Try to load the file
+  f = file.get_bytes().decode('utf-8').replace("'", '"')
+  
+  try:
+    data = json.loads(f)
+    data = data["Group"] 
+    data_list = list()
+    for key in data.keys():
+        for row in data[key]:
+            row["Group"] = key
+            row["CP_flag"] = False
+            data_list.append(row)
+    data = pd.DataFrame.from_dict(data_list)
+  except Exception as e:
+    print("Could not load JSON file: " + str(e))
+    return 0
+  
+  # Remove existing table from anvil
+  app_tables.json_table.delete_all_rows()
+  
+  # Format data correctly
+  data["Start"] = pd.to_datetime(data["Start"]).dt.date
+  data["Finish"] = pd.to_datetime(data["Finish"]).dt.date
+  data["Duration"] = pd.to_numeric(data["Duration"])
+  
+  for row in data.iterrows():
+    tmp = row[1]
+    app_tables.json_table.add_row(Task=tmp["Task"],
+                                  Start=tmp["Start"],
+                                  Finish=tmp["Finish"],
+                                  Duration=tmp["Duration"],
+                                  Adj=tmp["Adj"],
+                                  Description=tmp["Description"],
+                                  Resource=tmp["Resource"],
+                                  CP_flag=tmp["CP_flag"],
+                                  Group=tmp["Group"]
+                                 )
+
+  # Add resources to separate unique table
+  update_resource_table()
+  update_group_table()
+  return 1  
+
 def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, Group="All"):
 
   # Using CP_flag, determine critical activities for Gantt coloring

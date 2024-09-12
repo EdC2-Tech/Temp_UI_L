@@ -1,97 +1,97 @@
 allow_embedding: false
-package_name: LOGOS_UI
+correct_dependency_ids: {}
 db_schema:
-  increment:
-    client: search
-    server: full
-    columns:
-    - name: increment_value
-      admin_ui: {width: 200}
-      type: string
-    title: increment
   activity_table:
     client: full
-    server: full
     columns:
-    - name: activity_name
-      admin_ui: {width: 200, order: 0}
+    - admin_ui: {order: 0, width: 200}
+      name: activity_name
       type: string
-    - name: activity_description
-      admin_ui: {width: 200, order: 1}
+    - admin_ui: {order: 1, width: 200}
+      name: activity_description
       type: string
+    server: full
     title: Activity_table
-  resource_table:
-    client: full
-    server: full
-    columns:
-    - name: resource_name
-      admin_ui: {width: 200, order: 0}
-      type: string
-    - name: resource_description
-      admin_ui: {width: 200, order: 1}
-      type: string
-    title: Resource_table
-  json_table:
-    client: full
-    server: full
-    columns:
-    - name: Task
-      admin_ui: {order: 0, width: 200}
-      type: string
-    - name: Finish
-      admin_ui: {order: 2, width: 200}
-      type: date
-    - name: Duration
-      admin_ui: {width: 200, order: 3}
-      type: number
-    - name: Start
-      admin_ui: {width: 200, order: 1}
-      type: date
-    - name: Adj
-      admin_ui: {width: 200, order: 5}
-      type: simpleObject
-    - name: CP_flag
-      admin_ui: {order: 6, width: 200}
-      type: bool
-    - name: Description
-      admin_ui: {width: 200, order: 7}
-      type: string
-    - name: Resource
-      admin_ui: {width: 200, order: 8}
-      type: simpleObject
-    - name: Group
-      admin_ui: {width: 200, order: 9}
-      type: string
-    title: JSON_table
   group_table:
     client: full
-    server: full
     columns:
-    - name: group_name
-      admin_ui: {order: 0, width: 200}
+    - admin_ui: {order: 0, width: 200}
+      name: group_name
       type: string
-    - name: group_description
-      admin_ui: {order: 1, width: 200}
+    - admin_ui: {order: 1, width: 200}
+      name: group_description
       type: string
+    server: full
     title: Group_table
-startup: {type: form, module: Main}
+  increment:
+    client: search
+    columns:
+    - admin_ui: {width: 200}
+      name: increment_value
+      type: string
+    server: full
+    title: increment
+  json_table:
+    client: full
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: Task
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: Finish
+      type: date
+    - admin_ui: {order: 3, width: 200}
+      name: Duration
+      type: number
+    - admin_ui: {order: 1, width: 200}
+      name: Start
+      type: date
+    - admin_ui: {order: 5, width: 200}
+      name: Adj
+      type: simpleObject
+    - admin_ui: {order: 6, width: 200}
+      name: CP_flag
+      type: bool
+    - admin_ui: {order: 7, width: 200}
+      name: Description
+      type: string
+    - admin_ui: {order: 8, width: 200}
+      name: Resource
+      type: simpleObject
+    - admin_ui: {order: 9, width: 200}
+      name: Group
+      type: string
+    server: full
+    title: JSON_table
+  resource_table:
+    client: full
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: resource_name
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: resource_description
+      type: string
+    server: full
+    title: Resource_table
+dependencies: []
+metadata: {title: RAVEN LOGOS UI}
 name: LOGOS UI
-startup_form: null
 native_deps: {head_html: '<script src="https://www.gstatic.com/charts/loader.js"></script>'}
-correct_dependency_ids: {}
-uplink_visible: true
+package_name: LOGOS_UI
 renamed: true
 runtime_options:
-  version: 2
   client_version: '3'
-  server_version: python3-sandbox
   server_spec: {base: python310-standard}
-dependencies: []
+  server_version: python3-sandbox
+  version: 2
 services:
-- source: /runtime/services/tables.yml
-  client_config: {}
+- client_config: {}
   server_config: {}
-- source: /runtime/services/anvil/email.yml
-  client_config: {}
+  source: /runtime/services/tables.yml
+- client_config: {}
   server_config: {}
-metadata: {title: RAVEN LOGOS UI}
+  source: /runtime/services/anvil/email.yml
+startup: {module: Main, type: form}
+startup_form: null
+uplink_visible: true
