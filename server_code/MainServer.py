@@ -202,7 +202,8 @@ def load_json(file):
   update_group_table()
   return 1
 
-def load_file():
+@anvil.server.callable
+def load_file(file):
   # Try to load the file
   f = file.get_bytes().decode('utf-8').replace("'", '"')
   
