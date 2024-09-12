@@ -26,7 +26,7 @@ class Schedule(ScheduleTemplate):
       
   def import_button_change(self, file, **event_args):
     # Load JSON file and create associated table from data
-    success = anvil.server.call("load_json", file)
+    success = anvil.server.call("load_file", file)
     get_open_form().raise_event('x-refresh-tables')
     self.__refresh_self__()
     if success:

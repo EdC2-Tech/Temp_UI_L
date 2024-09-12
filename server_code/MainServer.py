@@ -207,15 +207,9 @@ def load_file():
   f = file.get_bytes().decode('utf-8').replace("'", '"')
   
   try:
-    data = json.loads(f)
-    data = data["Group"] 
-    data_list = list()
-    for key in data.keys():
-        for row in data[key]:
-            row["Group"] = key
-            row["CP_flag"] = False
-            data_list.append(row)
-    data = pd.DataFrame.from_dict(data_list)
+    data = json.loads(f) 
+    data = pd.DataFrame.from_dict(data)
+    data["CP_flag"] = False
   except Exception as e:
     print("Could not load JSON file: " + str(e))
     return 0

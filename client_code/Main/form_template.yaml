@@ -25,7 +25,7 @@ components:
   - event_bindings: {click: resource_button_click}
     layout_properties: {full_width_row: true, grid_position: 'OHWBAL,PSHGDX'}
     name: resource_button
-    properties: {align: right, background: 'theme:On Primary', role: outlined-button, text: Gantt Resources}
+    properties: {align: right, background: 'theme:On Primary', role: outlined-button, text: Resources}
     type: Button
   - layout_properties: {grid_position: 'OHWBAL,UDWRTF'}
     name: spacer_3
@@ -34,7 +34,7 @@ components:
   - event_bindings: {click: activity_button_click}
     layout_properties: {full_width_row: true, grid_position: 'OUFMQB,EUTIHQ'}
     name: activity_button
-    properties: {align: right, background: 'theme:On Primary', foreground: '', role: outlined-button, text: Gantt Activities}
+    properties: {align: right, background: 'theme:On Primary', foreground: '', role: outlined-button, text: Activities}
     type: Button
   - layout_properties: {grid_position: 'OUFMQB,HVNUEG'}
     name: spacer_3_copy
@@ -43,7 +43,7 @@ components:
   - event_bindings: {click: group_button_click}
     layout_properties: {full_width_row: true, grid_position: 'MMOYWC,GUXMSJ'}
     name: group_button
-    properties: {align: right, background: 'theme:On Primary', role: outlined-button, text: Activity Groups}
+    properties: {align: right, background: 'theme:On Primary', role: outlined-button, text: Groups}
     type: Button
   - layout_properties: {full_width_row: true, grid_position: 'MMOYWC,JDITYM'}
     name: spacer_4
