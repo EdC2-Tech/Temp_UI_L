@@ -63,6 +63,38 @@ db_schema:
       type: string
     server: full
     title: JSON_table
+  json_table_update:
+    client: full
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: Task
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: Start
+      type: date
+    - admin_ui: {order: 2, width: 200}
+      name: Finish
+      type: date
+    - admin_ui: {order: 3, width: 200}
+      name: Duration
+      type: number
+    - admin_ui: {order: 4, width: 200}
+      name: Adj
+      type: simpleObject
+    - admin_ui: {order: 5, width: 200}
+      name: CP_flag
+      type: bool
+    - admin_ui: {order: 6, width: 200}
+      name: Description
+      type: string
+    - admin_ui: {order: 7, width: 200}
+      name: Resource
+      type: simpleObject
+    - admin_ui: {order: 8, width: 200}
+      name: Group
+      type: string
+    server: full
+    title: JSON_table_update
   resource_table:
     client: full
     columns:

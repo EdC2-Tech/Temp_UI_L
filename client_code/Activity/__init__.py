@@ -72,6 +72,6 @@ class Activity(ActivityTemplate):
     self.edit_end_date.date = None
     self.edit_dependency_multi.reset()
     self.edit_resource_multi.reset()
-    self.edit_group = self.edit_group.items[0]
+    #self.edit_group.reset()
     self.critical_checkbox.checked = False
 
