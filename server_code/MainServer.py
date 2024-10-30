@@ -16,7 +16,7 @@ import math
 def get_all_tables():
   resource_table = app_tables.resource_table.search()
   activity_table = app_tables.activity_table.search()
-  json_table = app_tables.json_table.search()
+  json_table = app_tables.json_table.search(tables.order_by("Start"))
   increment  = app_tables.increment.search()
   group_table = app_tables.group_table.search()
   return resource_table, activity_table, json_table, increment, group_table
@@ -54,8 +54,7 @@ def add_activity(**kwargs):
                                 Group=kwargs["Group"],
                                 CP_flag=kwargs["CP_flag"]
                                )
-  app_tables.json_table.s
-  = app_tables.json_table.search(tables.order_by("Start", ascending=False))
+  app_tables.json_table.search(tables.order_by("Start", ascending=False))
   
 @anvil.server.callable
 def edit_activity(table_entry, **kwargs):
@@ -70,7 +69,7 @@ def edit_activity(table_entry, **kwargs):
                      Group=kwargs["Group"],
                      CP_flag=kwargs["CP_flag"]
                     )
-  app_tables.JSON_table_update = app_tables.json_table.search(tables.order_by("Start", ascending=False))
+  app_tables.json_table.search(tables.order_by("Start", ascending=False))
 
 @anvil.server.callable
 def delete_activity(table_entry):
