@@ -1,102 +1,106 @@
-is_package: true
-container:
-  type: HtmlTemplate
-  properties: {html: '@theme:standard-page.html'}
 components:
-- type: ColumnPanel
-  properties: {wrap_on: never, col_spacing: none, col_widths: '{"JMXRWP":76}'}
-  name: content_panel
-  layout_properties: {slot: default}
-  components:
-  - name: linear_panel_3
-    properties: {}
-    type: LinearPanel
-    layout_properties: {grid_position: 'KUUPAO,JMXRWP', full_width_row: true}
-    components:
-    - name: outlined_card_1
-      properties: {role: outlined-card, wrap_on: never, col_spacing: medium}
-      type: ColumnPanel
-      components:
-      - name: import_button
-        properties: {text: Import Schedule, file_types: '".json"'}
-        type: FileLoader
-        layout_properties: {grid_position: 'XRJZSE,LKNTVG', full_width_row: true}
+- components:
+  - components:
+    - components:
+      - data_bindings:
+        - {code: '', property: file, writeback: false}
         event_bindings: {change: import_button_change}
-        data_bindings:
-        - {property: file, code: '', writeback: false}
-      - name: label_4
-        properties: {text: 'Viewing Options:', font_size: 20}
+        layout_properties: {full_width_row: true, grid_position: 'XRJZSE,LKNTVG'}
+        name: import_button
+        properties: {file_types: '".json"', text: Import Schedule}
+        type: FileLoader
+      - layout_properties: {full_width_row: true, grid_position: 'CVOYYL,GTFELB'}
+        name: label_4
+        properties: {font_size: 20, text: 'Viewing Options:'}
         type: Label
-        layout_properties: {grid_position: 'CVOYYL,GTFELB', full_width_row: true}
-      - name: grid_panel_2
-        properties: {}
-        type: GridPanel
-        layout_properties: {grid_position: 'HSIIQJ,JQKSYY', full_width_row: true}
-        components:
-        - name: label_2
-          properties: {text: 'Start Date:', align: right}
+      - components:
+        - layout_properties: {col_xs: 2, row: XAOOOC, width_xs: 3}
+          name: label_2
+          properties: {align: right, text: 'Start Date:'}
           type: Label
-          layout_properties: {row: XAOOOC, width_xs: 3, col_xs: 2}
-        - name: start_datePicker
+        - event_bindings: {}
+          layout_properties: {col_xs: 5, row: XAOOOC, width_xs: 5}
+          name: start_datePicker
           properties: {pick_time: false}
           type: DatePicker
-          layout_properties: {row: XAOOOC, width_xs: 5, col_xs: 5}
-          event_bindings: {}
-        - name: label_3
-          properties: {text: 'End Date:', align: right}
+        - layout_properties: {col_xs: 2, row: RBFGCS, width_xs: 3}
+          name: label_3
+          properties: {align: right, text: 'End Date:'}
           type: Label
-          layout_properties: {row: RBFGCS, width_xs: 3, col_xs: 2}
-        - name: end_datePicker
+        - event_bindings: {}
+          layout_properties: {col_xs: 5, row: RBFGCS, width_xs: 5}
+          name: end_datePicker
           properties: {pick_time: false}
           type: DatePicker
-          layout_properties: {row: RBFGCS, width_xs: 5, col_xs: 5}
-          event_bindings: {}
-        - name: label_5
+        - layout_properties: {col_xs: 2, row: NPQIFM, width_xs: 3}
+          name: label_5
           properties: {align: right, text: 'Interval:'}
           type: Label
-          layout_properties: {row: NPQIFM, width_xs: 3, col_xs: 2}
-        - name: interval_drop_down
+        - layout_properties: {col_xs: 5, row: NPQIFM, width_xs: 5}
+          name: interval_drop_down
           properties: {}
           type: DropDown
-          layout_properties: {row: NPQIFM, width_xs: 5, col_xs: 5}
-      - name: column_panel_1
-        properties: {col_widths: '{"SZSQAZ":15,"IVPDDD":25,"VVMGRQ":40}'}
-        type: ColumnPanel
-        layout_properties: {grid_position: 'HSIIQJ,JGOYOG'}
-        components:
-        - name: label_6
-          properties: {text: 'Show Activity Group:', align: right}
+        layout_properties: {full_width_row: true, grid_position: 'HSIIQJ,JQKSYY'}
+        name: grid_panel_2
+        properties: {}
+        type: GridPanel
+      - components:
+        - layout_properties: {grid_position: 'HOGPJL,SZSQAZ'}
+          name: label_6
+          properties: {align: right, text: 'Show Activity Group:'}
           type: Label
-          layout_properties: {grid_position: 'HOGPJL,SZSQAZ'}
-        - name: group_dropdown
-          properties: {placeholder: All, include_placeholder: true}
-          type: DropDown
-          layout_properties: {grid_position: 'HOGPJL,IVPDDD'}
+        - data_bindings: []
           event_bindings: {}
-          data_bindings: []
-        - name: spacer_1
+          layout_properties: {grid_position: 'HOGPJL,IVPDDD'}
+          name: group_dropdown
+          properties: {include_placeholder: true, placeholder: All}
+          type: DropDown
+        - layout_properties: {grid_position: 'HOGPJL,VVMGRQ'}
+          name: spacer_1
           properties: {height: 32}
           type: Spacer
-          layout_properties: {grid_position: 'HOGPJL,VVMGRQ'}
-        - name: CP_flag
+        - layout_properties: {grid_position: 'LVRTKV,SUHVKH'}
+          name: CP_flag
           properties: {text: Show critical path}
           type: CheckBox
-          layout_properties: {grid_position: 'LVRTKV,SUHVKH'}
-        - name: simplified_flag
+        - layout_properties: {grid_position: 'YOCVMO,UIHEIG'}
+          name: simplified_flag
           properties: {text: Show simplified Gantt chart}
           type: CheckBox
-          layout_properties: {grid_position: 'YOCVMO,UIHEIG'}
-      - name: refresh_button
-        properties: {text: Refresh Viewer, spacing_above: none, spacing_below: none, background: ''}
-        type: Button
+        - layout_properties: {grid_position: 'XEYHGX,MBZUYI'}
+          name: ArrowOpt
+          properties: {checked: true, text: Show activity arrows}
+          type: CheckBox
+        layout_properties: {grid_position: 'HSIIQJ,JGOYOG'}
+        name: column_panel_1
+        properties: {col_widths: '{"SZSQAZ":15,"IVPDDD":25,"VVMGRQ":40}'}
+        type: ColumnPanel
+      - event_bindings: {click: refresh_button_click}
         layout_properties: {grid_position: 'BVXILC,AHCDQG'}
-        event_bindings: {click: refresh_button_click}
+        name: refresh_button
+        properties: {background: '', spacing_above: none, spacing_below: none, text: Refresh Viewer}
+        type: Button
       layout_properties: {}
-  - name: plot_1
+      name: outlined_card_1
+      properties: {col_spacing: medium, role: outlined-card, wrap_on: never}
+      type: ColumnPanel
+    layout_properties: {full_width_row: true, grid_position: 'KUUPAO,JMXRWP'}
+    name: linear_panel_3
+    properties: {}
+    type: LinearPanel
+  - layout_properties: {full_width_row: true, grid_position: 'GPPNFK,IUPGNS'}
+    name: plot_1
     properties: {}
     type: Plot
-    layout_properties: {grid_position: 'GPPNFK,IUPGNS', full_width_row: true}
-- name: label_1
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {col_spacing: none, col_widths: '{"JMXRWP":76}', wrap_on: never}
+  type: ColumnPanel
+- layout_properties: {slot: title}
+  name: label_1
   properties: {text: Schedule Optimization Tool - Idaho National Laboratory}
   type: Label
-  layout_properties: {slot: title}
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true

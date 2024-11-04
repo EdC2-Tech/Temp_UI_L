@@ -7,6 +7,8 @@ class MultiSelectDropDown(MultiSelectDropDownTemplate):
     # You must call self.init_components() before doing anything else in this function
     self.init_components(**properties)
 
+    self.selected = list() 
+    
     # If we've been told items can only be selected once...
     if self.unique:
       # .. adding items to the TokenBox removes them from the DropDown ...
@@ -17,7 +19,7 @@ class MultiSelectDropDown(MultiSelectDropDownTemplate):
   @property
   def items(self):
     return self.drop_down_1.items
-
+    
   @items.setter
   def items(self, value):
     if len(value) and value[0] is not self.placeholder:
@@ -36,8 +38,15 @@ class MultiSelectDropDown(MultiSelectDropDownTemplate):
     self.drop_down_1.items = items
 
   def drop_down_1_change(self, **event_args):
-    """This method is called when an item is selected"""
+    self.selected.append(event_args['sender'].selected_value)
     self.token_box.add(event_args['sender'].selected_value)
-    # Go back to having self.placeholder selected, to allow the same value 
-    # to be selected multiple times.
     self.drop_down_1.selected_value = self.placeholder
+
+  def reset(self):
+    self.selected = list()
+    self.token_box.selected = list()
+
+  def add_to_token(self, src_list):
+    self.selected = src_list
+    for text in src_list:
+      self.token_box.add(text)

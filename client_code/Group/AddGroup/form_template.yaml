@@ -1,29 +1,29 @@
-container: {type: ColumnPanel}
 components:
-- name: outlined_card_1
-  properties: {role: outlined-card}
-  type: ColumnPanel
-  layout_properties: {grid_position: 'NUFBZB,CFYOQE'}
-  components:
-  - name: label_1
-    properties: {text: Group, font_size: 25}
+- components:
+  - layout_properties: {grid_position: 'SNWFOK,ONIHBH'}
+    name: label_1
+    properties: {font_size: 25, text: Add New Group}
     type: Label
-    layout_properties: {grid_position: 'SNWFOK,ONIHBH'}
-  - name: label_2
+  - layout_properties: {grid_position: 'USWRVM,RXCRDG'}
+    name: label_2
     properties: {align: right, text: 'Group Name:'}
     type: Label
-    layout_properties: {grid_position: 'USWRVM,RXCRDG'}
-  - name: group_name
+  - layout_properties: {grid_position: 'USWRVM,FQBHPI'}
+    name: group_name
     properties: {}
     type: TextBox
-    layout_properties: {grid_position: 'USWRVM,FQBHPI'}
-  - name: label_3
+  - layout_properties: {grid_position: 'LCHWVW,TLNUOP'}
+    name: label_3
     properties: {align: right, text: 'Group Description:'}
     type: Label
-    layout_properties: {grid_position: 'LCHWVW,TLNUOP'}
-  - name: group_description
+  - event_bindings: {pressed_enter: resource_description_pressed_enter}
+    layout_properties: {grid_position: 'LCHWVW,YLVQOP'}
+    name: group_description
     properties: {}
     type: TextBox
-    layout_properties: {grid_position: 'LCHWVW,YLVQOP'}
-    event_bindings: {pressed_enter: resource_description_pressed_enter}
+  layout_properties: {grid_position: 'NUFBZB,CFYOQE'}
+  name: outlined_card_1
+  properties: {role: outlined-card}
+  type: ColumnPanel
+container: {type: ColumnPanel}
 is_package: true

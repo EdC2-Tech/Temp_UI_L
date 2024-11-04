@@ -1,75 +1,92 @@
-is_package: true
-container:
-  type: DataRowPanel
-  properties: {auto_display_data: false, visible: true}
-  data_bindings: []
 components:
-- properties: {}
-  type: DataRowPanel
-  layout_properties: {column: 'null'}
-  data_bindings:
-  - {property: item, code: self.item, writeback: false}
-  name: data_row_panel_1
-  components:
-  - properties: {text: '', icon: 'fa:edit', font_size: 18}
-    type: Button
+- components:
+  - event_bindings: {click: edit_button_click}
     layout_properties: {column: FYRUCI}
-    event_bindings: {click: edit_button_click}
     name: edit_button
-  - name: check_box_1
-    properties: {text: Critical, enabled: false}
-    type: CheckBox
+    properties: {font_size: 18, icon: 'fa:edit', text: ''}
+    type: Button
+  - data_bindings:
+    - {code: 'self.item[''CP_flag'']', property: checked, writeback: false}
     layout_properties: {column: QDDSUN}
-    data_bindings:
-    - {property: checked, code: 'self.item[''CP_flag'']', writeback: false}
-- properties: {visible: false}
-  type: DataRowPanel
+    name: CP_flag
+    properties: {enabled: false, text: Critical}
+    type: CheckBox
+  data_bindings:
+  - {code: self.item, property: item, writeback: false}
   layout_properties: {column: 'null'}
-  name: data_row_panel_2
-  components:
-  - properties: {text: ''}
-    type: TextBox
+  name: data_row_panel_1
+  properties: {}
+  type: DataRowPanel
+- components:
+  - data_bindings:
+    - {code: 'self.item[''Task'']', property: text, writeback: false}
+    - {code: 'self.item[''Task'']', property: placeholder, writeback: false}
     layout_properties: {column: JKSDUP}
-    data_bindings:
-    - {property: text, code: 'self.item[''Task'']', writeback: false}
-    - {property: placeholder, code: 'self.item[''Task'']', writeback: false}
     name: Task_name_edit
-  - properties: {text: '', icon: 'fa:trash-o', font_size: 18}
-    type: Button
-    layout_properties: {column: OYQBVS}
-    event_bindings: {click: delete_button_click}
-    name: delete_button
-  - properties: {}
+    properties: {text: ''}
     type: TextBox
-    layout_properties: {column: VJQQOR}
-    data_bindings:
-    - {property: text, code: 'self.item[''Description'']', writeback: false}
-    - {property: placeholder, code: 'self.item[''Description'']', writeback: false}
-    name: Task_decription_edit
-  - properties: {text: '', icon: 'fa:save', font_size: 18}
+  - event_bindings: {click: delete_button_click}
+    layout_properties: {column: OYQBVS}
+    name: delete_button
+    properties: {font_size: 18, icon: 'fa:trash-o', text: ''}
     type: Button
+  - data_bindings:
+    - {code: 'self.item[''Description'']', property: text, writeback: false}
+    - {code: 'self.item[''Description'']', property: placeholder, writeback: false}
+    layout_properties: {column: VJQQOR}
+    name: Task_decription_edit
+    properties: {}
+    type: TextBox
+  - event_bindings: {click: save_button_click}
     layout_properties: {column: FYRUCI}
-    event_bindings: {click: save_button_click}
     name: save_button
-  - name: Task_resource_edit
+    properties: {font_size: 18, icon: 'fa:save', text: ''}
+    type: Button
+  - data_bindings: []
+    layout_properties: {column: JPGNPJ}
+    name: Task_resource_edit
     properties:
       items: []
+      placeholder: ''
     type: form:MultiSelectDropDown
-    layout_properties: {column: JPGNPJ}
-    data_bindings: []
-  - name: Task_dependency_edit
-    properties: {}
-    type: form:MultiSelectDropDown
+  - data_bindings: []
     layout_properties: {column: UMUOAE}
-    data_bindings: []
-  - name: check_box_2
-    properties: {text: Critical, enabled: false}
-    type: CheckBox
+    name: Task_dependency_edit
+    properties: {placeholder: ''}
+    type: form:MultiSelectDropDown
+  - data_bindings:
+    - {code: 'self.item[''CP_flag'']', property: checked, writeback: true}
     layout_properties: {column: QDDSUN}
-    data_bindings:
-    - {property: checked, code: 'self.item[''CP_flag'']', writeback: true}
-  - name: Group_edit
-    properties: {}
-    type: DropDown
+    name: CP_flag_edit
+    properties: {enabled: true, text: Critical}
+    type: CheckBox
+  - data_bindings:
+    - {code: 'self.item[''Group'']', property: selected_value, writeback: true}
     layout_properties: {column: ENXKXA}
+    name: Group_edit
+    properties:
+      items: []
+      placeholder: ''
+    type: DropDown
+  - data_bindings:
+    - {code: 'self.item[''Start'']', property: date, writeback: true}
+    layout_properties: {column: RVRDDL}
+    name: Start_edit
+    properties: {pick_time: false}
+    type: DatePicker
+  - data_bindings:
+    - {code: 'self.item[''Finish'']', property: date, writeback: true}
+    layout_properties: {column: UMGSGP}
+    name: End_edit
+    properties: {date: null, pick_time: false, placeholder: ''}
+    type: DatePicker
   data_bindings: []
+  layout_properties: {column: 'null'}
+  name: data_row_panel_2
+  properties: {visible: false}
+  type: DataRowPanel
+container:
+  data_bindings: []
+  properties: {auto_display_data: false, visible: true}
+  type: DataRowPanel
+is_package: true
