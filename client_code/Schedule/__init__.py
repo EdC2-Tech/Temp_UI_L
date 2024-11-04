@@ -53,14 +53,17 @@ class Schedule(ScheduleTemplate):
                               end_date=self.end_datePicker.date, 
                               interval=self.interval_drop_down.selected_value,
                               showCrit=self.CP_flag.checked,
+                              showArrow=self.ArrowOpt.checked,
                               Group = grouping
                              )
     else:
+      print(self.ArrowOpt.checked)
       fig = anvil.server.call("draw_full_chart", 
                               start_date=self.start_datePicker.date, 
                               end_date=self.end_datePicker.date, 
                               interval=self.interval_drop_down.selected_value,
                               showCrit=self.CP_flag.checked,
+                              showArrow=self.ArrowOpt.checked,
                               Group = grouping
                              )
 

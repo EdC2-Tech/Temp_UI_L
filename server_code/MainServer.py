@@ -100,7 +100,7 @@ def delete_group(table_entry):
 
 # Backend for Schedule
 @anvil.server.callable
-def draw_simplified_chart(start_date=0, end_date=0, interval="Days", showCrit=False, Group="All"):
+def draw_simplified_chart(start_date=0, end_date=0, interval="Days", showCrit=False, showArrow=True, Group="All"):
     '''
     Draws a Gantt chart using the simplified list of activities.
 
@@ -114,6 +114,8 @@ def draw_simplified_chart(start_date=0, end_date=0, interval="Days", showCrit=Fa
         Custom interval specified by user.
     showCrit : Bool
         Specifies whether to display critical path
+    showArrow : Bool
+        Specifies whether to display activity link arrows
     Group : string
         Specifies whether to display a specific grouping in the Gantt chart
     Returns
@@ -128,11 +130,11 @@ def draw_simplified_chart(start_date=0, end_date=0, interval="Days", showCrit=Fa
     data = pd.DataFrame.from_dict(data)
     data = format_data(data)
   
-    fig = draw_chart(data, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit, Group=Group)
+    fig = draw_chart(data, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit, showArrow=showArrow, Group=Group)
     return fig
   
 @anvil.server.callable
-def draw_full_chart(start_date=0, end_date=0, interval="Days", showCrit=False, Group="All"):
+def draw_full_chart(start_date=0, end_date=0, interval="Days", showCrit=False, showArrow=True, Group="All"):
     '''
     Draws a Gantt chart using the full list of activities.
 
@@ -156,7 +158,7 @@ def draw_full_chart(start_date=0, end_date=0, interval="Days", showCrit=False, G
     data = get_data(ret_pd=True)
     data = format_data(data)  
     
-    fig = draw_chart(data, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit, Group=Group)
+    fig = draw_chart(data, start_date=start_date, end_date=end_date, interval=interval, showCrit=showCrit, showArrow=showArrow, Group=Group)
     return fig
 
 @anvil.server.callable
@@ -243,7 +245,7 @@ def load_file(file):
   update_group_table()
   return 1  
 
-def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, Group="All"):
+def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, showArrow=True, Group="All"):
 
   # Using CP_flag, determine critical activities for Gantt coloring
   data["Critical"] = data.apply(is_critical, axis=1)
@@ -317,7 +319,8 @@ def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, 
   fig.update_traces(width=1)
 
   # Draw arrows between tasks. Must be after x- and y-axis intervals are specified to know where start and end arrow coordinates are.
-  fig = draw_task_links(fig, data, showCrit=showCrit)
+  if showArrow:
+    fig = draw_task_links(fig, data, showCrit=showCrit)
   
   # Convert to correct time scale
   if interval == "Weeks":
@@ -585,7 +588,7 @@ def draw_line(fig, x0, x1, y0, y1, color="blue", width=2):
     return fig     
 
 def get_data(ret_pd=False):
-    all_records = app_tables.json_table.search()
+    all_records = app_tables.json_table.search(tables.order_by("Start"))
     input       = [{'Task':r['Task'],
                   'Start':r['Start'],
                   'Finish':r['Finish'],

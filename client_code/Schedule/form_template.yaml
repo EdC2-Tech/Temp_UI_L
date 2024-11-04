@@ -67,6 +67,10 @@ components:
           name: simplified_flag
           properties: {text: Show simplified Gantt chart}
           type: CheckBox
+        - layout_properties: {grid_position: 'XEYHGX,MBZUYI'}
+          name: ArrowOpt
+          properties: {checked: true, text: Show activity arrows}
+          type: CheckBox
         layout_properties: {grid_position: 'HSIIQJ,JGOYOG'}
         name: column_panel_1
         properties: {col_widths: '{"SZSQAZ":15,"IVPDDD":25,"VVMGRQ":40}'}
