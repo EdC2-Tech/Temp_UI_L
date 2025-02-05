@@ -1,13 +1,57 @@
 components: []
-container: {type: ColumnPanel}
+container:
+  event_bindings: {show: _show}
+  properties:
+    html: |+
+      <div style="height:152px; margin:8px 0;">
+          <div class='placeholder-table'></div>
+      </div>
+
+      <script type="module" type="text/javascript">
+      import {TabulatorFull as Tabulator} from "./_/theme/tabulator-tables/js/tabulator_esm.min.js";
+
+      let p = Promise.resolve();
+      if (!window.anvilTabulatorLoaded) {
+        window.anvilTabulatorLoaded = true;
+        const l = document.createElement("link");
+        l.href = "./_/theme/tabulator-tables/css/tabulator_bootstrap3.min.css";
+        l.rel = "stylesheet";
+        p = new Promise((resolve) => {
+          l.onload = resolve;
+          l.onerror = resolve;
+        });
+        document.body.appendChild(l);
+      }
+
+      p.then(() => {
+        $('.placeholder-table').each(function() {
+          new Tabulator(this, {
+                autoColumns: true,
+                layout:"fitColumns",
+                pagination: true,
+                paginationSize:2,
+                data: new Array(6).fill({columnA:'columnA', columnB:'columnB', columnC:'columnC', columnD:'columnD'})
+          });
+        });
+      });
+
+      </script>
+
+      <style>
+      .tabulator-row .tabulator-cell {
+          font-style: italic;
+      }
+      </style>
+
+  type: HtmlTemplate
 custom_component: true
 events:
-- default_event: true
-  description: when a row is clicked
+- description: when a row is clicked
   name: row_click
   parameters:
   - {description: the tabulator row object, name: row}
-- description: when a row is tapped on a mobile device
+- default_event: true
+  description: when a row is tapped on a mobile device
   name: row_tap
   parameters:
   - {description: the tabulator row object, name: row}
@@ -49,17 +93,17 @@ events:
 - {description: when the tabulator is hidden, name: hide}
 is_package: true
 properties:
-- {default_binding_prop: true, default_value: false, important: true, name: auto_columns, type: boolean}
-- {default_value: true, important: true, name: header_visible, type: boolean}
-- {default_value: '', important: true, name: height, type: string}
+- {default_value: false, group: columns, important: false, name: auto_columns, type: boolean}
+- {default_value: true, group: header, important: false, name: header_visible, type: boolean}
+- {default_binding_prop: true, default_value: '', group: appearance, important: true, name: height, type: string}
 - {default_value: id, description: This should be a unique identifier for a row., important: true, name: index, type: string}
-- {default_value: true, important: true, name: pagination, type: boolean}
-- {default_value: 5, important: true, name: pagination_size, type: number}
-- {default_value: '', important: true, name: border, type: string}
-- {default_value: small, important: true, name: spacing_above, type: string}
-- {default_value: small, important: true, name: spacing_below, type: string}
-- {default_value: true, important: true, name: visible, type: boolean}
-- {default_value: '', important: true, name: role, type: string}
+- {default_value: true, group: pagination, important: false, name: pagination, type: boolean}
+- {default_value: 5, group: pagination, important: false, name: pagination_size, type: number}
+- {default_value: '', group: appearance, important: false, name: border, type: string}
+- {default_value: small, group: layout, important: false, name: spacing_above, type: string}
+- {default_value: small, group: layout, important: false, name: spacing_below, type: string}
+- {default_value: true, group: appearance, important: true, name: visible, type: boolean}
+- {default_value: '', group: appearance, important: false, name: role, type: string}
 - {important: true, name: data, type: object}
-- {description: columns definitions should be a list of dicts. Each dict represents a column with options. See Tabulator.info for full documentation on available options, important: true, name: columns, type: object}
-- {description: set to a dict at runtime, important: true, name: column_defaults, type: object}
+- {description: column definitions should be a list of dicts. Each dict represents a column with options. See Tabulator.info for full documentation on available options, important: true, name: columns, type: object}
+- {description: set to a dict at runtime, important: false, name: columns_default, type: object}

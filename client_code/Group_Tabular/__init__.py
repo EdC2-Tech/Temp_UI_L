@@ -1,12 +1,10 @@
-from ._anvil_designer import Group_TabularTemplate
+debugger
+from ._anvil_designer import Form1Template
 from anvil import *
+import anvil.js
 import anvil.server
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
 
 from tabulator.Tabulator import Tabulator
-from tabulator.Tabulator import row_selection_column
 
 # remove some modules we don't need
 Tabulator.modules.remove("FrozenColumns")
@@ -21,6 +19,9 @@ Tabulator.theme = "simple"
 Tabulator.theme = "modern"
 Tabulator.theme = "bootstrap3"  # this is the default
 
+# Include a row_selection checkbox column
+from tabulator.Tabulator import row_selection_column
+
 def error_handler(e):
     if isinstance(e, anvil.js.ExternalError):
         e = e.original_error
@@ -29,7 +30,7 @@ def error_handler(e):
 set_default_error_handling(error_handler)
 
 
-class Group_Tabular(Group_TabularTemplate):
+class Form1(Form1Template):
     def __init__(self, **properties):
         self.init_components(**properties)
         try:
@@ -234,4 +235,3 @@ class Group_Tabular(Group_TabularTemplate):
         """This method is called when the row selection changes"""
         print(f"{event_args['event_name']}: {len(rows)} row(s) selected")
         self.delete_button.enabled = len(rows)
-
