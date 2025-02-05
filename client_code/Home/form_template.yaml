@@ -35,15 +35,13 @@ components:
     name: outlined_card_2
     properties: {role: outlined-card, wrap_on: never}
     type: ColumnPanel
-  layout_properties: {slot: default}
+  layout_properties: {full_width_row: true, grid_position: 'TSZVBD,GXCTDH'}
   name: content_panel
-  properties: {wrap_on: never}
+  properties:
+    col_spacing: large
+    spacing:
+      padding: [null, 25, null, 25]
+    wrap_on: never
   type: ColumnPanel
-- layout_properties: {slot: title}
-  name: label_3
-  properties: {text: Schedule Optimization Tool - Idaho National Laboratory}
-  type: Label
-container:
-  properties: {html: '@theme:standard-page.html'}
-  type: HtmlTemplate
+container: {type: ColumnPanel}
 is_package: true

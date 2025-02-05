@@ -26,7 +26,7 @@ class Main(MainTemplate):
     self.set_event_handler('x-refresh-tables', self.update_tables)
     
     # Adding global parameters
-    self.logo_image.source = "_/theme/logo.PNG" # Add LOGOS logo to page
+    #self.logo_image.source = "_/theme/logo.PNG" # Add LOGOS logo to page
     self.start_date_selected = None
     self.end_date_selected = None
     self.fig = None
