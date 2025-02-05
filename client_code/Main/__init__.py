@@ -4,6 +4,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+import time
 
 from ..Home import Home
 from ..Schedule import Schedule
@@ -22,7 +23,7 @@ class Main(MainTemplate):
     self.content_panel.add_component(Home(), full_width_row=True)
 
     # Pre-load existing data tables
-    self.update_tables()
+    #self.update_tables()
     self.set_event_handler('x-refresh-tables', self.update_tables)
     
     # Adding global parameters
@@ -62,12 +63,14 @@ class Main(MainTemplate):
     self.content_panel.add_component(Group(), full_width_row=True)
     
   def update_tables(self, **event_args):
-    resource_table, activity_table, json_table, increment, group_table = anvil.server.call('get_all_tables')
-    self.resource_table = resource_table
-    self.activity_table = activity_table
-    self.json_table     = json_table
-    self.increment      = increment
-    self.group_table    = group_table
+    task = anvil.server.call('get_all_tables')
+    task_state = task.get_state()
+    print(task_state)
+    #self.resource_table = task_state["resource_table"]
+    #self.activity_table = task_state["activity_table"]
+    #self.json_table     = task_state["json_table"]
+    #self.increment      = task_state["increment"]
+    #self.group_table    = task_state["group_table"]
     print("Updating")
 
 

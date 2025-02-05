@@ -8,7 +8,7 @@ components:
     name: repeating_panel_1
     properties: {item_template: Group.GroupTemplate, visible: true}
     type: RepeatingPanel
-  layout_properties: {grid_position: ''}
+  layout_properties: {full_width_row: true, grid_position: ''}
   name: group_dataGrid
   properties:
     columns:
@@ -16,6 +16,7 @@ components:
     - {data_key: column_1, expand: false, id: QYSIRR, title: '', width: 40}
     - {data_key: group_name, id: GECWBB, title: Group}
     - {data_key: group_description, id: VJQQOR, title: Description}
+    margin: [null, 25, null, 25]
   type: DataGrid
 - event_bindings: {click: add_resource_button_click}
   layout_properties: {grid_position: 'EXMEHY,OTSABO'}
