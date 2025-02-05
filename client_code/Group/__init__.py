@@ -7,7 +7,6 @@ from anvil.tables import app_tables
 
 from .AddGroup import AddGroup
 
-
 class Group(GroupTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
