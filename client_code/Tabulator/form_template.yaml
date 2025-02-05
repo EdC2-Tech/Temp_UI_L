@@ -1,0 +1,65 @@
+components: []
+container: {type: ColumnPanel}
+custom_component: true
+events:
+- default_event: true
+  description: when a row is clicked
+  name: row_click
+  parameters:
+  - {description: the tabulator row object, name: row}
+- description: when a row is tapped on a mobile device
+  name: row_tap
+  parameters:
+  - {description: the tabulator row object, name: row}
+- description: when a cell is clicked
+  name: cell_click
+  parameters:
+  - {description: the tabulator cell object, name: cell}
+- description: when a cell is tapped on a mobile device
+  name: cell_tap
+  parameters:
+  - {description: the tabulator cell object, name: cell}
+- description: when a cell is edited
+  name: cell_edited
+  parameters:
+  - {description: the tabulator cell object, name: cell}
+- description: when a row is selected
+  name: row_selected
+  parameters:
+  - {description: the tabulator row object, name: row}
+- description: when the row selection changes
+  name: row_selection_changed
+  parameters:
+  - {name: rows}
+  - {name: data}
+- description: when a row is deselected
+  name: row_deselected
+  parameters:
+  - {description: the tabulator row object, name: row}
+- description: when a page is loaded
+  name: page_loaded
+  parameters:
+  - {name: pageno}
+- description: when the row is rendered - manipulate the tabulator row object
+  name: row_formatter
+  parameters:
+  - {description: the tabulator row object, name: row}
+- {description: when the tabulator instance has been built - it is safe to call tabulator methods, name: table_built}
+- {description: when the tabulator is shown, name: show}
+- {description: when the tabulator is hidden, name: hide}
+is_package: true
+properties:
+- {default_binding_prop: true, default_value: false, important: true, name: auto_columns, type: boolean}
+- {default_value: true, important: true, name: header_visible, type: boolean}
+- {default_value: '', important: true, name: height, type: string}
+- {default_value: id, description: This should be a unique identifier for a row., important: true, name: index, type: string}
+- {default_value: true, important: true, name: pagination, type: boolean}
+- {default_value: 5, important: true, name: pagination_size, type: number}
+- {default_value: '', important: true, name: border, type: string}
+- {default_value: small, important: true, name: spacing_above, type: string}
+- {default_value: small, important: true, name: spacing_below, type: string}
+- {default_value: true, important: true, name: visible, type: boolean}
+- {default_value: '', important: true, name: role, type: string}
+- {important: true, name: data, type: object}
+- {description: columns definitions should be a list of dicts. Each dict represents a column with options. See Tabulator.info for full documentation on available options, important: true, name: columns, type: object}
+- {description: set to a dict at runtime, important: true, name: column_defaults, type: object}

@@ -36,3 +36,7 @@ class GroupTemplate(GroupTemplateTemplate):
     get_open_form().raise_event('x-refresh-tables')
     self.remove_from_parent()
 
+  def form_refreshing_data_bindings(self, **event_args):
+    """This method is called when refresh_data_bindings is called"""
+    pass
+

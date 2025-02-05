@@ -13,10 +13,9 @@ class Group(GroupTemplate):
     self.init_components(**properties)
 
     self.__update_table__()
-    # Any code you write here will run before the form opens.
 
   def __update_table__(self, **event_args):
-    self.repeating_panel_1.items = get_open_form().group_table
+    self.repeating_panel_1.items = app_tables.group_table.search()
     
   def add_resource_button_click(self, **event_args):
     """This method is called when the button is clicked"""

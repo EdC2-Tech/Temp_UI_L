@@ -2,6 +2,25 @@ unique_ids:
   assets:
     logo.PNG: '1722884327350885421790323.5963'
     standard-page.html: DTTNOCXWVUZK4EMKBE4PONXL3PFKEENN
+    tabulator-tables/.gitkeep: '173878402896227641311065.844666'
+    tabulator-tables/css/.gitkeep: '1738784041503623060591063.9307'
+    tabulator-tables/css/tabulator.min.css: '1738784098785411192216380.3321'
+    tabulator-tables/css/tabulator_bootstrap3.min.css: '1738784191213504962197424.96454'
+    tabulator-tables/css/tabulator_bootstrap4.min.css: '1738784198619989531635556.6222'
+    tabulator-tables/css/tabulator_bootstrap5.min.css: '1738784204250450855186228.4618'
+    tabulator-tables/css/tabulator_bulma.min.css: '1738784210890942047218008.471'
+    tabulator-tables/css/tabulator_materialize.min.css: '1738784216904517621368226.84357'
+    tabulator-tables/css/tabulator_midnight.min.css: '1738784224685443652573979.5227'
+    tabulator-tables/css/tabulator_modern.min.css: '1738784232473973420460074.4393'
+    tabulator-tables/css/tabulator_semanticui.min.css: '1738784238610759618601859.2284'
+    tabulator-tables/css/tabulator_simple.min.css: '1738784244676382769729996.8853'
+    tabulator-tables/css/tabulator_site.min.css: '1738784252571788929649095.7625'
+    tabulator-tables/css/tabulator_site_dark.min.css: '1738784262571639613413693.4646'
+    tabulator-tables/js/.gitkeep: '1738784052609175200057515.2588'
+    tabulator-tables/js/tabulator_esm.js: '1738784272873556018847441.3135'
+    tabulator-tables/js/tabulator_esm.js.map: '1738784280307548440844791.01874'
+    tabulator-tables/js/tabulator_esm.min.js: '1738784285863501273267253.88135'
+    tabulator-tables/js/tabulator_esm.min.js.map: '1738784293359458213008322.6843'
     theme.css: 45M7SXLF6FYHKFRREP5VZEY3XHI576QZ
   forms:
     Activity: '1738777786115485367118718.4163'
@@ -11,6 +30,7 @@ unique_ids:
     Group.AddGroup: '1724086567186542729746107.60504'
     Group.EditGroup: '1724086576719720718791494.9756'
     Group.GroupTemplate: '1724086531964630139621247.3591'
+    Group_Tabular: '1738782216439871525702331.7137'
     Home: '1738776136347142564482104.28683'
     Main: QF4VTXWMN3AT6J2GSD7PMJMGQZT2QXIA
     MultiSelectDropDown: '1723487153212907906236096.2343'
@@ -19,13 +39,24 @@ unique_ids:
     Resource.EditResource: '1719521508723689333521457.6577'
     Resource.ResourceTemplate: '1719505018270742641156884.4491'
     Schedule: '1738778204845716167961529.4778'
+    Tabu: '1738784483702957430295317.4672'
+    Tabulator: '1738782785430640847269162.7445'
     TokenBox: '1723487529411713715588643.6177'
-  modules: {}
+  modules:
+    Tabulator._custom_modules: '173878279334443590508990.30947'
+    Tabulator._data_loader: '1738782808706773068722714.1686'
+    Tabulator._datetime_overrides: '1738782816372554229134306.3129'
+    Tabulator._defaults: '1738782824961924553077184.4834'
+    Tabulator._helpers: '1738782832826826330771013.3263'
+    Tabulator._js_tabulator: '173878284000062728394396.68432'
+    Tabulator._module_helpers: '1738782850022655078692562.5227'
   scripts: {}
   server_modules:
     Activity_S: '173877079089571403735927.0403'
     Group_S: '1738770982346380095052181.0069'
+    Group_Tabular_S: '1738782614447134513804801.9554'
     MainServer: '1719338525409865316847659.6964'
     Main_S: '1738770756133621416343136.7745'
     Resource_S: '1738770781567290230359920.0484'
     Schedule_S: '1738770998679973381196815.9854'
+    name: '1738782641927855983007933.7372'

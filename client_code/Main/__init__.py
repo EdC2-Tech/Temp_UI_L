@@ -13,6 +13,8 @@ from ..Resource import Resource
 from ..Contact import Contact
 from ..Group import Group
 
+from ..Group_Tabular import Group_Tabular
+
 class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -20,7 +22,7 @@ class Main(MainTemplate):
 
     # Initiate default homepage panel 
     self.content_panel.clear()
-    self.content_panel.add_component(Home(), full_width_row=True)
+    self.content_panel.add_component(Group_Tabular(), full_width_row=True)
 
     # Pre-load existing data tables
     #self.update_tables()

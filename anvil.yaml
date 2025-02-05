@@ -118,12 +118,12 @@ runtime_options:
   server_version: python3-sandbox
   version: 2
 services:
-- client_config: {}
+- client_config: {enable_v2: true}
   server_config: {}
   source: /runtime/services/tables.yml
 - client_config: {}
   server_config: {}
   source: /runtime/services/anvil/email.yml
-startup: {module: Main, type: form}
+startup: {module: Tabulator._js_tabulator, type: module}
 startup_form: null
 uplink_visible: true
