@@ -13,11 +13,11 @@ Tabulator.modules.remove("FrozenColumns")
 Tabulator.default_options["selectable"] = True
 
 # change the theme
-Tabulator.theme = "midnight"
-Tabulator.theme = "standard"
+#Tabulator.theme = "midnight"
+#Tabulator.theme = "standard"
 Tabulator.theme = "simple"
-Tabulator.theme = "modern"
-Tabulator.theme = "bootstrap3"  # this is the default
+#Tabulator.theme = "modern"
+#Tabulator.theme = "bootstrap3"  # this is the default
 
 # Include a row_selection checkbox column
 from ..Tabulator import row_selection_column
@@ -77,51 +77,6 @@ class Group_Tabular(Group_TabularTemplate):
             "pagination_size_selector": [5, 10, 20],
             "css_class": "table-striped" # add table striped layout
 #             "selectable_persistence": False,
-        }
-
-        self.tabulator_obj.options["langs"] = {
-            "fr": {
-                "columns": {
-                    "name": "Nom",
-                    "progress": "Progression",
-                    "gender": "Genre",
-                    "rating": "Évaluation",
-                    "col": "Couleur",
-                    "dob": "Date de Naissance",
-                },
-                "pagination": {
-                    "first": "Premier",
-                    "first_title": "Première Page",
-                    "last": "Dernier",
-                    "last_title": "Dernière Page",
-                    "prev": "Précédent",
-                    "prev_title": "Page Précédente",
-                    "next": "Suivant",
-                    "next_title": "Page Suivante",
-                    "all": "Toute",
-                },
-            },
-            "de": {
-                "columns": {
-                    "name": "Name",
-                    "progress": "Fortschritt",
-                    "gender": "Genre",
-                    "rating": "Geschlecht",
-                    "col": "Farbe",
-                    "dob": "Geburtsdatum",
-                },
-                "pagination": {
-                    "first": "Zuerst",
-                    "first_title": "Zuerst Seite",
-                    "last": "Last",
-                    "last_title": "Letzte Seite",
-                    "prev": "Zurück",
-                    "prev_title": "Zurück Seite",
-                    "next": "Nächster",
-                    "next_title": "Nächster Seite",
-                    "all": "Alle",
-                },
-            },
         }
 
         # Refer to the example sort drop down box for configuration
