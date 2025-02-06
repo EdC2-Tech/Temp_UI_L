@@ -10,7 +10,7 @@ import anvil.server
 from ..Tabulator import Tabulator
 
 # remove some modules we don't need
-Tabulator.modules.remove("FrozenColumns")
+# Tabulator.modules.remove("FrozenColumns")
 
 # change some default options
 Tabulator.default_options["selectable"] = True
