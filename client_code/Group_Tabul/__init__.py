@@ -1,5 +1,5 @@
 debugger
-from ._anvil_designer import Group_TabularTemplate
+from ._anvil_designer import Group_TabulTemplate
 from anvil import *
 import anvil.js
 import anvil.server
@@ -30,7 +30,7 @@ def error_handler(e):
 set_default_error_handling(error_handler)
 
 
-class Group_Tabular(Group_TabularTemplate):
+class Group_Tabul(Group_TabulTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
         try:

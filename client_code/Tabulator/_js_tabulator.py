@@ -5,12 +5,15 @@ import anvil
 from anvil.js import import_from, report_exceptions
 from anvil.js.window import Function
 
-# from anvil.js.window import TabulatorModule
+#from anvil.js.window import TabulatorModule
 
-
-config = anvil.app.get_client_config("tabulator")
-cdn = config.get("cdn", True)
-minified = config.get("minified", True)
+# Unable to debug the following section. Determines the availablity of a configuration
+# then chooses a URL to get a theme. Changes to false to force second path. Needs to be debugged.
+#config = anvil.app.get_client_config("tabulator")
+#cdn = config.get("cdn", True)
+#minified = config.get("minified", True)
+cdn = False
+minified = False
 
 if cdn:
     min = ",min" if minified else ""

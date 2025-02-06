@@ -1,6 +1,112 @@
-components: []
-container:
+components:
+- components:
+  - components:
+    - event_bindings: {click: add_row_button_click}
+      layout_properties: {}
+      name: add_row_button
+      properties:
+        icon: fa:plus
+        icon_align: left
+        spacing:
+          margin: [null, null, null, 95]
+        text: ADD ROW
+      type: Button
+    layout_properties: {grid_position: 'FOGTLM,MOPFSS'}
+    name: flow_panel_2
+    properties: {vertical_align: full}
+    type: FlowPanel
+  - components:
+    - event_bindings: {click: delete_button_click}
+      layout_properties: {}
+      name: delete_button
+      properties:
+        icon: fa:close
+        spacing:
+          margin: [null, null, null, 98]
+          padding: [null, null, null, 24]
+        text: DELETE
+      type: Button
+    layout_properties: {grid_position: 'FOGTLM,PLKTKU'}
+    name: flow_panel_1
+    properties: {}
+    type: FlowPanel
+  - components:
+    - layout_properties: {}
+      name: rich_text_1
+      properties: {content: 'Sort:'}
+      type: RichText
+    - name: columns_dropdown
+      properties: {}
+      type: DropDown
+    - data_bindings:
+      - {code: '[(''asc'', True), (''desc'', False)]', property: items, writeback: false}
+      layout_properties: {}
+      name: ascending_dropdown
+      properties:
+        items: []
+      type: DropDown
+    - event_bindings: {click: sort_button_click}
+      layout_properties: {}
+      name: sort_button
+      properties: {icon: 'fa:sort', text: SORT}
+      type: Button
+    - event_bindings: {click: reset_sort_click}
+      layout_properties: {}
+      name: reset_sort
+      properties: {icon: 'fa:repeat', text: RESET}
+      type: Button
+    layout_properties: {grid_position: 'TLHXES,YVLALY'}
+    name: flow_panel_3
+    properties: {}
+    type: FlowPanel
+  - components:
+    - layout_properties: {}
+      name: rich_text_2
+      properties: {content: 'Filter:'}
+      type: RichText
+    - name: fields_dropdown
+      properties: {}
+      type: DropDown
+    - data_bindings:
+      - {code: '''like''', property: selected_value, writeback: false}
+      layout_properties: {}
+      name: type_dropdown
+      properties:
+        items: ['>', <, '>=', <=, like, '!=']
+      type: DropDown
+    - event_bindings: {change: value_box_change}
+      name: value_box
+      properties: {}
+      type: TextBox
+    - event_bindings: {click: filter_button_click}
+      layout_properties: {}
+      name: filter_button
+      properties: {icon: 'fa:filter', text: FILTER}
+      type: Button
+    - event_bindings: {click: reset_filter_click}
+      layout_properties: {}
+      name: reset_filter
+      properties: {icon: 'fa:refresh', text: RESET}
+      type: Button
+    layout_properties: {grid_position: 'IZMNBU,FJNNNJ'}
+    name: flow_panel_4
+    properties: {}
+    type: FlowPanel
+  data_bindings: []
+  layout_properties: {grid_position: 'XGOSXU,IUSBBQ'}
+  name: outlined_card_1
   properties:
-    html: "<link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500\" rel=\"stylesheet\" rel=\"preload\" as=\"font\" crossorigin=\"anonymous\">\n\n\n\n<div class=\"structure\">\n  <div class=\"app-bar\" anvil-drop-container=\".anvil-container\" anvil-drop-redirect=\".placeholder\">\n    <a class=\"sidebar-toggle\" anvil-if-slot-empty=\"top-left-btn\" anvil-hide-if-slot-empty=\"left-nav\" anvil-drop-slot=\"top-left-btn\" href=\"javascript:void(0)\"><i class=\"fa fa-bars\"></i></a>\n    <a class=\"sidebar-toggle anvil-designer-only\" anvil-if-slot-empty=\"top-left-btn\" anvil-if-slot-empty=\"left-nav\" anvil-drop-slot=\"top-left-btn\"><i class=\"fa fa-blank\"></i></a>\n    <div class=\"top-left-btn\" anvil-slot=\"top-left-btn\"></div>\n    <div class=\"title\" anvil-slot=\"title\">\n      <div class=\"placeholder anvil-designer-only\" anvil-if-slot-empty=\"title\" anvil-drop-here>Drop title here</div>\n    </div>\n    <div class=\"app-bar-nav\" anvil-slot=\"nav-right\">\n      <div class=\"placeholder anvil-designer-only\" anvil-if-slot-empty=\"nav-right\" anvil-drop-here>Drop a FlowPanel here</div>\n    </div>\n    <div style=\"clear:both\"></div>\n  </div>\n\n  <div class=\"nav-holder\">\n    <div class=\"left-nav anvil-measure-this\" anvil-slot-repeat=\"left-nav\" anvil-drop-container=\">.anvil-container\">\n    </div>\n    <div class=\"left-nav-placeholder anvil-designer-only\" anvil-if-slot-empty=\"left-nav\" anvil-drop-slot=\"left-nav\">\n      <div class=\"prompt\">To add a sidebar, drop a ColumnPanel here.</div>\n    </div>\n\n    <div class=\"content\">\n      <div anvil-slot-repeat=\"default\" class=\"anvil-measure-this\"></div>\n      <div class=\"placeholder drop-here\" anvil-if-slot-empty=\"default\" anvil-drop-slot=\"default\">Drop a ColumnPanel here.</div>\n    </div>\n  </div>\n  <div class=\"nav-shield\"></div>\n</div>\n<div anvil-drop-default anvil-drop-redirect=\".placeholder\" anvil-drop-container=\".anvil-container\"></div>\n\n<script>\n  function hideSidebar() {\n    var ln = $('.structure > .nav-holder > .left-nav');\n    ln.animate({left: -ln.outerWidth()}, function() {\n      ln.removeClass(\"in-transition shown\").addClass(\"hidden\");\n      $('.nav-shield').removeClass(\"shown\");\n      $(window).trigger('resize');\n    });\n  }\n  function showSidebar() {\n    var ln = $('.structure > .nav-holder > .left-nav');\n    $('.nav-shield').addClass(\"shown\");\n    ln.addClass(\"shown\").removeClass(\"hidden\").css({left: \"-100%\"}).css({left: -ln.outerWidth()}).animate({left: 0}, function() {\n      ln.removeClass(\"in-transition\");\n    });\n    $(window).trigger('resize');\n  }\n  $('.sidebar-toggle, .nav-shield').off('click').on('click', function() {\n    var ln = $('.structure > .nav-holder > .left-nav');\n    if (ln.is(\":visible\") || $('.nav-shield').is(\".shown\")) {\n      hideSidebar();\n    } else if(!ln.is(\":empty\")) {\n      showSidebar();\n    }\n  });\n  \n  $('.left-nav').off('click').on('click', 'a, button', function() {\n    if ($('.nav-shield').is(\":visible\")) {\n      $('.nav-shield').trigger('click');\n    }\n  });\n\n\n\n</script>\n\n\n"
-  type: HtmlTemplate
+    background: theme:On Primary
+    border: ''
+    role: null
+    spacing:
+      margin: [null, 0, null, null]
+      padding: [null, null, null, 25]
+  type: ColumnPanel
+- event_bindings: {cell_click: tabulator_obj_cell_click, cell_edited: tabulator_obj_cell_edited, page_loaded: tabulator_obj_page_loaded, row_click: tabulator_obj_row_click, row_formatter: tabulator_obj_row_formatter, row_selected: tabulator_obj_row_selected, row_selection_changed: tabulator_obj_row_selection_changed}
+  layout_properties: {grid_position: 'NXPBZC,FTRYRN'}
+  name: tabulator_obj
+  properties: {spacing_above: large, spacing_below: large}
+  type: form:Tabulator
+container: {type: ColumnPanel}
 is_package: true
