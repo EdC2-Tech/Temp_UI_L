@@ -90,9 +90,11 @@ class Group_T(Group_TTemplate):
 
     # Refer to the example sort drop down box for configuration
     self.columns_dropdown.items = [
+      # Add items to drop down list for sort object 
       col["field"] for col in self.tabulator_obj.columns[1:-1]
     ]
     self.fields_dropdown.items = [
+      # Add items to drop down list for filter object 
       col["field"] for col in self.tabulator_obj.columns[1:-1]
     ]
 

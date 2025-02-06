@@ -14,6 +14,7 @@ from ..Contact import Contact
 from ..Group import Group
 
 from ..Group_Tabular import Group_Tabular
+from ..Group_T import Group_T
 
 class Main(MainTemplate):
   def __init__(self, **properties):
@@ -22,7 +23,7 @@ class Main(MainTemplate):
 
     # Initiate default homepage panel 
     self.content_panel.clear()
-    self.content_panel.add_component(Group_Tabular(), full_width_row=True)
+    self.content_panel.add_component(Group_T(), full_width_row=True)
 
     # Pre-load existing data tables
     #self.update_tables()
