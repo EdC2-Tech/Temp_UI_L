@@ -35,12 +35,13 @@ components:
       name: rich_text_1
       properties: {content: 'Sort:'}
       type: RichText
-    - name: columns_dropdown
+    - layout_properties: {width: 100}
+      name: columns_dropdown
       properties: {}
       type: DropDown
     - data_bindings:
       - {code: '[(''asc'', True), (''desc'', False)]', property: items, writeback: false}
-      layout_properties: {}
+      layout_properties: {width: 100}
       name: ascending_dropdown
       properties:
         items: []
@@ -64,17 +65,19 @@ components:
       name: rich_text_2
       properties: {content: 'Filter:'}
       type: RichText
-    - name: fields_dropdown
+    - layout_properties: {width: 100}
+      name: fields_dropdown
       properties: {}
       type: DropDown
     - data_bindings:
       - {code: '''like''', property: selected_value, writeback: false}
-      layout_properties: {}
+      layout_properties: {width: 50}
       name: type_dropdown
       properties:
         items: ['>', <, '>=', <=, like, '!=']
       type: DropDown
     - event_bindings: {change: value_box_change}
+      layout_properties: {expand: true, width: null}
       name: value_box
       properties: {}
       type: TextBox

@@ -51,10 +51,10 @@ if in_designer:
     from anvil.js.window import document
 
     _s = document.createElement("style")
-    _s.textContent = """
-.tabulator-row .tabulator-cell {
-    font-style: italic;
-}"""
+    _s.textContent = """.tabulator-row .tabulator-cell {
+                          font-style: italic;
+                        }
+                     """
     document.head.append(_s)
 
 

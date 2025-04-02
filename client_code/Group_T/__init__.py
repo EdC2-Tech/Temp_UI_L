@@ -1,4 +1,3 @@
-debugger
 from ._anvil_designer import Group_TTemplate
 from anvil import *
 import anvil.tables as tables
@@ -25,18 +24,16 @@ Tabulator.theme = "simple"
 # Include a row_selection checkbox column
 from ..Tabulator import row_selection_column
 
-
 def error_handler(e):
   if isinstance(e, anvil.js.ExternalError):
     e = e.original_error
   alert(e)
 
-
 set_default_error_handling(error_handler)
-
 
 class Group_T(Group_TTemplate):
   def __init__(self, **properties):
+    # Constructor
     self.init_components(**properties)
     try:
       self.tabulator_obj.data = anvil.server.call("get_list_data", n=100)
@@ -46,9 +43,9 @@ class Group_T(Group_TTemplate):
     # FORMATTERS and Editors
     # can be Forms
     #from .FavColorCell import FavColorCell as FavColor
-
-    # Or functions that return components or strings or dom nodes
-    def delete_link_formatter(cell, **params):
+    
+    # Set link for delete icon per row in TABLE. Not user modifiable
+    def delete_link_formatter(cell, **params):  
       l = Link(
         icon="fa:trash",
         foreground="indianred",
@@ -57,6 +54,7 @@ class Group_T(Group_TTemplate):
       )
       return l
 
+    # Set TABLE column titles; title = display name, field = reference name 
     self.tabulator_obj.columns = [
       row_selection_column,  # checkbox select column
       {"title": "Group Name", "field": "group", "editor": True},
@@ -81,6 +79,7 @@ class Group_T(Group_TTemplate):
       },
     ]
 
+    # Set TABLE options
     self.tabulator_obj.options = {
       "selectable": "highlight",
       "pagination_size_selector": [5, 10, 20],
@@ -88,11 +87,13 @@ class Group_T(Group_TTemplate):
       #             "selectable_persistence": False,
     }
 
-    # Refer to the example sort drop down box for configuration
+    # Set items for SORT drop down box 
     self.columns_dropdown.items = [
       # Add items to drop down list for sort object 
       col["field"] for col in self.tabulator_obj.columns[1:-1]
     ]
+    
+    # Set items for FILTER drop down box
     self.fields_dropdown.items = [
       # Add items to drop down list for filter object 
       col["field"] for col in self.tabulator_obj.columns[1:-1]

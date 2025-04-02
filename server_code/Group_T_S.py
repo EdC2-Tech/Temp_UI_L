@@ -46,7 +46,6 @@ def add_row():
     }
     return row
 
-
 @anvil.server.callable
 @timeit
 def get_list_data(n=100):
@@ -54,16 +53,14 @@ def get_list_data(n=100):
     for i in range(n):
         row = add_row()
         row["id"] = i
-        #     row['dob'] = row['dob'].strftime('%d/%m/%Y')
+        # row['dob'] = row['dob'].strftime('%d/%m/%Y')
         row["dob"] = row["dob"]
-        #     row['datetime_obj'] = datetime.now()
+        # row['datetime_obj'] = datetime.now()
         row["media"] = anvil.BlobMedia("text/plain", b"hey")
         data.append(row)
     return data
 
-
 @anvil.server.callable
 def slow_call():
     from time import sleep
-
     sleep(2)

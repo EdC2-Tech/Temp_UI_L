@@ -23,7 +23,7 @@ class Main(MainTemplate):
 
     # Initiate default homepage panel 
     self.content_panel.clear()
-    self.content_panel.add_component(Group_Tabular(), full_width_row=True)
+    self.content_panel.add_component(Group_T(), full_width_row=True)
 
     # Pre-load existing data tables
     #self.update_tables()
