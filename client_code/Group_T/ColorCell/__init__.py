@@ -3,6 +3,12 @@ from anvil import *
 import anvil.js
 
 class ColorCell(ColorCellTemplate):
+    c_link = {
+      "High" : "red",
+      "Medium" : "blue",
+      "Low" : "green"
+    }
+  
     def __init__(self, **properties):
         self.init_components(**properties)
         # item is the row data we can use for data bindings 
@@ -17,3 +23,4 @@ class ColorCell(ColorCellTemplate):
     def text_box_1_lost_focus(self, *e, **event_args):
         """This method is called when the TextBox loses focus"""
         self.raise_event("x-close-editor", value=self.text_box_1.text)
+

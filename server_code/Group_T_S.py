@@ -4,8 +4,6 @@ from anvil.tables import app_tables
 import anvil.server
 
 import random
-from datetime import datetime, timedelta
-
 from functools import wraps
 from time import time
 
@@ -26,12 +24,6 @@ def timeit(f):
 
     return wrap
 
-def random_date(first_date, second_date):
-    first_timestamp = int(first_date.timestamp())
-    second_timestamp = int(second_date.timestamp())
-    random_timestamp = random.randint(first_timestamp, second_timestamp)
-    return datetime.fromtimestamp(random_timestamp).date()
-
 def add_row(group_row):  
     row = {
         "Group Name": group_row["group_name"],
@@ -44,14 +36,18 @@ def add_row(group_row):
 @timeit
 def get_grouplist_data():
     data = []
+    n = 0
     for item in app_tables.group_table.search():
         row = add_row(item)
+        row["ID"] = n
+        n += 1
         data.append(row)
     return data
 
+@anvil.server.callable
 def get_group_color():
-  return random.choice("blue green yellow red".split())
-
+  return random.choice("High Medium Low".split())
+  
 @anvil.server.callable
 def add_group(group_name, group_description):
   app_tables.group_table.add_row(group_name=group_name,
@@ -60,4 +56,7 @@ def add_group(group_name, group_description):
 
 @anvil.server.callable
 def delete_group(table_entry):
-  table_entry.delete()
+  for iter in app_tables.group_table.search(): 
+    if iter["group_name"]==table_entry["Group Name"]:
+      iter.delete()
+      return

@@ -14,7 +14,6 @@ from ._module_helpers import AbstractModule, tabulator_module
 
 JsProxy = type(Promise)
 
-
 def fieldgetter(*fields, getter=None):
     getter = getter or getitem
 

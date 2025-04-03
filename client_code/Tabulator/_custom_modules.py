@@ -11,7 +11,6 @@ from ._module_helpers import AbstractModule, tabulator_module
 
 JsProxy = type(document)
 
-
 @tabulator_module("cssClassAdder")
 class CssClassAdder(AbstractModule):
     def __init__(self, mod, table):
@@ -26,7 +25,6 @@ class CssClassAdder(AbstractModule):
             classes = [classes]
 
         self.table.element.classList.add(*classes)
-
 
 @tabulator_module("componentFormatter")
 class ComponentFormatter(AbstractModule):
@@ -63,7 +61,6 @@ class ComponentFormatter(AbstractModule):
         if component is not None:
             component.remove_from_parent()
 
-
 def cell_wrapper(f):
     if not isinstance(f, type) or not issubclass(f, Component):
         return lambda cell, **params: f(cell=cell, **params)
@@ -78,7 +75,6 @@ def cell_wrapper(f):
         return render_form
     else:
         return lambda cell, **params: f(**params)
-
 
 class AbstractCallableWrapper(AbstractModule):
     options = []
@@ -98,7 +94,6 @@ class AbstractCallableWrapper(AbstractModule):
     def wrap(f):
         return f
 
-
 @tabulator_module("formatterWrapper", moduleInitOrder=-10)
 class FormatterWrapper(AbstractCallableWrapper):
     options = [
@@ -109,7 +104,6 @@ class FormatterWrapper(AbstractCallableWrapper):
     def wrap(f):
         f = cell_wrapper(f)
         return lambda cell, params, onRendered: f(cell, **params)
-
 
 @tabulator_module("sorterWrapper", moduleInitOrder=-10)
 class SorterWrapper(AbstractCallableWrapper):
@@ -122,7 +116,6 @@ class SorterWrapper(AbstractCallableWrapper):
 
         return sorter_wrapper
 
-
 @tabulator_module("headerFilterFuncWrapper", moduleInitOrder=-10)
 class HeaderFilterFuncWrapper(AbstractCallableWrapper):
     options = ["headerFilterFunc"]
@@ -134,7 +127,6 @@ class HeaderFilterFuncWrapper(AbstractCallableWrapper):
 
         return header_filter_func
 
-
 @tabulator_module("paramLookup", moduleInitOrder=-10)
 class ParamLookupWrapper(AbstractCallableWrapper):
     options = [
@@ -145,7 +137,6 @@ class ParamLookupWrapper(AbstractCallableWrapper):
         "editorParams",
         "headerFilterFuncParams",
     ]
-
 
 def setup_editor(component, cell, onRendered, success, cancel):
     # if cell is None then we're being used as a HeaderFilterComponent
@@ -202,7 +193,6 @@ def setup_editor(component, cell, onRendered, success, cancel):
     onRendered(set_focus)
     return el
 
-
 @tabulator_module("editorWrapper", moduleInitOrder=-10)
 class EditorWrapper(AbstractCallableWrapper):
     options = ["editor"]
@@ -238,7 +228,6 @@ class EditorWrapper(AbstractCallableWrapper):
             return setup_editor(component, cell, onRendered, success, cancel)
 
         return editor_wrapper
-
 
 @tabulator_module("headerFilterWrapper", moduleInitOrder=-10)
 class HeaderFilterWrapper(AbstractCallableWrapper):

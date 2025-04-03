@@ -96,7 +96,7 @@ properties:
 - {default_value: false, group: columns, important: false, name: auto_columns, type: boolean}
 - {default_value: true, group: header, important: false, name: header_visible, type: boolean}
 - {default_binding_prop: true, default_value: '', group: appearance, important: true, name: height, type: string}
-- {default_value: id, description: This should be a unique identifier for a row., important: true, name: index, type: string}
+- {default_value: ID, description: This should be a unique identifier for a row., important: true, name: index, type: string}
 - {default_value: true, group: pagination, important: false, name: pagination, type: boolean}
 - {default_value: 5, group: pagination, important: false, name: pagination_size, type: number}
 - {default_value: '', group: appearance, important: false, name: border, type: string}
