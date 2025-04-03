@@ -9,11 +9,9 @@ import time
 from ..Home import Home
 from ..Schedule import Schedule
 from ..Activity import Activity
-from ..Resource import Resource
 from ..Contact import Contact
-from ..Group import Group
 
-from ..Group_Tabular import Group_Tabular
+#from ..Group_Tabular import Group_Tabular
 from ..Group_T import Group_T
 from ..Resource_T import Resource_T
 
@@ -24,10 +22,10 @@ class Main(MainTemplate):
 
     # Initiate default homepage panel 
     self.content_panel.clear()
-    self.content_panel.add_component(Resource_T(), full_width_row=True)
+    self.content_panel.add_component(Home(), full_width_row=True)
 
     # Pre-load existing data tables
-    #self.update_tables()
+    self.update_tables()
     self.set_event_handler('x-refresh-tables', self.update_tables)
     
     # Adding global parameters
@@ -49,7 +47,7 @@ class Main(MainTemplate):
   def resource_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(Resource(), full_width_row=True)
+    self.content_panel.add_component(Resource_T(), full_width_row=True)
 
   def activity_button_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -64,16 +62,16 @@ class Main(MainTemplate):
   def group_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.content_panel.clear()
-    self.content_panel.add_component(Group(), full_width_row=True)
+    self.content_panel.add_component(Group_T(), full_width_row=True)
     
   def update_tables(self, **event_args):
     task = anvil.server.call('get_all_tables')
     task_state = task.get_state()
-    #self.resource_table = task_state["resource_table"]
-    #self.activity_table = task_state["activity_table"]
-    #self.json_table     = task_state["json_table"]
-    #self.increment      = task_state["increment"]
-    #self.group_table    = task_state["group_table"]
+    self.resource_table = task_state["resource_table"]
+    self.activity_table = task_state["activity_table"]
+    self.json_table     = task_state["json_table"]
+    self.increment      = task_state["increment"]
+    self.group_table    = task_state["group_table"]
     print("Updating")
 
 

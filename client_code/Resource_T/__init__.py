@@ -60,7 +60,9 @@ class Resource_T(Resource_TTemplate):
       {"title": "ID", "field": "ID", "editor": "True", "width": 50},
       {"title": "Resource Name", "field": "Resource Name", "editor": True},
       {"title": "Description", "field": "Resource Description", "editor": True},
+      {"title": "Resource Group", "field": "Resource Group", "editor": False},
       {"title": "Resource Priority", "field": "Priority", "editor": ColorCell},
+      {"title": "Rating", "field": "Rating", "formatter": "star", "editor": "star"},
       {
         "field": "delete",
         "formatter": delete_link_formatter,
@@ -158,15 +160,14 @@ class Resource_T(Resource_TTemplate):
     )
 
     if result:
-      anvil.server.call(
-        "add_resource", adding_form.resource_name.text, adding_form.resource_description.text #########
-      )
-      # get_open_form().raise_event('x-refresh-tables')
+      anvil.server.call("add_resource", adding_form.resource_name.text, adding_form.resource_description.text, adding_form.resource_group.selected_value)
       row = anvil.server.call("get_resourcelist_data")[0]
       if self.tabulator_obj.data:
         row["Resource Name"] = adding_form.resource_name.text
         row["Resource Description"] = adding_form.resource_description.text
+        row["Resource Group"] = adding_form.resource_group.selected_value
         row["Priority"] = anvil.server.call("get_resource_color")
+        row["Rating"] = random.randint(0, 5)
         row["ID"] = max(row["ID"] for row in self.tabulator_obj.data) + 1
       self.tabulator_obj.add_row(row, True)
       print(row)
@@ -193,7 +194,6 @@ class Resource_T(Resource_TTemplate):
     cell = row.get_cell("Priority")
     color = cell.get_value()
     color = ColorCell.c_link[color]
-    print(color)
     cell.get_element().style.border = f"5px solid {color}"
 
   def tabulator_obj_row_selected(self, row, **event_args):

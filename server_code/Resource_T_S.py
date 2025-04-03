@@ -28,7 +28,9 @@ def add_row(resource_row):
     row = {
         "Resource Name": resource_row["resource_name"],
         "Resource Description": resource_row["resource_description"],
-        "Priority": get_resource_color()
+        "Resource Group" : resource_row["resource_group"]["group_name"],
+        "Priority": get_resource_color(),
+        "Rating": random.randint(0, 5)
     }
     return row
 
@@ -49,22 +51,26 @@ def get_resource_color():
   return random.choice("High Medium Low".split())
   
 @anvil.server.callable
-def add_resource(resource_name, resource_description):
+def add_resource(resource_name, resource_description, resource_group):
+  row = app_tables.group_table.get(group_name=resource_group)
+  print(row)
   app_tables.resource_table.add_row(resource_name=resource_name,
-                                 resource_description=resource_description
+                                    resource_description=resource_description,
+                                    resource_group=row
                                 )
 
 @anvil.server.callable
 def delete_resource(table_entry):
   try:
     # Fast search and delete. Entry must only appear once in database
-    row = app_tables.resource_table.get(resource_name=table_entry["Resource Name"])
+    row = app_tables.resource_table.get(resource_name=table_entry["Resource Name"], resource_description=["Resource Description"])
     if row:
       row.delete()
     return    
   except Exception:
+    print("Slow delete used")
     # Slow search and deletes first appearance of element
-    for iter in app_tables.resource_name.search(): 
+    for iter in app_tables.resource_table.search(): 
       if iter["resource_name"]==table_entry["Resource Name"]:
           iter.delete()
           return

@@ -7,7 +7,11 @@ import anvil.server
 ################################################### MAIN ###################################################
 @anvil.server.callable
 def get_all_tables():
-  return anvil.server.launch_background_task('get_all_tables_BG')
+  task = anvil.server.launch_background_task('get_all_tables_BG')
+  while task.is_running():
+    continue
+  
+  return task
   
 @anvil.server.background_task
 def get_all_tables_BG():

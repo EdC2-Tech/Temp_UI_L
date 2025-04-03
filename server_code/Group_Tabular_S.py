@@ -3,7 +3,6 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 
-from .names import get_full_name
 import random
 from datetime import datetime, timedelta
 
