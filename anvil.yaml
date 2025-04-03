@@ -104,6 +104,10 @@ db_schema:
     - admin_ui: {order: 1, width: 200}
       name: resource_description
       type: string
+    - admin_ui: {order: 2, width: 200}
+      name: resource_group
+      target: group_table
+      type: link_single
     server: full
     title: Resource_table
 dependencies: []
@@ -118,7 +122,7 @@ runtime_options:
   server_version: python3-sandbox
   version: 2
 services:
-- client_config: {}
+- client_config: {enable_v2: true}
   server_config: {}
   source: /runtime/services/tables.yml
 - client_config: {}

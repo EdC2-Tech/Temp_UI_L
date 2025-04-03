@@ -1,0 +1,104 @@
+components:
+- layout_properties: {grid_position: 'OQTTAE,UCXCVJ'}
+  name: label_1
+  properties: {align: center, font_size: 25, italic: true, text: Resource Tables}
+  type: Label
+- components:
+  - event_bindings: {click: add_row_button_click}
+    layout_properties: {grid_position: 'SBKRBK,HFFJZJ'}
+    name: add_row_button
+    properties:
+      icon: fa:plus
+      icon_align: left
+      spacing:
+        margin: [null, null, null, 0]
+      text: ADD ROW
+    type: Button
+  - event_bindings: {click: refresh_button_click}
+    layout_properties: {grid_position: 'SBKRBK,BCUHYB'}
+    name: refresh_button
+    properties: {icon: 'fa:recycle', text: REFRESH}
+    type: Button
+  - components:
+    - layout_properties: {}
+      name: rich_text_1
+      properties: {content: 'Sort:'}
+      type: RichText
+    - layout_properties: {expand: true, width: 100}
+      name: columns_dropdown
+      properties: {}
+      type: DropDown
+    - data_bindings:
+      - {code: '[(''asc'', True), (''desc'', False)]', property: items, writeback: false}
+      layout_properties: {width: 100}
+      name: ascending_dropdown
+      properties:
+        items: []
+      type: DropDown
+    - event_bindings: {click: sort_button_click}
+      layout_properties: {}
+      name: sort_button
+      properties: {icon: 'fa:sort', text: SORT}
+      type: Button
+    - event_bindings: {click: reset_sort_click}
+      layout_properties: {}
+      name: reset_sort
+      properties: {icon: 'fa:repeat', text: RESET}
+      type: Button
+    layout_properties: {grid_position: 'TLHXES,YVLALY'}
+    name: flow_panel_3
+    properties: {}
+    type: FlowPanel
+  - components:
+    - layout_properties: {}
+      name: rich_text_2
+      properties: {content: 'Filter:'}
+      type: RichText
+    - layout_properties: {expand: true, width: 100}
+      name: fields_dropdown
+      properties: {}
+      type: DropDown
+    - data_bindings:
+      - {code: '''like''', property: selected_value, writeback: false}
+      layout_properties: {width: 50}
+      name: type_dropdown
+      properties:
+        items: ['>', <, '>=', <=, like, '!=']
+      type: DropDown
+    - event_bindings: {change: value_box_change}
+      layout_properties: {expand: true, width: null}
+      name: value_box
+      properties: {}
+      type: TextBox
+    - event_bindings: {click: filter_button_click}
+      layout_properties: {}
+      name: filter_button
+      properties: {icon: 'fa:filter', text: FILTER}
+      type: Button
+    - event_bindings: {click: reset_filter_click}
+      layout_properties: {}
+      name: reset_filter
+      properties: {icon: 'fa:refresh', text: RESET}
+      type: Button
+    layout_properties: {grid_position: 'IZMNBU,FJNNNJ'}
+    name: flow_panel_4
+    properties: {}
+    type: FlowPanel
+  data_bindings: []
+  layout_properties: {grid_position: 'XGOSXU,IUSBBQ'}
+  name: outlined_card_1
+  properties:
+    background: theme:On Primary
+    border: ''
+    role: null
+    spacing:
+      margin: [null, 0, null, null]
+      padding: [null, null, null, 25]
+  type: ColumnPanel
+- event_bindings: {cell_click: tabulator_obj_cell_click, cell_edited: tabulator_obj_cell_edited, page_loaded: tabulator_obj_page_loaded, row_click: tabulator_obj_row_click, row_formatter: tabulator_obj_row_formatter, row_selected: tabulator_obj_row_selected, row_selection_changed: tabulator_obj_row_selection_changed}
+  layout_properties: {grid_position: 'NXPBZC,FTRYRN'}
+  name: tabulator_obj
+  properties: {spacing_above: large, spacing_below: large}
+  type: form:Tabulator
+container: {type: ColumnPanel}
+is_package: true

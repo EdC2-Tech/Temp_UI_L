@@ -23,6 +23,7 @@ components:
       foreground: theme:On Primary Container
       icon: fa:area-chart
       spacing:
+        margin: [22, null, null, null]
         padding: [null, 0, null, 0]
       text: Schedule
     type: Button
