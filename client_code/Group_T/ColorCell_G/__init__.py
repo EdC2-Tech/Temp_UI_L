@@ -1,8 +1,8 @@
-from ._anvil_designer import ColorCellTemplate
+from ._anvil_designer import ColorCell_GTemplate
 from anvil import *
 import anvil.js
 
-class ColorCell(ColorCellTemplate):
+class ColorCell_G(ColorCell_GTemplate):
     c_link = {
       "High" : "red",
       "Medium" : "blue",

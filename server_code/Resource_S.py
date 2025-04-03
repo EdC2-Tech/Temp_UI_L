@@ -4,6 +4,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 
+'''
 ################################################ RESOURCE ###################################################
 @anvil.server.callable
 def add_resource(name, description):
@@ -20,3 +21,4 @@ def delete_resource(table_entry):
   table_entry.delete()
   
 ############################################ END RESOURCE ###################################################
+'''

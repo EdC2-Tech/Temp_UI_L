@@ -1,5 +1,4 @@
 from ._anvil_designer import Resource_TTemplate
-from ._anvil_designer import Group_TTemplate  # Needed?
 from anvil import *
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -9,11 +8,8 @@ import anvil.server
 
 import random
 from ..Tabulator import Tabulator
-from .Add_NewGroup import Add_NewGroup
-from .ColorCell import ColorCell as ColorCell
-
-# remove some modules we don't need
-# Tabulator.modules.remove("FrozenColumns")
+from .Add_NewResource import Add_NewResource
+from .ColorCell_R import ColorCell_R as ColorCell
 
 # change some default options
 Tabulator.default_options["selectable"] = True
@@ -28,28 +24,25 @@ Tabulator.theme = "simple"
 # Include a row_selection checkbox column
 from ..Tabulator import row_selection_column
 
-
 def error_handler(e):
   if isinstance(e, anvil.js.ExternalError):
     e = e.original_error
   alert(e)
 
-
 set_default_error_handling(error_handler)
-
 
 class Resource_T(Resource_TTemplate):
   def __init__(self, **properties):
     # Constructor
     self.init_components(**properties)
     try:
-      self.tabulator_obj.data = anvil.server.call("get_grouplist_data")
+      self.tabulator_obj.data = anvil.server.call("get_resourcelist_data")
     except anvil.server.AppOfflineError:
       Notification("App is offline", style="danger").show()
 
     # FORMATTERS and Editors
     # can be Forms
-    from .ColorCell import ColorCell as ColorCell
+    from .ColorCell_R import ColorCell_R as ColorCell
 
     # Set link for delete icon per row in TABLE. Not user modifiable
     def delete_link_formatter(cell, **params):
@@ -65,9 +58,9 @@ class Resource_T(Resource_TTemplate):
     self.tabulator_obj.columns = [
       row_selection_column,  # checkbox select column
       {"title": "ID", "field": "ID", "editor": "True", "width": 50},
-      {"title": "Group Name", "field": "Group Name", "editor": True},
-      {"title": "Description", "field": "Group Description", "editor": True},
-      {"title": "Group Priority", "field": "Priority", "editor": ColorCell},
+      {"title": "Resource Name", "field": "Resource Name", "editor": True},
+      {"title": "Description", "field": "Resource Description", "editor": True},
+      {"title": "Resource Priority", "field": "Priority", "editor": ColorCell},
       {
         "field": "delete",
         "formatter": delete_link_formatter,
@@ -145,7 +138,7 @@ class Resource_T(Resource_TTemplate):
     c = confirm("Are you sure you want to delete this row?")
     if c:
       self.tabulator_obj.delete_row(data["ID"])
-      anvil.server.call("delete_group", data)
+      anvil.server.call("delete_resource", data)
 
   def tabulator_obj_cell_click(self, cell, **event_args):
     """This method is called when a cell is clicked - event_args include field and row"""
@@ -159,21 +152,21 @@ class Resource_T(Resource_TTemplate):
 
   def add_row_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    adding_form = Add_NewGroup(item=self.item)
+    adding_form = Add_NewResource(item=self.item)
     result = alert(
       content=adding_form, large=True, buttons=[("Accept", True), ("Cancel", False)]
     )
 
     if result:
       anvil.server.call(
-        "add_group", adding_form.group_name.text, adding_form.group_description.text
+        "add_resource", adding_form.resource_name.text, adding_form.resource_description.text #########
       )
       # get_open_form().raise_event('x-refresh-tables')
-      row = anvil.server.call("get_grouplist_data")[0]
+      row = anvil.server.call("get_resourcelist_data")[0]
       if self.tabulator_obj.data:
-        row["Group Name"] = adding_form.group_name.text
-        row["Group Description"] = adding_form.group_description.text
-        row["Priority"] = anvil.server.call("get_group_color")
+        row["Resource Name"] = adding_form.resource_name.text
+        row["Resource Description"] = adding_form.resource_description.text
+        row["Priority"] = anvil.server.call("get_resource_color")
         row["ID"] = max(row["ID"] for row in self.tabulator_obj.data) + 1
       self.tabulator_obj.add_row(row, True)
       print(row)
@@ -184,7 +177,7 @@ class Resource_T(Resource_TTemplate):
 
   def refresh_button_click(self, **event_args):
     """This method is called when the refresh button is clicked"""
-    self.tabulator_obj.data = anvil.server.call("get_grouplist_data")
+    self.tabulator_obj.data = anvil.server.call("get_resourcelist_data")
 
   def tabulator_obj_page_loaded(self, pageno, **event_args):
     """This method is called when a page is loaded"""

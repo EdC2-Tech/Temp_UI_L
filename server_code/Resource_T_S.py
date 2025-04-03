@@ -24,20 +24,20 @@ def timeit(f):
 
     return wrap
 
-def add_row(group_row):  
+def add_row(resource_row):  
     row = {
-        "Group Name": group_row["group_name"],
-        "Group Description": group_row["group_description"],
-        "Priority": get_group_color()
+        "Resource Name": resource_row["resource_name"],
+        "Resource Description": resource_row["resource_description"],
+        "Priority": get_resource_color()
     }
     return row
 
 @anvil.server.callable
 @timeit
-def get_grouplist_data():
+def get_resourcelist_data():
     data = []
     n = 0
-    for item in app_tables.group_table.search():
+    for item in app_tables.resource_table.search():
         row = add_row(item)
         row["ID"] = n
         n += 1
@@ -45,26 +45,27 @@ def get_grouplist_data():
     return data
 
 @anvil.server.callable
-def get_group_color():
+def get_resource_color():
   return random.choice("High Medium Low".split())
   
 @anvil.server.callable
-def add_group(group_name, group_description):
-  app_tables.group_table.add_row(group_name=group_name,
-                                 group_description=group_description
+def add_resource(resource_name, resource_description):
+  app_tables.resource_table.add_row(resource_name=resource_name,
+                                 resource_description=resource_description
                                 )
 
 @anvil.server.callable
-def delete_group(table_entry):
+def delete_resource(table_entry):
   try:
     # Fast search and delete. Entry must only appear once in database
-    row = app_tables.group_table.get(group_name=table_entry["Group Name"])
+    row = app_tables.resource_table.get(resource_name=table_entry["Resource Name"])
     if row:
       row.delete()
     return    
   except Exception:
     # Slow search and deletes first appearance of element
-    for iter in app_tables.group_table.search(): 
-      if iter["group_name"]==table_entry["Group Name"]:
+    for iter in app_tables.resource_name.search(): 
+      if iter["resource_name"]==table_entry["Resource Name"]:
           iter.delete()
           return
+

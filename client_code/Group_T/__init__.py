@@ -9,7 +9,7 @@ import anvil.server
 import random
 from ..Tabulator import Tabulator
 from .Add_NewGroup import Add_NewGroup
-from .ColorCell import ColorCell as ColorCell
+from .ColorCell_G import ColorCell_G as ColorCell
 
 # remove some modules we don't need
 # Tabulator.modules.remove("FrozenColumns")
@@ -45,7 +45,7 @@ class Group_T(Group_TTemplate):
 
     # FORMATTERS and Editors
     # can be Forms
-    from .ColorCell import ColorCell as ColorCell
+    from .ColorCell_G import ColorCell_G as ColorCell
     # Set link for delete icon per row in TABLE. Not user modifiable
     def delete_link_formatter(cell, **params):  
       l = Link(

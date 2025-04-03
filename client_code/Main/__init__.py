@@ -15,6 +15,7 @@ from ..Group import Group
 
 from ..Group_Tabular import Group_Tabular
 from ..Group_T import Group_T
+from ..Resource_T import Resource_T
 
 class Main(MainTemplate):
   def __init__(self, **properties):
