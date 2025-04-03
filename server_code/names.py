@@ -5,14 +5,12 @@ import anvil.server
 
 import random
 
-
 def get_name(name_type):
     selected = random.random() * 90
     for line in name_type.split("\n"):
         name, _, cummulative, _ = line.split()
         if float(cummulative) > selected:
             return name
-
 
 def get_first_name(gender=None):
     if gender not in ("male", "female"):
@@ -21,14 +19,11 @@ def get_first_name(gender=None):
         gender = boys_names if gender == "male" else girls_names
     return get_name(gender).capitalize()
 
-
 def get_last_name():
     return get_name(last_names).capitalize()
 
-
 def get_full_name(gender=None):
     return f"{get_first_name(gender)} {get_last_name()}"
-
 
 boys_names = """JAMES          3.318  3.318      1
 JOHN           3.271  6.589      2

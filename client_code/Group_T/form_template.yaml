@@ -35,7 +35,7 @@ components:
       name: rich_text_1
       properties: {content: 'Sort:'}
       type: RichText
-    - layout_properties: {width: 100}
+    - layout_properties: {expand: true, width: 100}
       name: columns_dropdown
       properties: {}
       type: DropDown
@@ -65,7 +65,7 @@ components:
       name: rich_text_2
       properties: {content: 'Filter:'}
       type: RichText
-    - layout_properties: {width: 100}
+    - layout_properties: {expand: true, width: 100}
       name: fields_dropdown
       properties: {}
       type: DropDown

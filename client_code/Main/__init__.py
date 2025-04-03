@@ -68,7 +68,6 @@ class Main(MainTemplate):
   def update_tables(self, **event_args):
     task = anvil.server.call('get_all_tables')
     task_state = task.get_state()
-    print(task_state)
     #self.resource_table = task_state["resource_table"]
     #self.activity_table = task_state["activity_table"]
     #self.json_table     = task_state["json_table"]

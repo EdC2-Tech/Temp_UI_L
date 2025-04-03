@@ -3,13 +3,13 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 
-from .names import get_full_name
 import random
 from datetime import datetime, timedelta
 
 from functools import wraps
 from time import time
 
+# Call using @timeit similar to @anvil.server.callable
 def timeit(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -32,35 +32,32 @@ def random_date(first_date, second_date):
     random_timestamp = random.randint(first_timestamp, second_timestamp)
     return datetime.fromtimestamp(random_timestamp).date()
 
-def add_row():
-    gender = random.choice(["male", "female"])
-
+def add_row(group_row):  
     row = {
-        "gender": gender,
-        "name": get_full_name(gender),
-        "progress": random.randint(0, 100),
-        "rating": random.randint(0, 5),
-        "col": random.choice("blue green yellow red".split()),
-        "car": random.choice([True, False]),
-        "dob": random_date(datetime(1950, 1, 1), datetime.now() - timedelta(days=17 * 365)),
+        "Group Name": group_row["group_name"],
+        "Group Description": group_row["group_description"],
+        "Priority": get_group_color()
     }
     return row
 
 @anvil.server.callable
 @timeit
-def get_list_data(n=100):
+def get_grouplist_data():
     data = []
-    for i in range(n):
-        row = add_row()
-        row["id"] = i
-        # row['dob'] = row['dob'].strftime('%d/%m/%Y')
-        row["dob"] = row["dob"]
-        # row['datetime_obj'] = datetime.now()
-        row["media"] = anvil.BlobMedia("text/plain", b"hey")
+    for item in app_tables.group_table.search():
+        row = add_row(item)
         data.append(row)
     return data
 
+def get_group_color():
+  return random.choice("blue green yellow red".split())
+
 @anvil.server.callable
-def slow_call():
-    from time import sleep
-    sleep(2)
+def add_group(group_name, group_description):
+  app_tables.group_table.add_row(group_name=group_name,
+                                 group_description=group_description
+                                )
+
+@anvil.server.callable
+def delete_group(table_entry):
+  table_entry.delete()

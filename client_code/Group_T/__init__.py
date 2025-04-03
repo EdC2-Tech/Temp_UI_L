@@ -1,4 +1,4 @@
-from ._anvil_designer import Group_TTemplate
+from ._anvil_designer import Group_TTemplate # Needed?
 from anvil import *
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -6,7 +6,9 @@ from anvil.tables import app_tables
 import anvil.js
 import anvil.server
 
+import random
 from ..Tabulator import Tabulator
+from .Add_NewGroup import Add_NewGroup
 
 # remove some modules we don't need
 # Tabulator.modules.remove("FrozenColumns")
@@ -36,13 +38,13 @@ class Group_T(Group_TTemplate):
     # Constructor
     self.init_components(**properties)
     try:
-      self.tabulator_obj.data = anvil.server.call("get_list_data", n=100)
+      self.tabulator_obj.data = anvil.server.call("get_grouplist_data")
     except anvil.server.AppOfflineError:
       Notification("App is offline", style="danger").show()
 
     # FORMATTERS and Editors
     # can be Forms
-    #from .FavColorCell import FavColorCell as FavColor
+    from .ColorCell import ColorCell as ColorCell
     
     # Set link for delete icon per row in TABLE. Not user modifiable
     def delete_link_formatter(cell, **params):  
@@ -57,18 +59,16 @@ class Group_T(Group_TTemplate):
     # Set TABLE column titles; title = display name, field = reference name 
     self.tabulator_obj.columns = [
       row_selection_column,  # checkbox select column
-      {"title": "Group Name", "field": "group", "editor": True},
+      {"title": "Group Name", "field": "Group Name", "editor": True},
       #{"title": "Progress", "field": "progress", "formatter": "progress", "sorter": "number",},
-      {"title": "Description", "field": "description", "editor": True},
+      {"title": "Description", "field": "Group Description", "editor": True},
       #{"title": "Rating", "field": "rating", "formatter": "star", "editor": "star"},
-      #{"title": "Favourite Color", "field": "col", "editor": FavColor},
-      #{"title": "Date Of Birth",
-      # "field": "dob",
       # "editor": "date",
       # "sorter": "date",
       # "formatter": "date",
       # "formatter_params": {"format": "%d/%m/%Y"},
       # "editor_params": {"format": "%d/%m/%Y"},
+      {"title": "Group Priority", "field": "Priority", "editor": ColorCell},
       #},
       #{"title": "Driver", "field": "car", "formatter": "tickCross"},
       {
@@ -138,13 +138,12 @@ class Group_T(Group_TTemplate):
     """This method is called when a row is edited - returns the row - will edit the data inplace if writeback is set to True"""
     print(f"{cell.get_field()} from row: {cell.get_row().get_index()} edited")
     print(f"previously: {cell.get_old_value()!r} now {cell.get_value()!r}")
-    self.tabulator_row_formatter(cell.get_row())
+    self.tabulator_obj_row_formatter(cell.get_row())
 
   # cell clicks
   def do_delete(self, data):
     print(f"deleting row with id {data['id']}")
-    c = confirm("are you sure you want to delete this row?")
-    print(c)
+    c = confirm("Are you sure you want to delete this row?")
     if c:
       self.tabulator_obj.delete_row(data["id"])
 
@@ -157,20 +156,40 @@ class Group_T(Group_TTemplate):
     if field == "delete":
       self.do_delete(data)
     print("cell clicked")
-
+  '''
   # easily add a row
   def add_row_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    row = anvil.server.call("get_list_data", n=1)[0]
+    row = anvil.server.call("get_list_data")[0]
     if self.tabulator_obj.data:
       row["id"] = max(row["id"] for row in self.tabulator_obj.data) + 1
     print("row with id", row["id"], "being added")
     self.tabulator_obj.add_row(row, True)
+  '''
+  def add_row_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    adding_form = Add_NewGroup(item=self.item)
+    result = alert(content=adding_form, large=True, buttons=[("Accept", True), ("Cancel", False)])
 
+    if result:
+      anvil.server.call('add_group', adding_form.group_name.text, adding_form.group_description.text)
+      #get_open_form().raise_event('x-refresh-tables')
+      row = anvil.server.call("get_grouplist_data")[0]
+      if self.tabulator_obj.data:
+        row["Group Name"] = adding_form.group_name.text
+        row["Group Description"] = adding_form.group_description.text
+        row["Priority"] = random.choice("blue green yellow red".split())
+      self.tabulator_obj.add_row(row, True)
+    else:
+      pass
+
+    return
+      
   # easily delete rows
   def delete_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     data = self.tabulator_obj.get_selected_data()
+    anvil.server.call("delete_group", data) 
     if not data:
       return
 
@@ -184,6 +203,15 @@ class Group_T(Group_TTemplate):
     self.tabulator_obj.delete_row(indices)
     anvil.js.call("loadSpinner", False)
 
+    return
+  '''
+  def delete_link_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    anvil.server.call("delete_group", self.item) 
+    get_open_form().raise_event('x-refresh-tables')
+    self.remove_from_parent()
+'''
+
   def tabulator_obj_page_loaded(self, pageno, **event_args):
     """This method is called when a page is loaded"""
     print("loaded", pageno)
@@ -195,9 +223,9 @@ class Group_T(Group_TTemplate):
 
   def tabulator_obj_row_formatter(self, row, **event_args):
     """This method is called when the row is rendered - manipulate the tabulator row object"""
-    cell = row.get_cell("col")
+    cell = row.get_cell("Priority")
     color = cell.get_value()
-    cell.get_element().style.border = f"2px solid {color}"
+    cell.get_element().style.border = f"5px solid {color}"
 
   def tabulator_obj_row_selected(self, row, **event_args):
     """This method is called when a row is selected"""
