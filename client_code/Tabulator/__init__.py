@@ -298,6 +298,6 @@ class Tabulator(TabulatorTemplate):
 
     def set_page(self, page):
         """set the current page"""
-
+        
 for method in _methods:
     delattr(Tabulator, method)
