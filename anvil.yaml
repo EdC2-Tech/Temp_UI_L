@@ -111,10 +111,10 @@ db_schema:
     server: full
     title: Resource_table
 dependencies: []
-metadata: {title: RAVEN LOGOS UI}
-name: LOGOS UI
+metadata: {title: Outage Optimization}
+name: Outage Optimization
 native_deps: {head_html: '<script src="https://www.gstatic.com/charts/loader.js"></script>'}
-package_name: LOGOS_UI
+package_name: Outage_Optimization
 renamed: true
 runtime_options:
   client_version: '3'
