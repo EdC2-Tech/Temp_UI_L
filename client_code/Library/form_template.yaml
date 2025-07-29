@@ -1,0 +1,52 @@
+components:
+- layout_properties: {grid_position: 'JEOFUF,DBIIUR'}
+  name: label_1
+  properties: {align: center, font_size: 22, text: Welcome to the INL Application Interface for Outage Optimization}
+  type: Label
+- layout_properties: {grid_position: 'KHVFFA,BWYZEV'}
+  name: rich_text_1
+  properties:
+    align: left
+    content: |-
+      Below are the available apps that can be accessed for outage optimization. They include:
+      DACKAR - Digital Analytics, Causal Knowledge Acquisition and Reasoning for Technical Language Processing
+      LOGOS - Operation Optimization Toolkit
+  type: RichText
+- components:
+  - layout_properties: {grid_position: 'YNFUEC,LFFNVY'}
+    name: button_1
+    properties: {text: button_1}
+    type: Button
+  layout_properties: {grid_position: 'ASVGTQ,AZMYIN CGVBRQ,OAXRFT'}
+  name: outlined_card_1
+  properties: {role: outlined-card}
+  type: ColumnPanel
+- components:
+  - layout_properties: {grid_position: 'VEPDUO,UIPXAG'}
+    name: button_3
+    properties: {text: Reserved}
+    type: Button
+  layout_properties: {grid_position: 'ASVGTQ,AZMYIN MGLVER,CKAVZQ'}
+  name: outlined_card_3
+  properties: {role: outlined-card}
+  type: ColumnPanel
+- components:
+  - layout_properties: {grid_position: 'MOTMKE,EJUYZV'}
+    name: button_2
+    properties: {text: button_2}
+    type: Button
+  layout_properties: {grid_position: 'ASVGTQ,SMNDLE ZXXMQV,DQHFJO'}
+  name: outlined_card_2
+  properties: {role: outlined-card}
+  type: ColumnPanel
+- components:
+  - layout_properties: {grid_position: 'BHJYXC,RWVBZT'}
+    name: button_4
+    properties: {text: button_4}
+    type: Button
+  layout_properties: {grid_position: 'ASVGTQ,SMNDLE OZVWFQ,RCQLRO'}
+  name: outlined_card_4
+  properties: {role: outlined-card}
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true
