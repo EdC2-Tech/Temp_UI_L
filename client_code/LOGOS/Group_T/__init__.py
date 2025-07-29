@@ -1,3 +1,4 @@
+from ._anvil_designer import Group_TTemplate
 from ._anvil_designer import Group_TTemplate # Needed?
 from anvil import *
 import anvil.tables as tables

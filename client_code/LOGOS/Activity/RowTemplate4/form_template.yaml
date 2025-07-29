@@ -48,12 +48,12 @@ components:
     properties:
       items: []
       placeholder: ''
-    type: form:MultiSelectDropDown
+    type: form:LOGOS.MultiSelectDropDown
   - data_bindings: []
     layout_properties: {column: UMUOAE}
     name: Task_dependency_edit
     properties: {placeholder: ''}
-    type: form:MultiSelectDropDown
+    type: form:LOGOS.MultiSelectDropDown
   - data_bindings:
     - {code: 'self.item[''CP_flag'']', property: checked, writeback: true}
     layout_properties: {column: QDDSUN}

@@ -58,7 +58,7 @@ components:
     - layout_properties: {column: UMUOAE}
       name: edit_dependency_multi
       properties: {placeholder: Select a value}
-      type: form:MultiSelectDropDown
+      type: form:LOGOS.MultiSelectDropDown
     - layout_properties: {column: QDDSUN}
       name: critical_checkbox
       properties: {text: Critical}
@@ -78,13 +78,13 @@ components:
     - layout_properties: {column: JPGNPJ}
       name: edit_resource_multi
       properties: {}
-      type: form:MultiSelectDropDown
+      type: form:LOGOS.MultiSelectDropDown
     layout_properties: {pinned: true}
     name: data_row_panel_2
     properties: {}
     type: DataRowPanel
   - name: repeating_panel_1
-    properties: {item_template: Activity.RowTemplate4}
+    properties: {item_template: LOGOS.Activity.RowTemplate4}
     type: RepeatingPanel
   - components:
     - layout_properties: {}

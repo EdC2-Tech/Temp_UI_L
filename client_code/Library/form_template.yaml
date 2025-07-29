@@ -9,17 +9,28 @@ components:
     align: left
     content: |-
       Below are the available apps that can be accessed for outage optimization. They include:
-      DACKAR - Digital Analytics, Causal Knowledge Acquisition and Reasoning for Technical Language Processing
+      #DACKAR - Digital Analytics, Causal Knowledge Acquisition and Reasoning for Technical Language Processing
       LOGOS - Operation Optimization Toolkit
+
+      Click on one of the apps to access.
+    format: markdown
   type: RichText
 - components:
   - layout_properties: {grid_position: 'YNFUEC,LFFNVY'}
     name: button_1
-    properties: {text: button_1}
+    properties:
+      background: ''
+      bold: true
+      font_size: 22
+      foreground: theme:On Primary
+      spacing:
+        margin: [0, null, 0, null]
+        padding: [10, 70, 10, 70]
+      text: LOGOS
     type: Button
   layout_properties: {grid_position: 'ASVGTQ,AZMYIN CGVBRQ,OAXRFT'}
   name: outlined_card_1
-  properties: {role: outlined-card}
+  properties: {background: 'theme:Primary', role: outlined-card}
   type: ColumnPanel
 - components:
   - layout_properties: {grid_position: 'VEPDUO,UIPXAG'}
@@ -28,21 +39,28 @@ components:
     type: Button
   layout_properties: {grid_position: 'ASVGTQ,AZMYIN MGLVER,CKAVZQ'}
   name: outlined_card_3
-  properties: {role: outlined-card}
+  properties: {foreground: 'theme:Primary', role: outlined-card}
   type: ColumnPanel
 - components:
   - layout_properties: {grid_position: 'MOTMKE,EJUYZV'}
     name: button_2
-    properties: {text: button_2}
+    properties:
+      bold: true
+      font_size: 22
+      foreground: theme:On Primary
+      spacing:
+        margin: [0, null, 0, null]
+        padding: [null, 60, null, 60]
+      text: DACKAR
     type: Button
   layout_properties: {grid_position: 'ASVGTQ,SMNDLE ZXXMQV,DQHFJO'}
   name: outlined_card_2
-  properties: {role: outlined-card}
+  properties: {background: 'theme:Primary', role: outlined-card}
   type: ColumnPanel
 - components:
   - layout_properties: {grid_position: 'BHJYXC,RWVBZT'}
     name: button_4
-    properties: {text: button_4}
+    properties: {text: Reserved}
     type: Button
   layout_properties: {grid_position: 'ASVGTQ,SMNDLE OZVWFQ,RCQLRO'}
   name: outlined_card_4
