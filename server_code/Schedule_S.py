@@ -215,7 +215,7 @@ def draw_chart(data, start_date=0, end_date=0, interval="Days", showCrit=False, 
     
   fig.update_layout(
     xaxis = dict(tickmode = 'array',
-                 tickvals = [start_date + dt.timedelta(days=x) for x in range(numdays)],
+                 tickvals = [start_date + dt.timedelta(days=x) for x in ra,nge(numdays)],
                  ticktext = [start_date + dt.timedelta(days=x) for x in range(numdays)],
                  range    = [start_date, end_date]
     ),
